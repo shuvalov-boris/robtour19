@@ -74,28 +74,13 @@ void setup()
 
 void loop()
 {
-//  color_sensor_calibration();
+  color_sensor_calibration();
 
-  IR_remote_recieve();
+//  IR_remote_recieve();
 
-<<<<<<< Updated upstream
-  DriveControl.turn_right();
-  delay(2000);
-
-  DriveControl.move_forward();
-  delay(2000);
-
-  DriveControl.turn_left();
-  delay(2000);
-
-  DriveControl.move_forward();
-  delay(2000);
-
-=======
 //  testing_movement();
 
 //  move_by_line();
->>>>>>> Stashed changes
 }
 
 
@@ -161,6 +146,7 @@ void move_by_line()
 //считывание информации от ИК передатчика
 void IR_remote_recieve()
 {
+//  irrecv.decode(&results);
     if (irrecv.decode(&results)) {
         Serial.print(results.value, BIN);
         Serial.print("\t bits of ");
