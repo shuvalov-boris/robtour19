@@ -15,13 +15,14 @@ const byte motor_drive_pinA = 4;
 const byte motor_drive_pinB = 5;
 const byte motor_drive_pinE = 3;
 const byte STBY = 12; // standby
+CDriveAxis *DriveAxis;
 
 // приёмник ИК-сигнала
 const byte ir_rc_pin = 11;
 IRrecv irrecv(ir_rc_pin);
 decode_results results;
 
-CDriveAxis *DriveAxis;
+
 CDriveControl DriveControl;
 MovementDirection last_move_cmd = MMD_NONE;
 
@@ -53,25 +54,28 @@ void setup()
 void loop()
 {
 
-  if (irrecv.decode(&results)) {
-        Serial.print("0x");
-        Serial.println(results.value, HEX);
-        delay(50);
-        irrecv.resume();// Receive the next value
-    }
+//  if (irrecv.decode(&results)) {
+//        Serial.print("0x");
+//        Serial.println(results.value, HEX);
+//        delay(50);
+//        irrecv.resume();// Receive the next value
+//    }
 
+  DriveControl.turn_right();
+  delay(2000);
 
-    
-//  DriveControl.move_forward();
-  long dt = millis() - last_time;
-  if ( dt < 5000)
-    DriveControl.turn_right();
-  else if (dt < 10000)
-    DriveControl.move_forward();
-  else if (dt < 15000)
-    DriveControl.turn_left();
-  move_by_line();
+  DriveControl.move_forward();
+  delay(2000);
+
+  DriveControl.turn_left();
+  delay(2000);
+
+  DriveControl.move_forward();
+  delay(2000);
+
 }
+
+
 
 // движение по черной полосе
 void move_by_line()

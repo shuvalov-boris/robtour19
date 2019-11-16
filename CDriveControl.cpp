@@ -21,14 +21,14 @@ void CDriveControl::move_backward()
 
 void CDriveControl::turn_left()
 {
-  servo.write(60);
+  servo.write(70);
   DriveAxis->setSpeed(80);
   DriveAxis->forward();
 }
 
 void CDriveControl::turn_right()
 {
-  servo.write(120);
+  servo.write(110);
   DriveAxis->setSpeed(80);
   DriveAxis->forward();
 }
