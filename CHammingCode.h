@@ -4,8 +4,8 @@
 #include <IRremote.h>
 
 int RECV_PIN = 11;
-IRrecv irrecv(RECV_PIN);
-decode_results results;
+IRrecv irrecv0(RECV_PIN);
+decode_results results0;
 uint8_t rcv_counter = 0;
 uint8_t received_data[8];
 uint8_t correct_data[8];

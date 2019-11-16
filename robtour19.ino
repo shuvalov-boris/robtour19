@@ -3,6 +3,7 @@
 #include "CColorTracker.h"
 #include "CDriveAxis.h"
 #include "CDriveControl.h"
+//#include "CHammingCode.h"
 
 // на каком этапе выполнения задачи находимся
 enum ETaskPhase
@@ -38,11 +39,6 @@ const byte motor_drive_pinB = 5;
 const byte motor_drive_pinE = 3;
 const byte STBY = 12; // standby
 CDriveAxis *DriveAxis;
-
-// приёмник ИК-сигнала
-const byte ir_rc_pin = 11;
-IRrecv irrecv(ir_rc_pin);
-decode_results results;
 
 
 CDriveControl DriveControl;
@@ -81,66 +77,16 @@ void setup()
   DriveAxis = new CDriveAxis(motor_drive_pinA, motor_drive_pinE, motor_drive_pinB, STBY);
   DriveControl = CDriveControl(DriveAxis, servo_rotate_chassis); // TODO
 
-  irrecv.enableIRIn();
-
   last_time = millis();
 }
 
 void loop()
 {
 
-  ColorTracker.GetColor();
-
-//  Считываем данные о положении фишек и роботов
-//  Определяем по датчику цвета номер поля - 1 или 2
-
-//  if НАЖАТА КНОПКА СТАРТА то
-    switch (TaskPhase)
-    {
-      case ETP_START_FIELD:
-        DriveControl.move_counting_lines(CoinsPos[passedMoveCount + 1] - CoinsPos[passedMoveCount]);
-        TaskPhase = ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN;
-        break;
-
-      case ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN:
-        int leftLF = digitalRead(left_line_follower_pin);
-        int rightLF = digitalRead(right_line_follower_pin);
-        if (DriveControl.loop(leftLF, rightLF) == FINAL_TURN_OVER)
-        {
-          TaskPhase = ETP_MOVING_ALONG_BLACK_LINE_TO_NEXT_COIN;
-          move_by_line();
-        }
-        break;
-      case ETP_MOVING_ALONG_BLACK_LINE_TO_NEXT_COIN:
-        move_by_line();
-        if (passedMoveCount < 3 && ColorTracker.GetColor() == EDF_BLUE)
-        {
-          passedMoveCount++;
-          TaskPhase = ETP_START_FIELD;
-          if (passedMoveCount == 3)
-          {
-            // Можно поднять платформу (сначала подобрав монетки)
-          }
-        }
-        else if (passedMoveCount == 3 && ColorTracker.GetColor() == EDF_GREEN)
-        {
-          // На финише. Поднять платформу! раньше надо было
-        }
-        break;
-    }
-
-
-
-
-
   
-//  ColorTracker.Calibrate();
-
-//  IR_remote_recieve();
-
-//  testing_movement();
-
-//  move_by_line();
+        DriveControl.move_forward();
+       
+        
 }
 
 
@@ -203,40 +149,6 @@ void move_by_line()
   }
 }
 
-//считывание информации от ИК передатчика
-void IR_remote_recieve()
-{
-//  irrecv.decode(&results);
-    if (irrecv.decode(&results)) {
-        Serial.print(results.value, BIN);
-        Serial.print("\t bits of ");
-        Serial.println(results.bits);
-        irrecv.resume();// Receive the next value
-    }
-}
-//
-//const byte red_orange_threshold = 35; // R-component: orange < 35 < red
-//const byte blue_white_threshold = 22; // B-component: white < 22 < blue
-//const byte green_white_threshold = 45; // G-component: white < 45 < green
-//
-//void color_identifier()
-//{
-//  int redFrequency = 0;
-//  int greenFrequency = 0;
-//  int blueFrequency = 0;
-//
-//  // настраиваем датчик таким образом, чтобы считывать данные
-//  // с фотодиодов с красным фильтром:
-//  digitalWrite(S2,LOW);
-//  digitalWrite(S3,LOW);
-// 
-//  // считываем выходную частоту:
-//  redFrequency = pulseIn(color_out, LOW);
-//
-//  if (redFrequency < )
-//  digitalWrite(13,HIGH);
-//  
-//}
 
 
 // проверка исполнения команд движения

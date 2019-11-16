@@ -2,34 +2,34 @@
 
 CHammingCode::CHammingCode()
 {
-  irrecv.enableIRIn(); // Start the receiver
+  irrecv0.enableIRIn(); // Start the receiver
 }
 
 void CHammingCode::loop()
 {
-  if (irrecv.decode(&results)) {
+  if (irrecv0.decode(&results0)) {
     if (rcv_counter == 0) {
-      if (results.value == 0xffffffff) {
+      if (results0.value == 0xffffffff) {
         rcv_counter = 1;
       }
     } else {      
       if (rcv_counter == 1) {
-        received_data[0] = (uint8_t)(results.value >> 24);
+        received_data[0] = (uint8_t)(results0.value >> 24);
         correct_data[0] = Hamming74(received_data[0]);
-        received_data[1] = (uint8_t)(results.value >> 16);
+        received_data[1] = (uint8_t)(results0.value >> 16);
         correct_data[1] = Hamming74(received_data[1]);
-        received_data[2] = (uint8_t)(results.value >> 8);
+        received_data[2] = (uint8_t)(results0.value >> 8);
         correct_data[2] = Hamming74(received_data[2]);
-        received_data[3] = (uint8_t)(results.value);
+        received_data[3] = (uint8_t)(results0.value);
         correct_data[3] = Hamming74(received_data[3]);
       } else if (rcv_counter == 2) {
-        received_data[4] = (uint8_t)(results.value >> 24);
+        received_data[4] = (uint8_t)(results0.value >> 24);
         correct_data[4] = Hamming74(received_data[4]);
-        received_data[5] = (uint8_t)(results.value >> 16);
+        received_data[5] = (uint8_t)(results0.value >> 16);
         correct_data[5] = Hamming74(received_data[5]);
-        received_data[6] = (uint8_t)(results.value >> 8);
+        received_data[6] = (uint8_t)(results0.value >> 8);
         correct_data[6] = Hamming74(received_data[6]);
-        received_data[7] = (uint8_t)(results.value); 
+        received_data[7] = (uint8_t)(results0.value); 
         correct_data[7] = Hamming74(received_data[7]);       
       }
       rcv_counter ++;
@@ -50,7 +50,7 @@ void CHammingCode::loop()
       }
       Serial.println();
     }
-    irrecv.resume(); // Receive the next value
+    irrecv0.resume(); // Receive the next value
   }
 }
 
