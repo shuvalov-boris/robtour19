@@ -18,9 +18,9 @@ const byte STBY = 12; // standby
 CDriveAxis *DriveAxis;
 
 // приёмник ИК-сигнала
-const byte ir_rc_pin = 11;
-IRrecv irrecv(ir_rc_pin);
-decode_results results;
+//const byte ir_rc_pin = 11;
+//IRrecv irrecv(ir_rc_pin);
+//decode_results results;
 
 
 CDriveControl DriveControl;
@@ -46,7 +46,7 @@ void setup()
   DriveAxis = new CDriveAxis(motor_drive_pinA, motor_drive_pinE, motor_drive_pinB, STBY); // TODO
   DriveControl = CDriveControl(DriveAxis, servo_rotate_chassis); // TODO
 
-  irrecv.enableIRIn();
+//  irrecv.enableIRIn();
 
   last_time = millis();
 }
@@ -61,18 +61,18 @@ void loop()
 //        irrecv.resume();// Receive the next value
 //    }
 
-  DriveControl.turn_right();
-  delay(2000);
-
-  DriveControl.move_forward();
-  delay(2000);
-
-  DriveControl.turn_left();
-  delay(2000);
-
-  DriveControl.move_forward();
-  delay(2000);
-
+//  DriveControl.turn_right();
+//  delay(500);
+//
+//  DriveControl.move_forward();
+//  delay(2000);
+//
+//  DriveControl.turn_left();
+//  delay(500);
+//
+//  DriveControl.move_forward();
+//  delay(2000);
+  move_by_line();
 }
 
 
