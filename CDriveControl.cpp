@@ -1,16 +1,20 @@
 #include "CDriveControl.h"
 
-CDriveControl::CDriveControl(CDriveAxis *ADriveAxis, byte servo_pin)
+CDriveControl::CDriveControl(CDriveAxis *ADriveAxis, byte left_rot_pin, byte right_rot_pin)
 {
   DriveAxis = ADriveAxis;
-  _servo_pin = servo_pin;
-  servo.attach(_servo_pin);
-  servo.write(90);
+  left_rot_pin = left_rot_pin;
+  right_rot_pin = right_rot_pin;
+  servol.attach(left_rot_pin);
+  servol.write(FORWARD_ANGLE);
+  servor.attach(right_rot_pin);
+  servor.write(FORWARD_ANGLE);
 }
 
 void CDriveControl::move_forward()
 {
-  servo.write(FORWARD_ANGLE);
+  servol.write(FORWARD_ANGLE);
+  servor.write(FORWARD_ANGLE);
   DriveAxis->setSpeed(80);
   DriveAxis->forward();
 }
@@ -22,14 +26,16 @@ void CDriveControl::move_backward()
 
 void CDriveControl::turn_left()
 {
-  servo.write(FORWARD_ANGLE - TURN_ANGLE);
+  servol.write(FORWARD_ANGLE - TURN_ANGLE);
+  servor.write(FORWARD_ANGLE - TURN_ANGLE);
   DriveAxis->setSpeed(80);
   DriveAxis->forward();
 }
 
 void CDriveControl::turn_right()
 {
-  servo.write(FORWARD_ANGLE + TURN_ANGLE);
+  servol.write(FORWARD_ANGLE + TURN_ANGLE);
+  servor.write(FORWARD_ANGLE + TURN_ANGLE);
   DriveAxis->setSpeed(80);
   DriveAxis->forward();
 }

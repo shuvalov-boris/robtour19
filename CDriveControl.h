@@ -6,12 +6,14 @@
 #include "CDriveAxis.h"
 
 #define TURN_TIME 500 // [ms]
-#define TURN_ANGLE 20
-#define FORWARD_ANGLE 82 // угол сервопривода для езды прямо
 
 // return codes of loop()
 #define DIRECTING_TURN_OVER 101 // первый поворот окончен
 #define FINAL_TURN_OVER 103 // второй поворот окончен
+
+
+const byte TURN_ANGLE = 25;
+const byte FORWARD_ANGLE = 82; // угол сервопривода для езды прямо
 
 // направление движения робота
 enum EMovementDirection {
@@ -48,7 +50,7 @@ class CDriveControl
 {
 public: 
   CDriveControl() {}
-  CDriveControl(CDriveAxis *ADriveAxis, byte servo_pin);
+  CDriveControl(CDriveAxis *ADriveAxis, byte left_rot_pin, byte right_rot_pin);
 
   // low logic
   void move_forward();
@@ -63,8 +65,10 @@ public:
 
 private:
   CDriveAxis *DriveAxis;
-  byte _servo_pin;
-  Servo servo;
+  byte left_rot_pin;
+  byte right_rot_pin;
+  Servo servol;
+  Servo servor;
 
   // для небольших поворотов на 1-7 линий
   unsigned long maneuver_time;
