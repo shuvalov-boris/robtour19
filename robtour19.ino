@@ -1,5 +1,6 @@
 #include <IRremote.h>
 
+#include "CColorTracker.h"
 #include "CDriveAxis.h"
 #include "CDriveControl.h"
 
@@ -34,6 +35,8 @@ decode_results results;
 CDriveControl DriveControl;
 MovementDirection last_move_cmd = MMD_NONE;
 
+CColorTracker ColorTracker;
+
 long last_time = 0;
 
 void setup()
@@ -45,24 +48,16 @@ void setup()
   pinMode(5, OUTPUT);// pinB drive axis motor
   pinMode(STBY, OUTPUT); // 12 standby drive axis motor
 
-//  pinMode(S3, OUTPUT); // 6 pin - S3 of color sensor
-//  pinMode(S2, OUTPUT); // 7 pin - S2 of color sensor
-//  pinMode(S1, OUTPUT); // 8 pin - S1 of color sensor
-//  pinMode(S0, OUTPUT); // 9 pin - S0 of color sensor
-//  pinMode(color_out, INPUT); // 10 pin - Color OUT
+  pinMode(13, OUTPUT); // led
   
   pinMode(14, INPUT);// pinA0 // in3 for motor2
   pinMode(15, INPUT);// pinA1 // switch(right) for чего-нибудь/ если его включить, то на А1 будет подаваться Vin (7.2В)
 
-// задаем масштабирование частоты на 20%:
-//  digitalWrite(S0,HIGH);
-//  digitalWrite(S1,LOW);
-//  
-//  digitalWrite(S2, HIGH);
-//  digitalWrite(S3, HIGH);
 
 
   Serial.begin(115200);
+
+  ColorTracker = CColorTracker(S0, S1, S2, S3, color_out);
   
   DriveAxis = new CDriveAxis(motor_drive_pinA, motor_drive_pinE, motor_drive_pinB, STBY);
   DriveControl = CDriveControl(DriveAxis, servo_rotate_chassis); // TODO
@@ -74,7 +69,10 @@ void setup()
 
 void loop()
 {
-  color_sensor_calibration();
+
+  ColorTracker.GetColor();
+  
+//  ColorTracker.Calibrate();
 
 //  IR_remote_recieve();
 
@@ -154,53 +152,30 @@ void IR_remote_recieve()
         irrecv.resume();// Receive the next value
     }
 }
+//
+//const byte red_orange_threshold = 35; // R-component: orange < 35 < red
+//const byte blue_white_threshold = 22; // B-component: white < 22 < blue
+//const byte green_white_threshold = 45; // G-component: white < 45 < green
+//
+//void color_identifier()
+//{
+//  int redFrequency = 0;
+//  int greenFrequency = 0;
+//  int blueFrequency = 0;
+//
+//  // настраиваем датчик таким образом, чтобы считывать данные
+//  // с фотодиодов с красным фильтром:
+//  digitalWrite(S2,LOW);
+//  digitalWrite(S3,LOW);
+// 
+//  // считываем выходную частоту:
+//  redFrequency = pulseIn(color_out, LOW);
+//
+//  if (redFrequency < )
+//  digitalWrite(13,HIGH);
+//  
+//}
 
-void color_sensor_calibration()
-{
-  // для хранения частоты, считанной фотодиодами
-  int redFrequency = 0;
-  int greenFrequency = 0;
-  int blueFrequency = 0;
-
-  // настраиваем датчик таким образом, чтобы считывать данные
-  // с фотодиодов с красным фильтром:
-  digitalWrite(S2,LOW);
-  digitalWrite(S3,LOW);
- 
-  // считываем выходную частоту:
-  redFrequency = pulseIn(color_out, LOW);
- 
-   // печатаем данные от фотодиодов с красным фильтром:
-  Serial.print("R = ");
-  Serial.print(redFrequency);
-  delay(100);
- 
-  // настраиваем датчик таким образом, чтобы считывать данные
-  // с фотодиодов с зеленым фильтром:
-  digitalWrite(S2,HIGH);
-  digitalWrite(S3,HIGH);
- 
-  // считываем выходную частоту:
-  greenFrequency = pulseIn(color_out, LOW);
- 
-  // печатаем данные от фотодиодов с зеленым фильтром:
-  Serial.print(" G = ");
-  Serial.print(greenFrequency);
-  delay(100);
- 
-  // настраиваем датчик таким образом, чтобы считывать данные
-  // с фотодиодов с синим фильтром:
-  digitalWrite(S2,LOW);
-  digitalWrite(S3,HIGH);
- 
-  // считываем выходную частоту:
-  blueFrequency = pulseIn(color_out, LOW);
- 
-  // печатаем данные от фотодиодов с синим фильтром:
-  Serial.print(" B = ");
-  Serial.println(blueFrequency);
-  delay(100);
-}
 
 // проверка исполнения команд движения
 void testing_movement()
