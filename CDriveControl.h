@@ -6,10 +6,12 @@
 #include "CDriveAxis.h"
 
 #define TURN_TIME 500 // [ms]
+#define TURN_ANGLE 20
+#define FORWARD_ANGLE 82 // угол сервопривода для езды прямо
 
 // return codes of loop()
-#define DIRECTING_TURN_OVER 1001 // первый поворот окончен
-#define FINAL_TURN_OVER 1003 // второй поворот окончен
+#define DIRECTING_TURN_OVER 101 // первый поворот окончен
+#define FINAL_TURN_OVER 103 // второй поворот окончен
 
 // направление движения робота
 enum EMovementDirection {

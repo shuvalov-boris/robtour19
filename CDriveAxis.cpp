@@ -17,9 +17,9 @@ CDriveAxis::CDriveAxis(byte pin_motor_A, byte pin_speed, byte pin_motor_B, byte 
 void CDriveAxis::forward() {
   if (_rotation_direction != EWRD_FORWARD) {
     _rotation_direction = EWRD_FORWARD;
-    digitalWrite(_pin_motor_A, 0);
+    digitalWrite(_pin_motor_A, 1);
     analogWrite(_pin_speed, _speed);
-    digitalWrite(_pin_motor_B, 1);
+    digitalWrite(_pin_motor_B, 0);
   }
 }
 
@@ -27,9 +27,9 @@ void CDriveAxis::forward() {
 void CDriveAxis::backward() {
   if (_rotation_direction != EWRD_BACKWARD) {
     _rotation_direction = EWRD_BACKWARD;    
-    digitalWrite(_pin_motor_A, 1);
+    digitalWrite(_pin_motor_A, 0);
     analogWrite(_pin_speed, _speed);
-    digitalWrite(_pin_motor_B, 0);
+    digitalWrite(_pin_motor_B, 1);
   }
 }
 

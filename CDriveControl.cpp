@@ -10,7 +10,7 @@ CDriveControl::CDriveControl(CDriveAxis *ADriveAxis, byte servo_pin)
 
 void CDriveControl::move_forward()
 {
-  servo.write(90);
+  servo.write(FORWARD_ANGLE);
   DriveAxis->setSpeed(80);
   DriveAxis->forward();
 }
@@ -22,14 +22,14 @@ void CDriveControl::move_backward()
 
 void CDriveControl::turn_left()
 {
-  servo.write(70);
+  servo.write(FORWARD_ANGLE - TURN_ANGLE);
   DriveAxis->setSpeed(80);
   DriveAxis->forward();
 }
 
 void CDriveControl::turn_right()
 {
-  servo.write(110);
+  servo.write(FORWARD_ANGLE + TURN_ANGLE);
   DriveAxis->setSpeed(80);
   DriveAxis->forward();
 }
