@@ -1,3 +1,5 @@
+#include <IRremote.h>
+
 #include "CDriveAxis.h"
 #include "CDriveControl.h"
 
@@ -13,6 +15,11 @@ const byte motor_drive_pinA = 4;
 const byte motor_drive_pinB = 5;
 const byte motor_drive_pinE = 3;
 const byte STBY = 12; // standby
+
+// приёмник ИК-сигнала
+const byte ir_rc_pin = 11;
+IRrecv irrecv(ir_rc_pin);
+decode_results results;
 
 CDriveAxis *DriveAxis;
 CDriveControl DriveControl;
@@ -38,11 +45,23 @@ void setup()
   DriveAxis = new CDriveAxis(motor_drive_pinA, motor_drive_pinE, motor_drive_pinB, STBY); // TODO
   DriveControl = CDriveControl(DriveAxis, servo_rotate_chassis); // TODO
 
+  irrecv.enableIRIn();
+
   last_time = millis();
 }
 
 void loop()
 {
+
+  if (irrecv.decode(&results)) {
+        Serial.print("0x");
+        Serial.println(results.value, HEX);
+        delay(50);
+        irrecv.resume();// Receive the next value
+    }
+
+
+    
 //  DriveControl.move_forward();
   long dt = millis() - last_time;
   if ( dt < 5000)
@@ -68,7 +87,7 @@ void move_by_line()
   {
     DriveControl.move_forward();
     last_move_cmd = MMD_FORWARD;
-    Serial.println("to FORWARD");
+//    Serial.println("to FORWARD");
 //    confused_threshold-=10;
   }
   else if (leftLF == HIGH && rightLF == HIGH)
@@ -83,31 +102,31 @@ void move_by_line()
     {
       DriveControl.turn_right(); 
       last_move_cmd = MMD_TURN_RIGHT;
-      Serial.println("repeat RIGHT");
+//      Serial.println("repeat RIGHT");
 //      confused_threshold++;
     }
     else if (last_move_cmd == MMD_TURN_LEFT)
     {
       DriveControl.turn_left(); 
       last_move_cmd = MMD_TURN_LEFT;
-      Serial.println("repeat LEFT");
+//      Serial.println("repeat LEFT");
 //      confused_threshold++;
     }
     else
     { // произошло нечто неординарное
-      Serial.println("ЧЕРНАЯ ПОЛОСА ПОПЕРЕК");
+//      Serial.println("ЧЕРНАЯ ПОЛОСА ПОПЕРЕК");
       }
   }
   else if (leftLF == LOW && rightLF == HIGH)
   {
     DriveControl.turn_right();
     last_move_cmd = MMD_TURN_RIGHT;
-    Serial.println("to RIGHT");
+//    Serial.println("to RIGHT");
   }
   else if (leftLF == HIGH && rightLF == LOW)
   {
     DriveControl.turn_left();
     last_move_cmd = MMD_TURN_LEFT;
-    Serial.println("to LEFT");
+//    Serial.println("to LEFT");
   }
 }
