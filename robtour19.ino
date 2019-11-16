@@ -4,6 +4,19 @@
 #include "CDriveAxis.h"
 #include "CDriveControl.h"
 
+// на каком этапе выполнения задачи находимся
+enum ETaskPhase
+{
+  ETP_START_FIELD,
+  ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN,
+  ETP_MOVING_ALONG_BLACK_LINE_TO_NEXT_COIN,
+  ETP_MOVING_TO_BLUE_LINE_1,
+  ETP_BLUE_LINE_1_PASSED,
+  ETP_BLUE_LINE_2,
+  ETP_BLUE_LINE_3,
+  ETP_FINISH_FIELD
+};
+
 // датчики линии
 const byte left_line_follower_pin = A1;
 const byte right_line_follower_pin = A0;
@@ -33,27 +46,33 @@ decode_results results;
 
 
 CDriveControl DriveControl;
-MovementDirection last_move_cmd = MMD_NONE;
+byte DCReturnedCode = 0;
+EMovementDirection last_move_cmd = EMD_NONE;
 
 CColorTracker ColorTracker;
 
 long last_time = 0;
 
+// for testing
+byte passedMoveCount = 0;
+byte CoinsPos[5] = {2, 6, 1, 8, 5};
+byte Move = 0;
+
+ETaskPhase TaskPhase = ETP_START_FIELD;
+
 void setup()
 {
 
   pinMode(2, OUTPUT); // servo rotation chassis
-  pinMode(3, OUTPUT);// enable drive axis motor
-  pinMode(4, OUTPUT);// pinA drive axis motor
-  pinMode(5, OUTPUT);// pinB drive axis motor
+  pinMode(3, OUTPUT); // enable drive axis motor
+  pinMode(4, OUTPUT); // pinA drive axis motor
+  pinMode(5, OUTPUT); // pinB drive axis motor
   pinMode(STBY, OUTPUT); // 12 standby drive axis motor
 
   pinMode(13, OUTPUT); // led
   
   pinMode(14, INPUT);// pinA0 // in3 for motor2
   pinMode(15, INPUT);// pinA1 // switch(right) for чего-нибудь/ если его включить, то на А1 будет подаваться Vin (7.2В)
-
-
 
   Serial.begin(115200);
 
@@ -71,6 +90,49 @@ void loop()
 {
 
   ColorTracker.GetColor();
+
+//  Считываем данные о положении фишек и роботов
+//  Определяем по датчику цвета номер поля - 1 или 2
+
+//  if НАЖАТА КНОПКА СТАРТА то
+    switch (TaskPhase)
+    {
+      case ETP_START_FIELD:
+        DriveControl.move_counting_lines(CoinsPos[passedMoveCount + 1] - CoinsPos[passedMoveCount]);
+        TaskPhase = ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN;
+        break;
+
+      case ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN:
+        int leftLF = digitalRead(left_line_follower_pin);
+        int rightLF = digitalRead(right_line_follower_pin);
+        if (DriveControl.loop(leftLF, rightLF) == FINAL_TURN_OVER)
+        {
+          TaskPhase = ETP_MOVING_ALONG_BLACK_LINE_TO_NEXT_COIN;
+          move_by_line();
+        }
+        break;
+      case ETP_MOVING_ALONG_BLACK_LINE_TO_NEXT_COIN:
+        move_by_line();
+        if (passedMoveCount < 3 && ColorTracker.GetColor() == EDF_BLUE)
+        {
+          passedMoveCount++;
+          TaskPhase = ETP_START_FIELD;
+          if (passedMoveCount == 3)
+          {
+            // Можно поднять платформу (сначала подобрав монетки)
+          }
+        }
+        else if (passedMoveCount == 3 && ColorTracker.GetColor() == EDF_GREEN)
+        {
+          // На финише. Поднять платформу! раньше надо было
+        }
+        break;
+    }
+
+
+
+
+
   
 //  ColorTracker.Calibrate();
 
@@ -96,7 +158,7 @@ void move_by_line()
   if (leftLF == LOW && rightLF == LOW)
   {
     DriveControl.move_forward();
-    last_move_cmd = MMD_FORWARD;
+    last_move_cmd = EMD_FORWARD;
 //    Serial.println("to FORWARD");
 //    confused_threshold-=10;
   }
@@ -108,17 +170,17 @@ void move_by_line()
 //      Serial.println("FORCE FORCE FORCE FORWARD");
 //      confused_threshold;
 //    }
-    if (last_move_cmd == MMD_TURN_RIGHT)
+    if (last_move_cmd == EMD_TURN_RIGHT)
     {
       DriveControl.turn_right(); 
-      last_move_cmd = MMD_TURN_RIGHT;
+      last_move_cmd = EMD_TURN_RIGHT;
 //      Serial.println("repeat RIGHT");
 //      confused_threshold++;
     }
-    else if (last_move_cmd == MMD_TURN_LEFT)
+    else if (last_move_cmd == EMD_TURN_LEFT)
     {
       DriveControl.turn_left(); 
-      last_move_cmd = MMD_TURN_LEFT;
+      last_move_cmd = EMD_TURN_LEFT;
 //      Serial.println("repeat LEFT");
 //      confused_threshold++;
     }
@@ -130,13 +192,13 @@ void move_by_line()
   else if (leftLF == LOW && rightLF == HIGH)
   {
     DriveControl.turn_right();
-    last_move_cmd = MMD_TURN_RIGHT;
+    last_move_cmd = EMD_TURN_RIGHT;
 //    Serial.println("to RIGHT");
   }
   else if (leftLF == HIGH && rightLF == LOW)
   {
     DriveControl.turn_left();
-    last_move_cmd = MMD_TURN_LEFT;
+    last_move_cmd = EMD_TURN_LEFT;
 //    Serial.println("to LEFT");
   }
 }
