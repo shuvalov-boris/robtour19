@@ -1,10 +1,12 @@
-
 #include "CDriveAxis.h"
 #include "CDriveControl.h"
 
 // датчики линии
 const byte left_line_follower_pin = A1;
 const byte right_line_follower_pin = A0;
+
+// сервопривод передней оси поворота робота
+const byte servo_rotate_chassis = 2;
 
 // мотор ведущей оси
 const byte motor_drive_pinA = 4;
@@ -16,9 +18,12 @@ CDriveAxis *DriveAxis;
 CDriveControl DriveControl;
 MovementDirection last_move_cmd = MMD_NONE;
 
+long last_time = 0;
+
 void setup()
 {
 
+  pinMode(2, OUTPUT); // servo rotation chassis
   pinMode(3, OUTPUT);// enable drive axis motor
   pinMode(4, OUTPUT);// pinA drive axis motor
   pinMode(5, OUTPUT);// pinB drive axis motor
@@ -31,13 +36,22 @@ void setup()
   Serial.begin(115200);
   
   DriveAxis = new CDriveAxis(motor_drive_pinA, motor_drive_pinE, motor_drive_pinB, STBY); // TODO
-  DriveControl = CDriveControl(DriveAxis); // TODO
+  DriveControl = CDriveControl(DriveAxis, servo_rotate_chassis); // TODO
+
+  last_time = millis();
 }
 
 void loop()
 {
-  DriveControl.move_forward();
-//  move_by_line();
+//  DriveControl.move_forward();
+  long dt = millis() - last_time;
+  if ( dt < 5000)
+    DriveControl.turn_right();
+  else if (dt < 10000)
+    DriveControl.move_forward();
+  else if (dt < 15000)
+    DriveControl.turn_left();
+  move_by_line();
 }
 
 // движение по черной полосе

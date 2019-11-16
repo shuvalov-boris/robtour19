@@ -1,6 +1,7 @@
 #ifndef CDRIVECONTROL_H
 #define CDRIVECONTROL_H
 
+#include <Servo.h>
 #include "Arduino.h"
 #include "CDriveAxis.h"
 
@@ -20,14 +21,17 @@ class CDriveControl
 {
 public: 
   CDriveControl() {}
-  CDriveControl(CDriveAxis *ADriveAxis);
+  CDriveControl(CDriveAxis *ADriveAxis, byte servo_pin);
 
   void move_forward();
   void move_backward();
   void turn_left();
   void turn_right();
 
+private:
   CDriveAxis *DriveAxis;
+  byte _servo_pin;
+  Servo servo;
   
 };
 
