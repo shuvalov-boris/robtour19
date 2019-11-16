@@ -5,6 +5,7 @@ CDriveControl::CDriveControl(CDriveAxis *ADriveAxis, byte servo_pin)
   DriveAxis = ADriveAxis;
   _servo_pin = servo_pin;
   servo.attach(_servo_pin);
+  servo.write(90);
 }
 
 void CDriveControl::move_forward()

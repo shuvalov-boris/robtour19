@@ -7,6 +7,14 @@
 const byte left_line_follower_pin = A1;
 const byte right_line_follower_pin = A0;
 
+// датчики цвета
+const byte S0 = 9;
+const byte S1 = 8;
+const byte S2 = 7;
+const byte S3 = 6;
+const byte color_out = 10;
+
+
 // сервопривод передней оси поворота робота
 const byte servo_rotate_chassis = 2;
 
@@ -36,14 +44,27 @@ void setup()
   pinMode(4, OUTPUT);// pinA drive axis motor
   pinMode(5, OUTPUT);// pinB drive axis motor
   pinMode(STBY, OUTPUT); // 12 standby drive axis motor
+
+//  pinMode(S3, OUTPUT); // 6 pin - S3 of color sensor
+//  pinMode(S2, OUTPUT); // 7 pin - S2 of color sensor
+//  pinMode(S1, OUTPUT); // 8 pin - S1 of color sensor
+//  pinMode(S0, OUTPUT); // 9 pin - S0 of color sensor
+//  pinMode(color_out, INPUT); // 10 pin - Color OUT
   
   pinMode(14, INPUT);// pinA0 // in3 for motor2
   pinMode(15, INPUT);// pinA1 // switch(right) for чего-нибудь/ если его включить, то на А1 будет подаваться Vin (7.2В)
 
+// задаем масштабирование частоты на 20%:
+//  digitalWrite(S0,HIGH);
+//  digitalWrite(S1,LOW);
+//  
+//  digitalWrite(S2, HIGH);
+//  digitalWrite(S3, HIGH);
+
 
   Serial.begin(115200);
   
-  DriveAxis = new CDriveAxis(motor_drive_pinA, motor_drive_pinE, motor_drive_pinB, STBY); // TODO
+  DriveAxis = new CDriveAxis(motor_drive_pinA, motor_drive_pinE, motor_drive_pinB, STBY);
   DriveControl = CDriveControl(DriveAxis, servo_rotate_chassis); // TODO
 
   irrecv.enableIRIn();
@@ -53,14 +74,11 @@ void setup()
 
 void loop()
 {
+//  color_sensor_calibration();
 
-//  if (irrecv.decode(&results)) {
-//        Serial.print("0x");
-//        Serial.println(results.value, HEX);
-//        delay(50);
-//        irrecv.resume();// Receive the next value
-//    }
+  IR_remote_recieve();
 
+<<<<<<< Updated upstream
   DriveControl.turn_right();
   delay(2000);
 
@@ -73,6 +91,11 @@ void loop()
   DriveControl.move_forward();
   delay(2000);
 
+=======
+//  testing_movement();
+
+//  move_by_line();
+>>>>>>> Stashed changes
 }
 
 
@@ -133,4 +156,78 @@ void move_by_line()
     last_move_cmd = MMD_TURN_LEFT;
 //    Serial.println("to LEFT");
   }
+}
+
+//считывание информации от ИК передатчика
+void IR_remote_recieve()
+{
+    if (irrecv.decode(&results)) {
+        Serial.print(results.value, BIN);
+        Serial.print("\t bits of ");
+        Serial.println(results.bits);
+        irrecv.resume();// Receive the next value
+    }
+}
+
+void color_sensor_calibration()
+{
+  // для хранения частоты, считанной фотодиодами
+  int redFrequency = 0;
+  int greenFrequency = 0;
+  int blueFrequency = 0;
+
+  // настраиваем датчик таким образом, чтобы считывать данные
+  // с фотодиодов с красным фильтром:
+  digitalWrite(S2,LOW);
+  digitalWrite(S3,LOW);
+ 
+  // считываем выходную частоту:
+  redFrequency = pulseIn(color_out, LOW);
+ 
+   // печатаем данные от фотодиодов с красным фильтром:
+  Serial.print("R = ");
+  Serial.print(redFrequency);
+  delay(100);
+ 
+  // настраиваем датчик таким образом, чтобы считывать данные
+  // с фотодиодов с зеленым фильтром:
+  digitalWrite(S2,HIGH);
+  digitalWrite(S3,HIGH);
+ 
+  // считываем выходную частоту:
+  greenFrequency = pulseIn(color_out, LOW);
+ 
+  // печатаем данные от фотодиодов с зеленым фильтром:
+  Serial.print(" G = ");
+  Serial.print(greenFrequency);
+  delay(100);
+ 
+  // настраиваем датчик таким образом, чтобы считывать данные
+  // с фотодиодов с синим фильтром:
+  digitalWrite(S2,LOW);
+  digitalWrite(S3,HIGH);
+ 
+  // считываем выходную частоту:
+  blueFrequency = pulseIn(color_out, LOW);
+ 
+  // печатаем данные от фотодиодов с синим фильтром:
+  Serial.print(" B = ");
+  Serial.println(blueFrequency);
+  delay(100);
+}
+
+// проверка исполнения команд движения
+void testing_movement()
+{
+  DriveControl.turn_right();
+  delay(500);
+
+  DriveControl.move_forward();
+  delay(2000);
+
+  DriveControl.turn_left();
+  delay(500);
+
+  DriveControl.move_forward();
+  delay(2000);
 }
