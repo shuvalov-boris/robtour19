@@ -72,6 +72,7 @@ byte CDriveControl::loop(int leftEn, int rightEn)
         passed_black_lines = 0; // точно ли?
         BlackLinePassStatus = EBLPS_BOTH_EXPECTING; // TODO если мы еще не доехали до первой черной полосы НЕ ФАКТ!!!
         // TODO мониторить ли тут черные полосы?
+        Serial.print("First TURN passed!");
         return DIRECTING_TURN_OVER;
       }
       break;
@@ -106,6 +107,8 @@ byte CDriveControl::loop(int leftEn, int rightEn)
           {
             BlackLinePassStatus = EBLPS_BOTH_EXPECTING;
             passed_black_lines++;
+            Serial.print("Got one more black line to ");
+            Serial.println(passed_black_lines);
             if (passed_black_lines == black_lines_count_to_pass)
             {  // прошли все линии -> выруливаем на следующую черную полосу
               Maneuver = EMS_FINAL_TURN;

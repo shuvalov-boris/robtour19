@@ -61,6 +61,7 @@ uint8_t correct_data[8];
 bool data_is_read = false;
 
 long last_time = 0;
+const long TIME_TO_WAIT = 10000;
 
 // for testing
 byte passedMoveCount = 0;
@@ -100,7 +101,7 @@ void setup()
 void loop()
 {
 //DriveControl.move_forward();
-  move_by_line();
+  move_by_line( );
 //
 ////  testing_movement();
   return;
@@ -117,50 +118,72 @@ void loop()
 //  Считываем данные о положении фишек и роботов
 //  Определяем по датчику цвета номер поля - 1 или 2
 
+    if (TaskPhase == ETP_READY)
+    {
+      hamming_loop();
+      if (millis() - last_time > TIME_TO_WAIT)
+    
+    {
+       TaskPhase = ETP_START_FIELD;
+      Serial.println("EMERGE FORWARD");
+    }
+    }
+      
+
   
     switch (TaskPhase)
     {
       case ETP_READY:
         //  Считываем данные о положении фишек и роботов
-//        if (data_is_read == false)
-//        { 
-//          hamming_loop();
-//        }
-//        if (data_is_read == true)
-//        {
-//          // if цвет стартовой зоны определен
-//          // задаем массив CoinsPos
-//          //  Определяем по датчику цвета номер поля - 1 или 2
-//          EDefinedColor color = ColorTracker.GetColor();
-//          if (color == EDC_YELLOW)
-//          {
-//            for (int i = 0; i < 4; i++)
-//              CoinsPos[i] = correct_data[i];
-//          }
-//          else if (color == EDC_RED)
-//          {
-//            for (int i = 0; i < 4; i++)
-//              CoinsPos[i] = correct_data[i + 4];
-//          }
-//          CoinsPos[4] = 5; // or 4
-//        }   
+        if (data_is_read == false)
+        { 
+          hamming_loop();
+        }
+        if (data_is_read == true)
+        {
+          Serial.println("READ IR REMOTE DATA");
+          // if цвет стартовой зоны определен
+          // задаем массив CoinsPos
+          //  Определяем по датчику цвета номер поля - 1 или 2
+          EDefinedColor color = ColorTracker.GetColor();
+          if (color == EDC_YELLOW)
+          {
+            Serial.println("YELLOW");
+            for (int i = 0; i < 4; i++)
+            {
+              CoinsPos[i] = correct_data[i];
+              Serial.print(CoinsPos[i]);
+              Serial.print("\t");
+            }
+            Serial.println();
+          }
+          else if (color == EDC_RED)
+          {
+            Serial.println("RED");
+            for (int i = 0; i < 4; i++)
+            {
+              CoinsPos[i] = correct_data[i + 4];
+              Serial.print(CoinsPos[i]);
+              Serial.print("\t");
+            }
+            Serial.println();
+          }
+          CoinsPos[4] = 5; // or 4
+        }   
         
         //  if НАЖАТА КНОПКА СТАРТА то
 //          TaskPhase = ETP_START_FIELD;
 
 // ВРЕМЕННО !!!  ВРЕМЕННО !!!  ВРЕМЕННО !!!  ВРЕМЕННО !!!  ВРЕМЕННО !!!  ВРЕМЕННО !!!  ВРЕМЕННО !!!  ВРЕМЕННО !!!  
-          int buttonState = digitalRead(start_button_pin);
-          if (buttonState == HIGH)
-          {
-//          if (data_is_read == true)
+
+          if (data_is_read == true){
             TaskPhase = ETP_START_FIELD;
-            Serial.println("BUTTON PRESSED");
+            Serial.println("START");
           }
         break;
       case ETP_START_FIELD:
-//        DriveControl.move_counting_lines(CoinsPos[passedMoveCount + 1] - CoinsPos[passedMoveCount]);
-//        TaskPhase = ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN;
-          move_by_line();
+        DriveControl.move_counting_lines(CoinsPos[passedMoveCount + 1] - CoinsPos[passedMoveCount]);
+        TaskPhase = ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN;
         break;
 
       case ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN:
@@ -310,12 +333,12 @@ void hamming_loop()
 //      }
 //      Serial.println();
 //
-//      Serial.print("Correct data:");
-//      for (int i = 0; i < 8; i++) {
-//        Serial.print(" ");
-//        Serial.print(correct_data[i]);
-//      }
-//      Serial.println();
+      Serial.print("Correct data:");
+      for (int i = 0; i < 8; i++) {
+        Serial.print(" ");
+        Serial.print(correct_data[i]);
+      }
+      Serial.println();
       data_is_read = true;
     }
     irrecv0.resume(); // Receive the next value
