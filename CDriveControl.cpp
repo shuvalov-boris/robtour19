@@ -24,18 +24,18 @@ void CDriveControl::move_backward()
   
 }
 
-void CDriveControl::turn_left()
+void CDriveControl::turn_left(byte aangle)
 {
-  servol.write(FORWARD_ANGLE - TURN_ANGLE);
-  servor.write(FORWARD_ANGLE - TURN_ANGLE);
+  servol.write(FORWARD_ANGLE - aangle);
+  servor.write(FORWARD_ANGLE - aangle);
   DriveAxis->setSpeed(80);
   DriveAxis->forward();
 }
 
-void CDriveControl::turn_right()
+void CDriveControl::turn_right(byte aangle)
 {
-  servol.write(FORWARD_ANGLE + TURN_ANGLE);
-  servor.write(FORWARD_ANGLE + TURN_ANGLE);
+  servol.write(FORWARD_ANGLE + aangle);
+  servor.write(FORWARD_ANGLE + aangle);
   DriveAxis->setSpeed(80);
   DriveAxis->forward();
 }
@@ -104,7 +104,7 @@ byte CDriveControl::loop(int leftEn, int rightEn)
         case EBLPS_FIRST_SENSOR_PASSED_SECOND_DETECTION:
           if (byOrder[0] == 0 && byOrder[1] == 0)
           {
-            BlackLinePassStatus = EBLPS_BOTH_SENSORS_PASSED;
+            BlackLinePassStatus = EBLPS_BOTH_EXPECTING;
             passed_black_lines++;
             if (passed_black_lines == black_lines_count_to_pass)
             {  // прошли все линии -> выруливаем на следующую черную полосу
@@ -113,7 +113,7 @@ byte CDriveControl::loop(int leftEn, int rightEn)
               if (left_turn)
                 turn_right();
               else
-                turn_right();
+                turn_left();
             }
           }
       }

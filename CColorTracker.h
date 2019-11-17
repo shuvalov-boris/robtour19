@@ -11,11 +11,12 @@
 
 enum EDefinedColor
 {
-  EDF_UNKNOW,
-  EDF_RED,
-  EDF_ORANGE,
-  EDF_BLUE,
-  EDF_GREEN
+  EDC_UNKNOW,
+  EDC_RED,
+  EDC_ORANGE,
+  EDC_BLUE,
+  EDC_GREEN,
+  EDC_YELLOW
 };
 
 // Отвечает за определение поля (1 или 2(!)) - распознавание цвета на старте,

@@ -5,7 +5,7 @@
 #include "Arduino.h"
 #include "CDriveAxis.h"
 
-#define TURN_TIME 500 // [ms]
+#define TURN_TIME 750 // [ms]
 
 // return codes of loop()
 #define DIRECTING_TURN_OVER 101 // первый поворот окончен
@@ -55,8 +55,8 @@ public:
   // low logic
   void move_forward();
   void move_backward();
-  void turn_left();
-  void turn_right();
+  void turn_left(byte aangle = TURN_ANGLE);
+  void turn_right(byte aangle = TURN_ANGLE);
 
   // high logic
   void move_counting_lines(byte dy);

@@ -19,7 +19,7 @@ enum ETaskPhase
   ETP_FINISH_FIELD
 };
 
-//const start_button_pin = 
+const byte start_button_pin = A7;
 
 // датчики линии
 const byte left_line_follower_pin = A1;
@@ -29,18 +29,18 @@ const byte right_line_follower_pin = A0;
 const byte S0 = 9;
 const byte S1 = 8;
 const byte S2 = 7;
-const byte S3 = 6;
+const byte S3 = 17;
 const byte color_out = 10;
 
 
 // сервопривод передней оси поворота робота
-const byte servo_rotate_left_wheel = 1;
+const byte servo_rotate_left_wheel = 16;
 const byte servo_rotate_right_wheel = 2;
 
 // мотор ведущей оси
 const byte motor_drive_pinA = 4;
 const byte motor_drive_pinB = 5;
-const byte motor_drive_pinE = 3;
+const byte motor_drive_pinE = 6;
 const byte STBY = 12; // standby
 CDriveAxis *DriveAxis;
 
@@ -69,13 +69,13 @@ byte Move = 0;
 
 
 
-ETaskPhase TaskPhase = ETP_START_FIELD;
+ETaskPhase TaskPhase = ETP_READY;
 
 void setup()
 {
   pinMode(1, OUTPUT); // servo left rotation axis
   pinMode(2, OUTPUT); // servo rotation chassis
-  pinMode(3, OUTPUT); // enable drive axis motor
+  pinMode(6, OUTPUT); // enable drive axis motor
   pinMode(4, OUTPUT); // pinA drive axis motor
   pinMode(5, OUTPUT); // pinB drive axis motor
   pinMode(STBY, OUTPUT); // 12 standby drive axis motor
@@ -99,41 +99,68 @@ void setup()
 
 void loop()
 {
-
-//  testing_movement();
-
-    if (millis() - last_time < 3000)
-        DriveControl.turn_right();
-     else
-     DriveControl.turn_left();
-       
-  ColorTracker.GetColor();
+//DriveControl.move_forward();
+  move_by_line();
+//
+////  testing_movement();
+  return;
+//
+//    if (millis() - last_time < 3000)
+//        DriveControl.turn_right();
+//     else
+//     DriveControl.turn_left();
+//
+//     return;
+//       
+//  ColorTracker.GetColor();
 
 //  Считываем данные о положении фишек и роботов
 //  Определяем по датчику цвета номер поля - 1 или 2
 
-
+  
     switch (TaskPhase)
     {
       case ETP_READY:
         //  Считываем данные о положении фишек и роботов
-        if (data_is_read == false)
-        { 
-          hamming_loop();
-        }
-        if (data_is_read == true)
-        {
-          // if цвет стартовой зоны определен
-          // задаем массив CoinsPos
-        }
-       
-        //  Определяем по датчику цвета номер поля - 1 или 2
+//        if (data_is_read == false)
+//        { 
+//          hamming_loop();
+//        }
+//        if (data_is_read == true)
+//        {
+//          // if цвет стартовой зоны определен
+//          // задаем массив CoinsPos
+//          //  Определяем по датчику цвета номер поля - 1 или 2
+//          EDefinedColor color = ColorTracker.GetColor();
+//          if (color == EDC_YELLOW)
+//          {
+//            for (int i = 0; i < 4; i++)
+//              CoinsPos[i] = correct_data[i];
+//          }
+//          else if (color == EDC_RED)
+//          {
+//            for (int i = 0; i < 4; i++)
+//              CoinsPos[i] = correct_data[i + 4];
+//          }
+//          CoinsPos[4] = 5; // or 4
+//        }   
+        
         //  if НАЖАТА КНОПКА СТАРТА то
 //          TaskPhase = ETP_START_FIELD;
+
+// ВРЕМЕННО !!!  ВРЕМЕННО !!!  ВРЕМЕННО !!!  ВРЕМЕННО !!!  ВРЕМЕННО !!!  ВРЕМЕННО !!!  ВРЕМЕННО !!!  ВРЕМЕННО !!!  
+          int buttonState = digitalRead(start_button_pin);
+          if (buttonState == HIGH)
+          {
+//          if (data_is_read == true)
+            TaskPhase = ETP_START_FIELD;
+            Serial.println("BUTTON PRESSED");
+          }
         break;
       case ETP_START_FIELD:
-        DriveControl.move_counting_lines(CoinsPos[passedMoveCount + 1] - CoinsPos[passedMoveCount]);
-        TaskPhase = ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN;
+//        DriveControl.move_counting_lines(CoinsPos[passedMoveCount + 1] - CoinsPos[passedMoveCount]);
+//        TaskPhase = ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN;
+          move_by_line();
         break;
 
       case ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN:
@@ -147,7 +174,7 @@ void loop()
         break;
       case ETP_MOVING_ALONG_BLACK_LINE_TO_NEXT_COIN:
         move_by_line();
-        if (passedMoveCount < 3 && ColorTracker.GetColor() == EDF_BLUE)
+        if (passedMoveCount < 3 && ColorTracker.GetColor() == EDC_BLUE)
         {
           passedMoveCount++;
           TaskPhase = ETP_START_FIELD;
@@ -156,7 +183,7 @@ void loop()
             // Можно поднять платформу (сначала подобрав монетки)
           }
         }
-        else if (passedMoveCount == 3 && ColorTracker.GetColor() == EDF_GREEN)
+        else if (passedMoveCount == 3 && ColorTracker.GetColor() == EDC_GREEN)
         {
           // На финише. Поднять платформу! раньше надо было
         }

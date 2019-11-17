@@ -90,11 +90,11 @@ EDefinedColor CColorTracker::DefineStartField()
   if (redFrequency < red_orange_threshold)
   { 
     digitalWrite(13, LOW);
-    return EDF_ORANGE;
+    return EDC_ORANGE;
   }
   else
   {
     digitalWrite(13, HIGH);
-    return EDF_RED;
+    return EDC_RED;
   }
 }

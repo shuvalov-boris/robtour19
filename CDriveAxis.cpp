@@ -18,6 +18,7 @@ void CDriveAxis::forward() {
   if (_rotation_direction != EWRD_FORWARD) {
     _rotation_direction = EWRD_FORWARD;
     digitalWrite(_pin_motor_A, 1);
+    _speed = 80;
     analogWrite(_pin_speed, _speed);
     digitalWrite(_pin_motor_B, 0);
   }
@@ -26,7 +27,8 @@ void CDriveAxis::forward() {
 // движение колеса назад
 void CDriveAxis::backward() {
   if (_rotation_direction != EWRD_BACKWARD) {
-    _rotation_direction = EWRD_BACKWARD;    
+    _rotation_direction = EWRD_BACKWARD;   
+    _speed = 80; 
     digitalWrite(_pin_motor_A, 0);
     analogWrite(_pin_speed, _speed);
     digitalWrite(_pin_motor_B, 1);
