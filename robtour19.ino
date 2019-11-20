@@ -1,9 +1,7 @@
-#include <IRremote.h>
-
 #include "CColorTracker.h"
 #include "CDriveAxis.h"
 #include "CDriveControl.h"
-
+#include "CHammingCode.h"
 
 // на каком этапе выполнения задачи находимся
 enum ETaskPhase
@@ -52,11 +50,7 @@ EMovementDirection last_move_cmd = EMD_NONE;
 CColorTracker ColorTracker;
 
 int RECV_pin = 11;
-IRrecv irrecv0(RECV_pin);
-decode_results results0;
-uint8_t rcv_counter = 0;
-uint8_t received_data[8];
-uint8_t correct_data[8];
+CHammingCode HammingCode(RECV_pin);
 
 bool data_is_read = false;
 
@@ -93,51 +87,27 @@ void setup()
   DriveAxis = new CDriveAxis(motor_drive_pinA, motor_drive_pinE, motor_drive_pinB, STBY);
   DriveControl = CDriveControl(DriveAxis, servo_rotate_left_wheel, servo_rotate_right_wheel); // TODO
 
-  irrecv0.enableIRIn(); // Start the receiver
-
   last_time = millis();
 }
 
 void loop()
 {
-//DriveControl.move_forward();
-  move_by_line( );
-//
-////  testing_movement();
-  return;
-//
-//    if (millis() - last_time < 3000)
-//        DriveControl.turn_right();
-//     else
-//     DriveControl.turn_left();
-//
-//     return;
-//       
+
 //  ColorTracker.GetColor();
 
 //  Считываем данные о положении фишек и роботов
 //  Определяем по датчику цвета номер поля - 1 или 2
 
-    if (TaskPhase == ETP_READY)
-    {
-      hamming_loop();
-      if (millis() - last_time > TIME_TO_WAIT)
-    
-    {
-       TaskPhase = ETP_START_FIELD;
-      Serial.println("EMERGE FORWARD");
-    }
-    }
-      
 
   
     switch (TaskPhase)
     {
       case ETP_READY:
         //  Считываем данные о положении фишек и роботов
+        uint8_t * correct_data;
         if (data_is_read == false)
-        { 
-          hamming_loop();
+        {
+          data_is_read = HammingCode.ReceiveData(correct_data);
         }
         if (data_is_read == true)
         {
@@ -290,111 +260,4 @@ void testing_movement()
 
   DriveControl.move_forward();
   delay(2000);
-}
-
-
-
-void hamming_loop()
-{
-  if (irrecv0.decode(&results0)) {
-    if (rcv_counter == 0) {
-      if (results0.value == 0xffffffff) {
-        rcv_counter = 1;
-      }
-    } else {      
-      if (rcv_counter == 1) {
-        received_data[0] = (uint8_t)(results0.value >> 24);
-        correct_data[0] = Hamming74(received_data[0]);
-        received_data[1] = (uint8_t)(results0.value >> 16);
-        correct_data[1] = Hamming74(received_data[1]);
-        received_data[2] = (uint8_t)(results0.value >> 8);
-        correct_data[2] = Hamming74(received_data[2]);
-        received_data[3] = (uint8_t)(results0.value);
-        correct_data[3] = Hamming74(received_data[3]);
-      } else if (rcv_counter == 2) {
-        received_data[4] = (uint8_t)(results0.value >> 24);
-        correct_data[4] = Hamming74(received_data[4]);
-        received_data[5] = (uint8_t)(results0.value >> 16);
-        correct_data[5] = Hamming74(received_data[5]);
-        received_data[6] = (uint8_t)(results0.value >> 8);
-        correct_data[6] = Hamming74(received_data[6]);
-        received_data[7] = (uint8_t)(results0.value); 
-        correct_data[7] = Hamming74(received_data[7]);       
-      }
-      rcv_counter ++;
-    }
-    if(rcv_counter > 2) {
-      rcv_counter = 0;
-      
-//      Serial.print("Received data:");
-//      for (int i = 0; i < 8; i++) {
-//        Serial.print(" ");
-//        Serial.print(received_data[i]);
-//      }
-//      Serial.println();
-//
-      Serial.print("Correct data:");
-      for (int i = 0; i < 8; i++) {
-        Serial.print(" ");
-        Serial.print(correct_data[i]);
-      }
-      Serial.println();
-      data_is_read = true;
-    }
-    irrecv0.resume(); // Receive the next value
-  }
-}
-
-byte Hamming74 (byte input)
-{
-
-  //узнаем значения битов   
-  boolean
-  bit8=(0 < (input & B00000001)), // data
-  bit7=(0 < (input & B00000010)), // data
-  bit6=(0 < (input & B00000100)), // data
-  bit5=(0 < (input & B00001000)), 
-  bit4=(0 < (input & B00010000)), // data
-  bit3=(0 < (input & B00100000)),
-  bit2=(0 < (input & B01000000)),
-  bit1=(0 < (input & B10000000));
-
-  //  делаем XOR к трём проверочным битам 
-  boolean
-  SumCheck1 = (bit4 ^ bit6 ^ bit8),
-  SumCheck2 = (bit4 ^ bit7 ^ bit8),
-  SumCheck3 = (bit6 ^ bit7 ^ bit8);
-
-  
-
-  //  сравниваем значение XOR проверочного бита и бита используемого в посылке
-  if (!((SumCheck1 == bit1) && (SumCheck2 == bit2) && (SumCheck3 == bit4)))
-  {    
-    boolean
-      SumCheckSyndrome1 = (bit2 ^ bit4 ^ bit6 ^ bit8),
-      SumCheckSyndrome2 = (bit3 ^ bit4 ^ bit7 ^ bit8),
-      SumCheckSyndrome3 = (bit5 ^ bit6 ^ bit7 ^ bit8);
-  
-     byte SyndromeSumCheck = 1;
-     if (SumCheckSyndrome1 == 1) { SyndromeSumCheck+=1; }
-     if (SumCheckSyndrome2 == 1) { SyndromeSumCheck+=2; }
-     if (SumCheckSyndrome3 == 1) { SyndromeSumCheck+=4; } 
-
-    if (SyndromeSumCheck > 0)
-    { // исправляем ошибку в бите данных
-      if (SyndromeSumCheck == 4) bit4 = 1 - bit4;
-      if (SyndromeSumCheck == 6) bit6 = 1 - bit6;
-      if (SyndromeSumCheck == 7) bit7 = 1 - bit7;
-      if (SyndromeSumCheck == 8) bit8 = 1 - bit8;
-    }
-  }
-
-
-   byte result = 0;
-    if (bit8==1) {result+=1;}  else {result+=0;}
-    if (bit7==1) {result+=2;}  else {result+=0;}
-    if (bit6==1) {result+=4;}  else {result+=0;}
-    if (bit4==1) {result+=8;}  else {result+=0;}
-
-    return result;
 }
