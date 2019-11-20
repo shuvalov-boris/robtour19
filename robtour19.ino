@@ -5,6 +5,8 @@
 #include "CDriveControl.h"
 #include "CHammingCode.h"
 
+#define BTN_TIME 500
+
 // на каком этапе выполнения задачи находимся
 enum ETaskPhase
 {
@@ -60,12 +62,14 @@ byte passedMoveCount = 0;
 byte CoinsPos[5] = {2, 6, 1, 8, 5};
 byte Move = 0;
 
+bool is_setup = false;
 
 
 ETaskPhase TaskPhase = ETP_READY;
 
 void setup()
 {
+  pinMode(3, INPUT_PULLUP); // кнопка старта
   pinMode(1, OUTPUT); // servo left rotation axis
   pinMode(2, OUTPUT); // servo rotation chassis
   pinMode(6, OUTPUT); // enable drive axis motor
@@ -85,38 +89,65 @@ void setup()
   DriveAxis = new CDriveAxis(motor_drive_pinA, motor_drive_pinE, motor_drive_pinB, STBY);
   DriveControl = CDriveControl(DriveAxis, servo_rotate_left_wheel, servo_rotate_right_wheel);
 
+//  Serial.print("testing HammingCode...\t\t");
+//  bool is_correct = HammingCode.test();
+//  if (is_correct == true) Serial.println("OK");
+//  else Serial.println("FAIL");
+
   last_time = millis();
 }
 
 void loop()
 {
 
-//  ColorTracker.GetColor();
+//  ColorTracker.Calibrate();
 
+//  if (ColorTracker.GetColor(EDC_BLUE) == EDC_BLUE)
+//  {
+//    Serial.println("EDC_BLUE");
+//    DriveAxis->stop();
+//  }
+//  else
+//  
+//  move_by_line();
+
+//Serial.println(digitalRead(3));
 
   collect_coins();
+
     
 }
 
 // выполнение задачи сбора фишек
 void collect_coins()
 {
+//  Serial.print("TaskPhase is ");
+//  Serial.println((int)TaskPhase);
   switch (TaskPhase)
   {
   case ETP_READY:
+  {
     //  Считываем данные о положении фишек и роботов
-    uint8_t * correct_data;
+    uint8_t correct_data[] = {3, 2, 5, 6, 1, 6, 4, 8};
+    data_is_read = true;
     if (data_is_read == false)
     {
       data_is_read = HammingCode.ReceiveData(correct_data);
     }
-    if (data_is_read == true)
+    if (data_is_read == true && is_setup == false)
     {
+      Serial.print("IR Received data:");
+      for (int i = 0; i < 8; i++) {
+        Serial.print(" ");
+        Serial.print(correct_data[i]);
+      }
+      Serial.println();
+      
       Serial.println("READ IR REMOTE DATA");
       // if цвет стартовой зоны определен
       // задаем массив CoinsPos
       //  Определяем по датчику цвета номер поля - 1 или 2
-      EDefinedColor color = ColorTracker.GetColor();
+      EDefinedColor color = ColorTracker.DefineStartField();
       if (color == EDC_YELLOW)
       {
         Serial.println("YELLOW");
@@ -140,24 +171,27 @@ void collect_coins()
         Serial.println();
       }
       CoinsPos[4] = 5; // or 4
+      is_setup = true;
     }   
-    
-    //  if НАЖАТА КНОПКА СТАРТА то
-    // TaskPhase = ETP_START_FIELD;
-
-// ВРЕМЕННО !!!  ВРЕМЕННО !!!  ВРЕМЕННО !!!  
-      if (data_is_read == true){
-        TaskPhase = ETP_START_FIELD;
-        Serial.println("START");
-      }
+     
+    if (digitalRead(3) == LOW){
+      TaskPhase = ETP_START_FIELD;
+      Serial.println("START");
+    }
 // ------------------/\---------------------- \\
-    break;
-  case ETP_START_FIELD:
+//    break;
+    return;
+  }
+  case ETP_START_FIELD:{
     DriveControl.move_counting_lines(CoinsPos[passedMoveCount + 1] - CoinsPos[passedMoveCount]);
     TaskPhase = ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN;
-    break;
-
-  case ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN:
+    Serial.print("I'm at position #");
+    Serial.print(CoinsPos[passedMoveCount]);
+    Serial.print(" and head to line #");
+    Serial.println(CoinsPos[passedMoveCount + 1]); 
+    return;
+  }
+  case ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN:{
     int left = digitalRead(left_line_follower_pin);
     int right = digitalRead(right_line_follower_pin);
     if (DriveControl.loop(left, right) == FINAL_TURN_OVER)
@@ -166,22 +200,29 @@ void collect_coins()
       move_by_line();
     }
     break;
-  case ETP_MOVING_ALONG_BLACK_LINE_TO_NEXT_COIN:
+  }
+  case ETP_MOVING_ALONG_BLACK_LINE_TO_NEXT_COIN:{
     move_by_line();
-    if (passedMoveCount < 3 && ColorTracker.GetColor() == EDC_BLUE)
+    if (passedMoveCount < 3 && ColorTracker.GetColor(EDC_BLUE) == EDC_BLUE)
     {
+      Serial.println("REACH BLUE");
+      Serial.println();
       passedMoveCount++;
       TaskPhase = ETP_START_FIELD;
       if (passedMoveCount == 3)
       {
+        Serial.println("GOT ALL COINS");
         // Можно поднять платформу (сначала подобрав монетки)
       }
     }
-    else if (passedMoveCount == 3 && ColorTracker.GetColor() == EDC_GREEN)
+    else if (passedMoveCount == 3 && ColorTracker.GetColor(EDC_GREEN) == EDC_GREEN)
     {
       // На финише. Поднять платформу! раньше надо было
     }
     break;
+  }
+  default:
+      return;
   }
 }
 

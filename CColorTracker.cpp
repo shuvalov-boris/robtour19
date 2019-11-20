@@ -22,32 +22,32 @@ void CColorTracker::Calibrate()
   int redFrequency = 0;
   int greenFrequency = 0;
   int blueFrequency = 0;
-
-  // настраиваем датчик таким образом, чтобы считывать данные
-  // с фотодиодов с красным фильтром:
-  digitalWrite(_pin_s2, LOW);
-  digitalWrite(_pin_s3, LOW);
- 
-  // считываем выходную частоту:
-  redFrequency = pulseIn(_color_out, LOW);
- 
-   // печатаем данные от фотодиодов с красным фильтром:
-  Serial.print("R = ");
-  Serial.print(redFrequency);
-  delay(100);
- 
-  // настраиваем датчик таким образом, чтобы считывать данные
-  // с фотодиодов с зеленым фильтром:
-//  digitalWrite(_pin_s2, HIGH);
-//  digitalWrite(_pin_s2, HIGH);
- 
-  // считываем выходную частоту:
-  greenFrequency = pulseIn(_color_out, LOW);
- 
-  // печатаем данные от фотодиодов с зеленым фильтром:
-  Serial.print(" G = ");
-  Serial.print(greenFrequency);
-  delay(100);
+//
+//  // настраиваем датчик таким образом, чтобы считывать данные
+//  // с фотодиодов с красным фильтром:
+//  digitalWrite(_pin_s2, LOW);
+//  digitalWrite(_pin_s3, LOW);
+// 
+//  // считываем выходную частоту:
+//  redFrequency = pulseIn(_color_out, LOW);
+// 
+//   // печатаем данные от фотодиодов с красным фильтром:
+//  Serial.print("R = ");
+//  Serial.print(redFrequency);
+//  delay(100);
+// 
+//  // настраиваем датчик таким образом, чтобы считывать данные
+//  // с фотодиодов с зеленым фильтром:
+////  digitalWrite(_pin_s2, HIGH);
+////  digitalWrite(_pin_s2, HIGH);
+// 
+//  // считываем выходную частоту:
+//  greenFrequency = pulseIn(_color_out, LOW);
+// 
+//  // печатаем данные от фотодиодов с зеленым фильтром:
+//  Serial.print(" G = ");
+//  Serial.print(greenFrequency);
+//  delay(100);
  
   // настраиваем датчик таким образом, чтобы считывать данные
   // с фотодиодов с синим фильтром:
@@ -64,13 +64,59 @@ void CColorTracker::Calibrate()
 }
 
 
-EDefinedColor CColorTracker::GetColor()
+EDefinedColor CColorTracker::GetColor(EDefinedColor color)
 {
   
   int greenFrequency = 0;
   int blueFrequency = 0;
 
-  return DefineStartField();
+  if (color = EDC_BLUE)
+  {
+     // настраиваем датчик таким образом, чтобы считывать данные
+    // с фотодиодов с синим фильтром:
+    digitalWrite(_pin_s2, LOW);
+    digitalWrite(_pin_s3, HIGH);
+   
+    // считываем выходную частоту:
+    blueFrequency = pulseIn(_color_out, LOW);
+//   
+//    // печатаем данные от фотодиодов с синим фильтром:
+//    Serial.print(" B = ");
+//    Serial.println(blueFrequency);
+//    delay(100);
+
+    if (blueFrequency < blue_white_threshold)
+    {
+      value = 0;
+      count = 0;
+      return EDC_WHITE;
+    }
+//    else if (blueFrequency > blue_black_threshold)
+//    {
+//      value = 0;
+//      count = 0;
+//      return EDC_BLACK;
+//    }
+    else
+    {
+      return EDC_BLUE;
+      value += blueFrequency;
+      count++;
+      if (count >= 10)
+      {
+        if (((value / count) > blue_white_threshold) && ((value / count) < blue_black_threshold))
+        {
+          Serial.print("count is ");
+          Serial.println(count);
+          Serial.print("got median blue ");
+          Serial.println(value / count);
+          return EDC_BLUE;
+        }
+        else return EDC_UNKNOW;
+      }
+      
+    }
+  }
 
   
 }

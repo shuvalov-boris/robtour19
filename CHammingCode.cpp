@@ -63,18 +63,51 @@ bool CHammingCode::test()
 
   uint8_t * correct_data = CorrectMessage(input);
 
+  Serial.println("CorrectMessage after is");
+  for (int i = 0; i < MESSAGE_SIZE; ++i)
+  { Serial.print(correct_data[i]); Serial.print("  ");}
+  Serial.println();
+
   for (int i = 0; i < MESSAGE_SIZE; ++i)
     if (correct_data[i] != output[i])
+    {
+      Serial.print("while compared the number of not equal bytes is ");
+      Serial.println(i);
+      Serial.print(correct_data[i]);
+      Serial.print(" vs ");
+      Serial.print(output[i]);
+      Serial.print("\tor\t");
+      Serial.print(correct_data[i], BIN);
+      Serial.print(" vs ");
+      Serial.println(output[i], BIN);
       return false;
+    }
   return true;
 }
 
 uint8_t * CHammingCode::CorrectMessage(uint8_t * raw_data)
 {
+  Serial.println("Decoding message ...");
   uint8_t correct_data[MESSAGE_SIZE];
   for (int i = 0; i < MESSAGE_SIZE; ++i)
+  {
+    memset(correct_data[i], 0, sizeof(uint8_t));
     correct_data[i] = Hamming74(raw_data[i]);
-  return correct_data;
+    Serial.print("for ");
+    Serial.print(raw_data[i]);
+    Serial.print(" = ");
+    Serial.print(raw_data[i], BIN);
+    Serial.print(" decoded number is ");
+    Serial.print(correct_data[i]);
+    Serial.print(" = ");
+    Serial.println(correct_data[i], BIN);
+  }
+
+  Serial.println("CorrectMessage before is");
+  for (int i = 0; i < MESSAGE_SIZE; ++i)
+  { Serial.print(correct_data[i]); Serial.print("  ");}
+  Serial.println();
+  return (uint8_t *)correct_data;
 }
 
 byte CHammingCode::Hamming74 (uint8_t input)
@@ -118,12 +151,22 @@ byte CHammingCode::Hamming74 (uint8_t input)
       if (SyndromeSumCheck == 8) bit8 = 1 - bit8;
     }
   }
-  
+
+  Serial.print("result is:");
   byte result = 0;
+//  Serial.print(result, BIN);
+//  Serial.print(" -> ");
   if (bit8 == 1) result += 1;
+//  Serial.print(result, BIN);
+//  Serial.print(" -> ");
   if (bit7 == 1) result += 2;
+//  Serial.print(result, BIN);
+//  Serial.print(" -> ");
   if (bit6 == 1) result += 4;
+//  Serial.print(result, BIN);
+//  Serial.print(" -> ");
   if (bit4 == 1) result += 8;
+  Serial.println(result, BIN);
 
   return result;
 }

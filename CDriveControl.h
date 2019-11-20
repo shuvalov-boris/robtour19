@@ -7,14 +7,18 @@
 #include "CDriveAxis.h"
 
 // Время, в течение которого робот поворачивается при перестроении на черную линию со следующей фишкой
-#define TURN_TIME 750 // [ms]
+#define TURN_TIME 1000 // [ms]
 
 // коды выполнения движений (поворотов) для достижения следующей фишки (для метода loop)
 #define DIRECTING_TURN_OVER 101 // первый поворот окончен
 #define FINAL_TURN_OVER 103 // второй поворот окончен
 
+#define SPEED 80
+#define TURN_SPEED 80
 
-const byte TURN_ANGLE = 25;
+
+const byte TURN_DRIVE_ANGLE = 30;
+const byte TURN_ANGLE = 65;
 const byte FORWARD_ANGLE = 82; // угол сервопривода для езды прямо
 
 // направление движения робота
@@ -57,11 +61,11 @@ public:
   
   //! Ехать прямо и налево
   /// \param[in] aangle угол в градусах, на который поворачивать передние колеса при повороте
-  void turn_left(byte aangle = TURN_ANGLE);
+  void turn_left(byte aangle = TURN_DRIVE_ANGLE);
   
   //! Ехать прямо и направо
   /// \param[in] aangle угол в градусах, на который поворачивать передние колеса при повороте
-  void turn_right(byte aangle = TURN_ANGLE);
+  void turn_right(byte aangle = TURN_DRIVE_ANGLE);
 
   /*!
     Команда движения к следующей фишке.
@@ -117,6 +121,11 @@ private:
   byte passed_black_lines; // количество пересеченных черных линий (стартовая (1-ая) не считается)
   
   byte byOrder[2];
+
+  int turn_time;
+//  byte turn_add = 0;
+
+  void CDriveControl::search_lines(int leftEn, int rightIn);
   
 };
 
