@@ -21,7 +21,10 @@ void CDriveControl::move_forward()
 
 void CDriveControl::move_backward()
 {
-  
+  servol.write(FORWARD_ANGLE);
+  servor.write(FORWARD_ANGLE);
+  DriveAxis->setSpeed(80);
+  DriveAxis->backward();
 }
 
 void CDriveControl::turn_left(byte aangle)
@@ -49,13 +52,13 @@ void CDriveControl::move_counting_lines(byte dist_in_lines)
   {
     Maneuver = EMS_DIRECTING_TURN;
     left_turn = true;
-    turn_left(); // TODO на какой угол и в течение какого времени? ограничить
+    turn_left();
   }
   else 
   {
     Maneuver = EMS_DIRECTING_TURN;
     left_turn = false;
-    turn_right(); // TODO the same
+    turn_right();
   }    
 }
 

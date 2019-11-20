@@ -1,0 +1,3 @@
+<map id="CHammingCode" name="CHammingCode">
+<area shape="rect" id="node1" title="Принимает сообщение (координаты роботов и фишек на поле) от ИК передатчика" alt="" coords="5,5,141,112"/>
+</map>

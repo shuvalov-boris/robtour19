@@ -1,0 +1,8 @@
+<map id="move_by_line" name="move_by_line">
+<area shape="rect" id="node1" title=" " alt="" coords="5,71,105,98"/>
+<area shape="rect" id="node2" href="$class_c_drive_control.html#a2c7473331fe035f183e1a37a9596ec3e" title="Ехать прямо вперёд" alt="" coords="161,5,300,47"/>
+<area shape="rect" id="node5" href="$class_c_drive_control.html#a8a0b8078c4a1869c047dcf79302b20e0" title=" " alt="" coords="153,71,308,98"/>
+<area shape="rect" id="node6" href="$class_c_drive_control.html#a7c502d16e1226631a5d7c9e0a3b10634" title=" " alt="" coords="165,123,296,164"/>
+<area shape="rect" id="node3" href="$class_c_drive_axis.html#ad7ab6a9182464753a3b5f3dcb4d15daa" title=" " alt="" coords="363,46,497,73"/>
+<area shape="rect" id="node4" href="$class_c_drive_axis.html#a1621a0c988e0018522366f1c81c5276e" title=" " alt="" coords="356,97,504,123"/>
+</map>

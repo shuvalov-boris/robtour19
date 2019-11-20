@@ -1,0 +1,5 @@
+<map id="CDriveControl::turn_left" name="CDriveControl::turn_left">
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,160,57"/>
+<area shape="rect" id="node2" href="$class_c_drive_axis.html#ad7ab6a9182464753a3b5f3dcb4d15daa" title=" " alt="" coords="215,5,349,32"/>
+<area shape="rect" id="node3" href="$class_c_drive_axis.html#a1621a0c988e0018522366f1c81c5276e" title=" " alt="" coords="208,56,356,83"/>
+</map>

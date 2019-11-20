@@ -1,15 +1,8 @@
 #ifndef CDRIVEAXIS_H
 #define CDRIVEAXIS_H
 
-#include "Arduino.h"
+#include <Arduino.h>
 
-// Направление вращения колеса
-enum EWheelRotationDirection
-{
-  EWRD_STOP,    // не вращается
-  EWRD_FORWARD, // вперед
-  EWRD_BACKWARD // назад
-};
 
 // Ось с приводом (без энкодера). Отвечет за движение робота вперед/назад
 class CDriveAxis
@@ -35,7 +28,14 @@ private:
   byte _pin_speed;
   byte _pin_motor_B;
   byte _pin_standby;
-  EWheelRotationDirection _rotation_direction;
+  
+  // Направление вращения колеса
+  enum EWheelRotationDirection
+  {
+    EWRD_STOP,    // не вращается
+    EWRD_FORWARD, // вперед
+    EWRD_BACKWARD // назад
+  } _rotation_direction;
   
 };
 

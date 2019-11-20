@@ -1,7 +1,7 @@
 #ifndef CCOLORTRACKER_H
 #define CCOLORTRACKER_H
 
-#include "Arduino.h"
+#include <Arduino.h>
 
 // пороги определения цвета
 #define red_orange_threshold  35 // R-component: orange < 35 < red

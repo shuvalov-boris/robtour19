@@ -1,0 +1,13 @@
+<map id="CDriveAxis::setSpeed" name="CDriveAxis::setSpeed">
+<area shape="rect" id="node1" title=" " alt="" coords="636,107,784,134"/>
+<area shape="rect" id="node2" href="$class_c_drive_control.html#a734ade3f33c34c924c0dc60abe2a08fc" title="Ехать назад" alt="" coords="441,5,580,47"/>
+<area shape="rect" id="node3" href="$class_c_drive_control.html#a2c7473331fe035f183e1a37a9596ec3e" title="Ехать прямо вперёд" alt="" coords="441,188,580,229"/>
+<area shape="rect" id="node9" href="$class_c_drive_control.html#a8a0b8078c4a1869c047dcf79302b20e0" title=" " alt="" coords="433,137,588,163"/>
+<area shape="rect" id="node11" href="$class_c_drive_control.html#a7c502d16e1226631a5d7c9e0a3b10634" title=" " alt="" coords="445,71,576,112"/>
+<area shape="rect" id="node4" href="$class_c_drive_control.html#a84ea3af6bddd6078f3793b013c19c8c9" title="Движение робота к фишке" alt="" coords="250,145,382,171"/>
+<area shape="rect" id="node7" href="$robtour19_8ino.html#a94e76b51efdf997cc7eff28df8261e4b" title=" " alt="" coords="266,94,366,121"/>
+<area shape="rect" id="node8" href="$robtour19_8ino.html#a97cbda62853f83d2b66ced0b97c83940" title=" " alt="" coords="253,195,379,222"/>
+<area shape="rect" id="node5" href="$robtour19_8ino.html#a3753695beec721ce1eefc2332f7890a0" title=" " alt="" coords="100,94,199,121"/>
+<area shape="rect" id="node6" href="$robtour19_8ino.html#afe461d27b9c48d5921c00d521181f12f" title=" " alt="" coords="5,94,52,121"/>
+<area shape="rect" id="node10" href="$class_c_drive_control.html#a1a65edcb7a50e97f9e81fc3da5e1faac" title=" " alt="" coords="247,28,385,69"/>
+</map>

@@ -1,0 +1,14 @@
+<map id="loop" name="loop">
+<area shape="rect" id="node1" title=" " alt="" coords="5,107,52,133"/>
+<area shape="rect" id="node2" href="$robtour19_8ino.html#a3753695beec721ce1eefc2332f7890a0" title=" " alt="" coords="100,107,199,133"/>
+<area shape="rect" id="node3" href="$class_c_color_tracker.html#ad4668b0e3afb1c19274757c46478d7a6" title=" " alt="" coords="263,5,426,32"/>
+<area shape="rect" id="node4" href="$class_c_drive_control.html#a84ea3af6bddd6078f3793b013c19c8c9" title="Движение робота к фишке" alt="" coords="279,107,411,133"/>
+<area shape="rect" id="node10" href="$robtour19_8ino.html#a94e76b51efdf997cc7eff28df8261e4b" title=" " alt="" coords="295,56,395,83"/>
+<area shape="rect" id="node11" href="$class_c_drive_control.html#a1a65edcb7a50e97f9e81fc3da5e1faac" title=" " alt="" coords="275,158,414,199"/>
+<area shape="rect" id="node12" href="$class_c_hamming_code.html#a1ee3dd890fd4c28afb5573e10af2e883" title="Принимает положение фишек и роботов от ИК передатчика" alt="" coords="247,224,443,251"/>
+<area shape="rect" id="node5" href="$class_c_drive_control.html#a2c7473331fe035f183e1a37a9596ec3e" title="Ехать прямо вперёд" alt="" coords="499,34,637,75"/>
+<area shape="rect" id="node8" href="$class_c_drive_control.html#a8a0b8078c4a1869c047dcf79302b20e0" title=" " alt="" coords="491,165,645,192"/>
+<area shape="rect" id="node9" href="$class_c_drive_control.html#a7c502d16e1226631a5d7c9e0a3b10634" title=" " alt="" coords="503,99,633,141"/>
+<area shape="rect" id="node6" href="$class_c_drive_axis.html#ad7ab6a9182464753a3b5f3dcb4d15daa" title=" " alt="" coords="700,81,835,108"/>
+<area shape="rect" id="node7" href="$class_c_drive_axis.html#a1621a0c988e0018522366f1c81c5276e" title=" " alt="" coords="693,132,841,159"/>
+</map>
