@@ -6,20 +6,29 @@
 
 #include "CDriveAxis.h"
 
-// Время, в течение которого робот поворачивается при перестроении на черную линию со следующей фишкой
-#define TURN_TIME 1000 // [ms]
+/// максимальное время, в течение которого робот поворачивается при перестроении на черную линию со следующей фишкой
+#define MAX_TURN_TIME 1400 // [ms]
+#define MIN_TURN_TIME 400 // [ms]
+
+/// время, спустя которое после поворота начинать считать черные линии
+#define TURN_TIME_CROSS_LINE 250 // [ms]
 
 // коды выполнения движений (поворотов) для достижения следующей фишки (для метода loop)
+#define DIRECTING_TURN 100
 #define DIRECTING_TURN_OVER 101 // первый поворот окончен
-#define FINAL_TURN_OVER 103 // второй поворот окончен
+#define COUNTING_BLACK_LINES 102 //
+#define FINAL_TURN 103 // второй поворот выполняетс
+#define FINAL_TURN_OVER 104 // второй поворот окончен
 
-#define SPEED 80
-#define TURN_SPEED 80
+#define SPEED 120 // forward   // 100
+#define TURN_SPEED 120        //  80
+
+#define SECOND_TURN_ANGLE_DECREASE_FACTOR 1 // 2.5 for 3->8
 
 
-const byte TURN_DRIVE_ANGLE = 30;
-const byte TURN_ANGLE = 65;
-const byte FORWARD_ANGLE = 82; // угол сервопривода для езды прямо
+const byte TURN_DRIVE_ANGLE = 15;
+const byte TURN_ANGLE = 60;
+const byte FORWARD_ANGLE = 90; // угол сервопривода для езды прямо
 
 // направление движения робота
 enum EMovementDirection {
@@ -69,12 +78,15 @@ public:
 
   /*!
     Команда движения к следующей фишке.
-    \details Команда только начинает движения робота. Для полного выполнения алгоритма необходимо в цикле вызывать метод loop()
+    \details Команда движения от одной цветной полосы (зоны) к следующей. Команда только инициирует движение робота. 
+              Для полного выполнения алгоритма необходимо в цикле вызывать метод loop()
     \param[in] ADriveAxis Объект класса управления мотором на ведущей оси
     \param[in] left_rot_pin Пин сервопривода левого переднего колеса робота
     \param[in] right_rot_pin Пин сервопривода правого переднего колеса робота
+    \warning Перед применением требуется настройка параметров в зависимости от развиваемой скорости.
+    \todo Необходимо отладить алгоритм. Работает частично.
   */
-  void move_counting_lines(byte dy);
+  void move_counting_lines(int dist_in_lines);
 
   /// Движение робота к фишке
   /*!
@@ -85,6 +97,7 @@ public:
      \return код завершения конректного этапа алгоритма, необходимый для перехода, например, к алгоритму движения по черной линии
    */
   byte loop(int leftEn, int rightEn);
+  void search_lines(int leftEn, int rightIn);
 
 private:
   CDriveAxis *DriveAxis;
@@ -125,7 +138,9 @@ private:
   int turn_time;
 //  byte turn_add = 0;
 
-  void CDriveControl::search_lines(int leftEn, int rightIn);
+  bool one_time_acceleration = false;
+
+  void start_second_turn();
   
 };
 

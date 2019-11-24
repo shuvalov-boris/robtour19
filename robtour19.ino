@@ -24,16 +24,26 @@ const byte left_line_follower_pin = A1;
 const byte right_line_follower_pin = A0;
 
 // датчики цвета
-const byte S0 = 9;
-const byte S1 = 8;
-const byte S2 = 7;
+const byte S0 = 16; // A2
+const byte S1 = 18; // A4
+const byte S2 = 19; // A5
 const byte S3 = 17;
 const byte color_out = 10;
 
 
 // сервопривод передней оси поворота робота
-const byte servo_rotate_left_wheel = 16;
+//const byte servo_rotate_left_wheel = 16;
 const byte servo_rotate_right_wheel = 2;
+
+const byte servo_lipuchka = A6;
+
+const byte servo_tower = 13;
+Servo servo_lip; //TODO
+
+const byte motor_tower_pinA = 7;
+const byte motor_tower_pinB = 8;
+const byte motor_tower_pinE = 9;
+CDriveAxis TowerMotor;
 
 // мотор ведущей оси
 const byte motor_drive_pinA = 4;
@@ -74,7 +84,9 @@ void setup()
   pinMode(2, OUTPUT); // servo rotation chassis
   pinMode(6, OUTPUT); // enable drive axis motor
   pinMode(4, OUTPUT); // pinA drive axis motor
-  pinMode(5, OUTPUT); // pinB drive axis motor
+  pinMode(5, OUTPUT); // pinB drive axis motor TPWER
+  pinMode(8, OUTPUT); // pinA drive axis motor
+  pinMode(9, OUTPUT); // pinB drive axis motor TOWER
   pinMode(STBY, OUTPUT); // 12 standby drive axis motor
 
   pinMode(13, OUTPUT); // led
@@ -87,16 +99,22 @@ void setup()
   ColorTracker = CColorTracker(S0, S1, S2, S3, color_out);
   
   DriveAxis = new CDriveAxis(motor_drive_pinA, motor_drive_pinE, motor_drive_pinB, STBY);
-  DriveControl = CDriveControl(DriveAxis, servo_rotate_left_wheel, servo_rotate_right_wheel);
+  DriveControl = CDriveControl(DriveAxis, servo_rotate_right_wheel, servo_rotate_right_wheel); // TODO rm left servo
+
+  TowerMotor = CDriveAxis(motor_tower_pinA, motor_tower_pinE, motor_tower_pinB, STBY);
 
 //  Serial.print("testing HammingCode...\t\t");
 //  bool is_correct = HammingCode.test();
 //  if (is_correct == true) Serial.println("OK");
 //  else Serial.println("FAIL");
 
+  servo_lip.attach(servo_lipuchka);
+  servo_lip.write(0);
+
   last_time = millis();
 }
-
+int tower_angle = 0;
+int last_btn_state = HIGH;
 void loop()
 {
 
@@ -111,11 +129,26 @@ void loop()
 //  
 //  move_by_line();
 
-//Serial.println(digitalRead(3));
+//  проверка подсчета черных линий
+//  int left = digitalRead(left_line_follower_pin);
+//  int right = digitalRead(right_line_follower_pin);
+//  DriveControl.search_lines(left, right);
+
 
   collect_coins();
 
+
+// testing of tower     
+//    if (digitalRead(3) == LOW && last_btn_state == HIGH){
+//      servo_lip.write(++tower_angle);
+//      delay(2000);
+//      last_btn_state = LOW;
+//      Serial.println(tower_angle);
+//    }
+//    else
+//      last_btn_state = HIGH;
     
+
 }
 
 // выполнение задачи сбора фишек
@@ -123,12 +156,12 @@ void collect_coins()
 {
 //  Serial.print("TaskPhase is ");
 //  Serial.println((int)TaskPhase);
-  switch (TaskPhase)
-  {
-  case ETP_READY:
+//  switch (TaskPhase)
+//  {
+  if (TaskPhase == ETP_READY)
   {
     //  Считываем данные о положении фишек и роботов
-    uint8_t correct_data[] = {3, 2, 5, 6, 1, 6, 4, 8};
+    uint8_t correct_data[] = {3, 4, 5, 6, 3, 4, 5, 6};
     data_is_read = true;
     if (data_is_read == false)
     {
@@ -150,7 +183,7 @@ void collect_coins()
       EDefinedColor color = ColorTracker.DefineStartField();
       if (color == EDC_YELLOW)
       {
-        Serial.println("YELLOW");
+        Serial.println("YELLOW start field");
         for (int i = 0; i < 4; i++)
         {
           CoinsPos[i] = correct_data[i];
@@ -161,7 +194,7 @@ void collect_coins()
       }
       else if (color == EDC_RED)
       {
-        Serial.println("RED");
+        Serial.println("RED start field");
         for (int i = 0; i < 4; i++)
         {
           CoinsPos[i] = correct_data[i + 4];
@@ -170,11 +203,18 @@ void collect_coins()
         }
         Serial.println();
       }
-      CoinsPos[4] = 5; // or 4
+      else
+      {
+        Serial.print("got color "); 
+        Serial.println(color);
+      }
+      Serial.println();
+      CoinsPos[4] = 5; // or 4 чтобы на финише быть под центром мишени
       is_setup = true;
     }   
      
     if (digitalRead(3) == LOW){
+      delay(5000);
       TaskPhase = ETP_START_FIELD;
       Serial.println("START");
     }
@@ -182,7 +222,9 @@ void collect_coins()
 //    break;
     return;
   }
-  case ETP_START_FIELD:{
+  
+  else if (TaskPhase == ETP_START_FIELD)
+  {
     DriveControl.move_counting_lines(CoinsPos[passedMoveCount + 1] - CoinsPos[passedMoveCount]);
     TaskPhase = ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN;
     Serial.print("I'm at position #");
@@ -191,38 +233,54 @@ void collect_coins()
     Serial.println(CoinsPos[passedMoveCount + 1]); 
     return;
   }
-  case ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN:{
+  else if (TaskPhase == ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN)
+  {
+//    Serial.println("ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN");
     int left = digitalRead(left_line_follower_pin);
     int right = digitalRead(right_line_follower_pin);
     if (DriveControl.loop(left, right) == FINAL_TURN_OVER)
     {
+      Serial.println("Got FINAL_TURN_OVER return code");
       TaskPhase = ETP_MOVING_ALONG_BLACK_LINE_TO_NEXT_COIN;
       move_by_line();
     }
-    break;
+    return;
   }
-  case ETP_MOVING_ALONG_BLACK_LINE_TO_NEXT_COIN:{
+  else if (TaskPhase == ETP_MOVING_ALONG_BLACK_LINE_TO_NEXT_COIN)
+  {
     move_by_line();
-    if (passedMoveCount < 3 && ColorTracker.GetColor(EDC_BLUE) == EDC_BLUE)
+//    Serial.println("Searching BLUE");
+// TODO Может начинать искать синий еще при завершающем повороте (для нашего тестового поля с короткими расстояниями)
+    if ((passedMoveCount < 3) && (ColorTracker.GetColor(EDC_BLUE) == EDC_BLUE))
     {
       Serial.println("REACH BLUE");
       Serial.println();
+//      DriveAxis->stop();
+//      delay(2000);
       passedMoveCount++;
       TaskPhase = ETP_START_FIELD;
       if (passedMoveCount == 3)
       {
+        TaskPhase = ETP_FINISH_FIELD; // ВРЕМЕННО !!! убрать на полноценном поле!
         Serial.println("GOT ALL COINS");
         // Можно поднять платформу (сначала подобрав монетки)
       }
     }
-    else if (passedMoveCount == 3 && ColorTracker.GetColor(EDC_GREEN) == EDC_GREEN)
+    else if ((passedMoveCount >= 3) && (ColorTracker.GetColor(EDC_GREEN) == EDC_GREEN))
     {
+      Serial.println("FINISH");
+      TaskPhase = ETP_FINISH_FIELD;
       // На финише. Поднять платформу! раньше надо было
     }
-    break;
+//    break;
+    return;
   }
-  default:
-      return;
+
+  else if (TaskPhase == ETP_FINISH_FIELD)
+  {
+    delay(500);
+    DriveAxis->stop();
+    return;
   }
 }
 
@@ -261,7 +319,9 @@ void move_by_line()
     else
     { // произошло нечто неординарное
 //      Serial.println("ЧЕРНАЯ ПОЛОСА ПОПЕРЕК");
-      }
+      DriveControl.move_forward();
+      last_move_cmd = EMD_FORWARD;
+    }
   }
   else if (leftLF == LOW && rightLF == HIGH)
   {

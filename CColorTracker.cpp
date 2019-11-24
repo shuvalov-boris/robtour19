@@ -84,35 +84,46 @@ EDefinedColor CColorTracker::GetColor(EDefinedColor color)
 //    Serial.print(" B = ");
 //    Serial.println(blueFrequency);
 //    delay(100);
-
+    Serial.print("current blue frequency is ");
+    Serial.println(blueFrequency);
     if (blueFrequency < blue_white_threshold)
     {
       value = 0;
       count = 0;
       return EDC_WHITE;
     }
-//    else if (blueFrequency > blue_black_threshold)
-//    {
-//      value = 0;
-//      count = 0;
-//      return EDC_BLACK;
-//    }
+    else if (blueFrequency > blue_black_threshold)
+    {
+      value = 0;
+      count = 0;
+      return EDC_BLACK;
+    }
     else
     {
-      return EDC_BLUE;
+      Serial.print(" TRUE blue frequency is ");
+      Serial.println(blueFrequency);
+//      return EDC_BLUE;
       value += blueFrequency;
       count++;
-      if (count >= 10)
+      if (count >= CHAIN_SIZE)
       {
-        if (((value / count) > blue_white_threshold) && ((value / count) < blue_black_threshold))
+        if ((((float)value / count) > blue_white_threshold) && (((float)value / count) < blue_black_threshold))
         {
           Serial.print("count is ");
           Serial.println(count);
           Serial.print("got median blue ");
-          Serial.println(value / count);
+          Serial.println((float)value / count);
           return EDC_BLUE;
         }
-        else return EDC_UNKNOW;
+        else 
+        {
+          Serial.println("UNKNOWN COLOR:");
+          Serial.print("\tcount is ");
+          Serial.println(count);
+          Serial.print("\tgot median blue ");
+          Serial.println(((float)value / count));
+          return EDC_UNKNOW;
+        }
       }
       
     }
@@ -136,7 +147,7 @@ EDefinedColor CColorTracker::DefineStartField()
   if (redFrequency < red_orange_threshold)
   { 
     digitalWrite(13, LOW);
-    return EDC_ORANGE;
+    return EDC_YELLOW;
   }
   else
   {

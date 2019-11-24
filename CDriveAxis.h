@@ -16,7 +16,7 @@ public:
   void backward(); // движение назад
   void stop(); // остановка движения
 
-  // задать текущую скорость вращения jcb
+  // задать текущую скорость вращения
   void setSpeed(byte speed);
   byte getSpeed();
 
