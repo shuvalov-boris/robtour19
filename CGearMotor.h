@@ -1,15 +1,14 @@
-#ifndef CDRIVEAXIS_H
-#define CDRIVEAXIS_H
+#pragma once
 
 #include <Arduino.h>
 
 
 // Ось с приводом (без энкодера). Отвечет за движение робота вперед/назад
-class CDriveAxis
+class CGearMotor
 {
 public:
-  CDriveAxis() {}
-  CDriveAxis(byte pin_motor_A, byte pin_speed, byte pin_motor_B, byte pin_standby);
+  CGearMotor() {}
+  CGearMotor(byte pin_motor_A, byte pin_speed, byte pin_motor_B, byte pin_standby);
 
   // установить направление и скорость вращения ведущей оси
   void forward(); // движение вперед
@@ -38,5 +37,3 @@ private:
   } _rotation_direction;
   
 };
-
-#endif // CDRIVEAXIS_H

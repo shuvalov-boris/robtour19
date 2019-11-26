@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <Servo.h>
 
-#include "CDriveAxis.h"
+#include "CGearMotor.h"
 
 /// максимальное время, в течение которого робот поворачивается при перестроении на черную линию со следующей фишкой
 #define MAX_TURN_TIME 1400 // [ms]
@@ -60,7 +60,7 @@ public:
     \param[in] left_rot_pin Пин сервопривода левого переднего колеса робота
     \param[in] right_rot_pin Пин сервопривода правого переднего колеса робота
   */
-  CDriveControl(CDriveAxis *ADriveAxis, byte left_rot_pin, byte right_rot_pin);
+  CDriveControl(CGearMotor *ADriveAxis, byte left_rot_pin, byte right_rot_pin);
 
   //! Ехать прямо вперёд
   void move_forward();
@@ -100,7 +100,7 @@ public:
   void search_lines(int leftEn, int rightIn);
 
 private:
-  CDriveAxis *DriveAxis;
+  CGearMotor *DriveAxis;
   byte left_rot_pin;
   byte right_rot_pin;
   Servo servol;

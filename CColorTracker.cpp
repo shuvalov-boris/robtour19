@@ -16,51 +16,64 @@ CColorTracker::CColorTracker(byte s0, byte s1, byte s2, byte s3, byte out)
   digitalWrite(s1,LOW);
 }
 
-void CColorTracker::Calibrate()
+void CColorTracker::Calibrate(EDefinedColor color)
 {
-  // для хранения частоты, считанной фотодиодами
-  int redFrequency = 0;
-  int greenFrequency = 0;
-  int blueFrequency = 0;
-//
-//  // настраиваем датчик таким образом, чтобы считывать данные
-//  // с фотодиодов с красным фильтром:
-//  digitalWrite(_pin_s2, LOW);
-//  digitalWrite(_pin_s3, LOW);
-// 
-//  // считываем выходную частоту:
-//  redFrequency = pulseIn(_color_out, LOW);
-// 
-//   // печатаем данные от фотодиодов с красным фильтром:
-//  Serial.print("R = ");
-//  Serial.print(redFrequency);
+  if (color == EDC_RED || color == EDC_ALL)
+  {
+    // для хранения частоты, считанной фотодиодами
+    int redFrequency = 0;
+  
+    // настраиваем датчик таким образом, чтобы считывать данные
+    // с фотодиодов с красным фильтром:
+    digitalWrite(_pin_s2, LOW);
+    digitalWrite(_pin_s3, LOW);
+   
+    // считываем выходную частоту:
+    redFrequency = pulseIn(_color_out, LOW);
+   
+     // печатаем данные от фотодиодов с красным фильтром:
+    Serial.print("R = ");
+    Serial.print(redFrequency);
+//    delay(100);
+  }
+
+  if (color == EDC_GREEN || color == EDC_ALL)
+  {
+    int greenFrequency = 0;
+    
+    // настраиваем датчик таким образом, чтобы считывать данные
+    // с фотодиодов с зеленым фильтром:
+    digitalWrite(_pin_s2, HIGH);
+    digitalWrite(_pin_s2, HIGH);
+   
+    // считываем выходную частоту:
+    greenFrequency = pulseIn(_color_out, LOW);
+   
+    // печатаем данные от фотодиодов с зеленым фильтром:
+    Serial.print(" G = ");
+    Serial.print(greenFrequency);
+//    delay(100);
+  }
+
+  if (color == EDC_BLUE || color == EDC_ALL)
+  {
+    int blueFrequency = 0;
+    
+    // настраиваем датчик таким образом, чтобы считывать данные
+    // с фотодиодов с синим фильтром:
+    digitalWrite(_pin_s2, LOW);
+    digitalWrite(_pin_s3, HIGH);
+   
+    // считываем выходную частоту:
+    blueFrequency = pulseIn(_color_out, LOW);
+   
+    // печатаем данные от фотодиодов с синим фильтром:
+    Serial.print(" B = ");
+    Serial.print(blueFrequency);
 //  delay(100);
-// 
-//  // настраиваем датчик таким образом, чтобы считывать данные
-//  // с фотодиодов с зеленым фильтром:
-////  digitalWrite(_pin_s2, HIGH);
-////  digitalWrite(_pin_s2, HIGH);
-// 
-//  // считываем выходную частоту:
-//  greenFrequency = pulseIn(_color_out, LOW);
-// 
-//  // печатаем данные от фотодиодов с зеленым фильтром:
-//  Serial.print(" G = ");
-//  Serial.print(greenFrequency);
-//  delay(100);
- 
-  // настраиваем датчик таким образом, чтобы считывать данные
-  // с фотодиодов с синим фильтром:
-  digitalWrite(_pin_s2, LOW);
-  digitalWrite(_pin_s3, HIGH);
- 
-  // считываем выходную частоту:
-  blueFrequency = pulseIn(_color_out, LOW);
- 
-  // печатаем данные от фотодиодов с синим фильтром:
-  Serial.print(" B = ");
-  Serial.println(blueFrequency);
-  delay(100);
+  }
+
+  Serial.println();
 }
 
 
@@ -68,10 +81,12 @@ EDefinedColor CColorTracker::GetColor(EDefinedColor color)
 {
   
   int greenFrequency = 0;
-  int blueFrequency = 0;
+  
 
   if (color = EDC_BLUE)
   {
+    int blueFrequency = 0;
+    
      // настраиваем датчик таким образом, чтобы считывать данные
     // с фотодиодов с синим фильтром:
     digitalWrite(_pin_s2, LOW);
@@ -129,7 +144,65 @@ EDefinedColor CColorTracker::GetColor(EDefinedColor color)
     }
   }
 
-  
+
+  if (color = EDC_GREEN)
+  {
+    int greenFrequency = 0;
+    
+    // настраиваем датчик таким образом, чтобы считывать данные
+    // с фотодиодов с зеленым фильтром:
+    digitalWrite(_pin_s2, HIGH);
+    digitalWrite(_pin_s2, HIGH);
+   
+    // считываем выходную частоту:
+    greenFrequency = pulseIn(_color_out, LOW);
+   
+    // печатаем данные от фотодиодов с зеленым фильтром:
+    Serial.print("current green frequency is ");
+    Serial.println(greenFrequency);
+    
+    if (greenFrequency < green_white_threshold)
+    {
+      value = 0;
+      count = 0;
+      return EDC_WHITE;
+    }
+    else if (greenFrequency > green_black_threshold)
+    {
+      value = 0;
+      count = 0;
+      return EDC_BLACK;
+    }
+    else
+    {
+      Serial.print(" TRUE green frequency is ");
+      Serial.println(greenFrequency);
+      
+      value += greenFrequency;
+      count++;
+      
+      if (count >= CHAIN_SIZE)
+      {
+        if ((((float)value / count) > green_white_threshold) && (((float)value / count) < green_black_threshold))
+        {
+          Serial.print("count is ");
+          Serial.println(count);
+          Serial.print("got median green ");
+          Serial.println((float)value / count);
+          return EDC_GREEN;
+        }
+        else 
+        {
+          Serial.println("UNKNOWN COLOR:");
+          Serial.print("\tcount is ");
+          Serial.println(count);
+          Serial.print("\tgot median green ");
+          Serial.println(((float)value / count));
+          return EDC_UNKNOW;
+        }
+      }
+  }
+}
 }
 
 EDefinedColor CColorTracker::DefineStartField()

@@ -1,20 +1,23 @@
 #include "CDriveControl.h"
 
-CDriveControl::CDriveControl(CDriveAxis *ADriveAxis, byte left_rot_pin, byte right_rot_pin)
+CDriveControl::CDriveControl(CGearMotor *ADriveAxis, byte left_rot_pin, byte right_rot_pin)
 {
   DriveAxis = ADriveAxis;
   left_rot_pin = left_rot_pin;
   right_rot_pin = right_rot_pin;
+  
   Serial.print("set forward speed to ");
   Serial.println(SPEED);
   Serial.print("set turn speed to ");
   Serial.println(TURN_SPEED);
   Serial.print("front wheel turn angle is ");
   Serial.println(TURN_ANGLE);
+  
   servol.attach(left_rot_pin);
   servol.write(FORWARD_ANGLE);
   servor.attach(right_rot_pin);
   servor.write(FORWARD_ANGLE);
+  
   DriveAxis->stop();
 
   BlackLinePassStatus = EBLPS_BOTH_EXPECTING;

@@ -1,11 +1,12 @@
 /**@file robtour19.ino */
 
 #include "CColorTracker.h"
-#include "CDriveAxis.h"
 #include "CDriveControl.h"
+#include "CGearMotor.h"
 #include "CHammingCode.h"
 
-#define BTN_TIME 500
+// задержка на срабатывание книпки старта
+#define BTN_TIME 1000 // [ms]
 
 // на каком этапе выполнения задачи находимся
 enum ETaskPhase
@@ -35,22 +36,26 @@ const byte color_out = 10;
 //const byte servo_rotate_left_wheel = 16;
 const byte servo_rotate_right_wheel = 2;
 
-const byte servo_lipuchka = A6;
+// лапа (платформа с липучкой для сбора фишек)
+const byte servo_gripper_pin = A6;
+Servo servo_gripper; //TODO init
 
-const byte servo_tower = 13;
-Servo servo_lip; //TODO
+// наклон башни
+const byte servo_tilt_tower_pin = 13;
+Servo servo_tilt_tower; //TODO
 
 const byte motor_tower_pinA = 7;
 const byte motor_tower_pinB = 8;
 const byte motor_tower_pinE = 9;
-CDriveAxis TowerMotor;
+//const byte STBY = 12; // standby
+CGearMotor TowerMotor; // Мотор для подъема платформы с фишками
 
 // мотор ведущей оси
 const byte motor_drive_pinA = 4;
 const byte motor_drive_pinB = 5;
 const byte motor_drive_pinE = 6;
 const byte STBY = 12; // standby
-CDriveAxis *DriveAxis;
+CGearMotor *DriveAxis;
 
 
 CDriveControl DriveControl;
@@ -79,17 +84,18 @@ ETaskPhase TaskPhase = ETP_READY;
 
 void setup()
 {
-  pinMode(3, INPUT_PULLUP); // кнопка старта
   pinMode(1, OUTPUT); // servo left rotation axis
   pinMode(2, OUTPUT); // servo rotation chassis
-  pinMode(6, OUTPUT); // enable drive axis motor
+  pinMode(3, INPUT_PULLUP); // кнопка старта
   pinMode(4, OUTPUT); // pinA drive axis motor
-  pinMode(5, OUTPUT); // pinB drive axis motor TPWER
+  pinMode(5, OUTPUT); // pinB drive axis motor TOWER
+  pinMode(6, OUTPUT); // enable drive axis motor
+  
   pinMode(8, OUTPUT); // pinA drive axis motor
   pinMode(9, OUTPUT); // pinB drive axis motor TOWER
   pinMode(STBY, OUTPUT); // 12 standby drive axis motor
 
-  pinMode(13, OUTPUT); // led
+  pinMode(13, OUTPUT); // servo tower
   
   pinMode(14, INPUT);// pinA0 // in3 for motor2
   pinMode(15, INPUT);// pinA1 // switch(right) for чего-нибудь/ если его включить, то на А1 будет подаваться Vin (7.2В)
@@ -98,36 +104,29 @@ void setup()
 
   ColorTracker = CColorTracker(S0, S1, S2, S3, color_out);
   
-  DriveAxis = new CDriveAxis(motor_drive_pinA, motor_drive_pinE, motor_drive_pinB, STBY);
+  DriveAxis = new CGearMotor(motor_drive_pinA, motor_drive_pinE, motor_drive_pinB, STBY);
   DriveControl = CDriveControl(DriveAxis, servo_rotate_right_wheel, servo_rotate_right_wheel); // TODO rm left servo
 
-  TowerMotor = CDriveAxis(motor_tower_pinA, motor_tower_pinE, motor_tower_pinB, STBY);
+  TowerMotor = CGearMotor(motor_tower_pinA, motor_tower_pinE, motor_tower_pinB, STBY);
 
 //  Serial.print("testing HammingCode...\t\t");
 //  bool is_correct = HammingCode.test();
 //  if (is_correct == true) Serial.println("OK");
 //  else Serial.println("FAIL");
 
-  servo_lip.attach(servo_lipuchka);
-  servo_lip.write(0);
+  servo_tilt_tower.attach(servo_tilt_tower_pin);
+  servo_tilt_tower.write(0);
 
   last_time = millis();
 }
-int tower_angle = 0;
-int last_btn_state = HIGH;
+
+//int tower_angle = 0;
+//int last_btn_state = HIGH;
+
 void loop()
 {
 
-//  ColorTracker.Calibrate();
-
-//  if (ColorTracker.GetColor(EDC_BLUE) == EDC_BLUE)
-//  {
-//    Serial.println("EDC_BLUE");
-//    DriveAxis->stop();
-//  }
-//  else
-//  
-//  move_by_line();
+//  ColorTracker.Calibrate(EDC_BLUE);
 
 //  проверка подсчета черных линий
 //  int left = digitalRead(left_line_follower_pin);
@@ -214,7 +213,7 @@ void collect_coins()
     }   
      
     if (digitalRead(3) == LOW){
-      delay(5000);
+      delay(BTN_TIME);
       TaskPhase = ETP_START_FIELD;
       Serial.println("START");
     }

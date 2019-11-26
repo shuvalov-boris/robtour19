@@ -1,6 +1,6 @@
-#include "CDriveAxis.h"
+#include  "CGearMotor.h"
 
-CDriveAxis::CDriveAxis(byte pin_motor_A, byte pin_speed, byte pin_motor_B, byte pin_standby) 
+CGearMotor::CGearMotor(byte pin_motor_A, byte pin_speed, byte pin_motor_B, byte pin_standby) 
 {
   _pin_motor_A = pin_motor_A;
   _pin_speed = pin_speed;
@@ -14,7 +14,7 @@ CDriveAxis::CDriveAxis(byte pin_motor_A, byte pin_speed, byte pin_motor_B, byte 
 }
 
 // движение колеса вперед
-void CDriveAxis::forward() {
+void CGearMotor::forward() {
   if (_rotation_direction != EWRD_FORWARD) {
     _rotation_direction = EWRD_FORWARD;
     digitalWrite(_pin_motor_A, 1);
@@ -25,7 +25,7 @@ void CDriveAxis::forward() {
 }
 
 // движение колеса назад
-void CDriveAxis::backward() {
+void CGearMotor::backward() {
   if (_rotation_direction != EWRD_BACKWARD) {
     _rotation_direction = EWRD_BACKWARD;   
     _speed = 255; 
@@ -36,7 +36,7 @@ void CDriveAxis::backward() {
 }
 
 // остановить движение колеса
-void CDriveAxis::stop()
+void CGearMotor::stop()
 {
   if (_rotation_direction != EWRD_STOP) {
     _rotation_direction = EWRD_STOP;
@@ -45,11 +45,11 @@ void CDriveAxis::stop()
   }
 }
 
-void CDriveAxis::setSpeed(byte aspeed){
+void CGearMotor::setSpeed(byte aspeed){
   analogWrite(_pin_speed, aspeed);
   _speed = aspeed;  
 }
 
-byte CDriveAxis::getSpeed(){
+byte CGearMotor::getSpeed(){
   return _speed;
 }
