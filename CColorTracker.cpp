@@ -66,10 +66,25 @@ void CColorTracker::Calibrate(EDefinedColor color)
    
     // считываем выходную частоту:
     blueFrequency = pulseIn(_color_out, LOW);
+
+    if (min_value > blueFrequency)
+      min_value = blueFrequency;
+
+    if (max_value < blueFrequency)
+      max_value = blueFrequency;
+
+    sum += blueFrequency;
+    ++_count;
    
     // печатаем данные от фотодиодов с синим фильтром:
     Serial.print(" B = ");
     Serial.print(blueFrequency);
+    Serial.print("\t min = ");
+    Serial.print(min_value);
+    Serial.print("\t max = ");
+    Serial.print(max_value);
+    Serial.print("\t mean = ");
+    Serial.print((float)sum / _count);
 //  delay(100);
   }
 
@@ -227,4 +242,10 @@ EDefinedColor CColorTracker::DefineStartField()
     digitalWrite(13, HIGH);
     return EDC_RED;
   }
+}
+
+void CColorTracker::Clear()
+{
+  count = 0;
+  value = 0;
 }

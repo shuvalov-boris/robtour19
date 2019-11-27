@@ -6,9 +6,9 @@
 // пороги определения цвета
 #define red_orange_threshold  35 // R-component: orange < 35 < red
 
-// BLUE THRESHOLDs: white 31-35 blue 42-56  black 75-88
-#define blue_white_threshold  40 // B-component: white < 22 < blue
-#define blue_black_threshold 61
+// BLUE THRESHOLDs: white 25 blue 30-47 black 50
+#define blue_white_threshold  27 // B-component: white < 22 < blue
+#define blue_black_threshold 50
 
 // GREEN THRESHOLDs: white 31-35 green 42-56  black 75-88
 #define green_white_threshold 45 // G-component: white < 45 < green
@@ -52,6 +52,8 @@ public:
   EDefinedColor GetColor(EDefinedColor color);
   EDefinedColor DefineStartField();
 
+  void Clear();
+
 private:
   byte _pin_s2;
   byte _pin_s3;
@@ -59,6 +61,12 @@ private:
 
   byte value;
   byte count;
+
+  byte min_value = 255;
+  byte max_value = 0;
+
+  long sum = 0;
+  long _count = 0;
 
   
 };

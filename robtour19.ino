@@ -8,6 +8,9 @@
 // задержка на срабатывание книпки старта
 #define BTN_TIME 1000 // [ms]
 
+// порог аналогово-цифрового преобразования для датчика черной полосы
+#define LF_SENSOR_THRESHOLD 900
+
 // на каком этапе выполнения задачи находимся
 enum ETaskPhase
 {
@@ -18,11 +21,21 @@ enum ETaskPhase
   ETP_FINISH_FIELD
 };
 
+// Стадия сбора
+enum ECoinsLiftPhase
+{
+  ECLP_COLLECTING, // сбор фишек
+  ECLP_GRIPPING,   // захват фишек
+  ECLP_LIFTING,    // подъём и поворот вверх лапы с фишками
+  ECLP_TOWER_TILT,
+  ECLP_COMPLETED
+};
+
 const byte start_button_pin = A7;
 
 // датчики линии
 const byte left_line_follower_pin = A1;
-const byte right_line_follower_pin = A0;
+const byte right_line_follower_pin = A6;
 
 // датчики цвета
 const byte S0 = 16; // A2
@@ -36,13 +49,17 @@ const byte color_out = 10;
 //const byte servo_rotate_left_wheel = 16;
 const byte servo_rotate_right_wheel = 2;
 
-// лапа (платформа с липучкой для сбора фишек)
-const byte servo_gripper_pin = A6;
+// сервопривод управления лапой (платформа с липучкой для сбора фишек)
+const byte servo_gripper_pin = A0;
 Servo servo_gripper; //TODO init
 
+// сервопривод управления натяжением верёвки для подъёма лапы
+const byte servo_rope_tension_pin = 123;
+Servo servo_rope_tension; //TODO init
+
 // наклон башни
-const byte servo_tilt_tower_pin = 13;
-Servo servo_tilt_tower; //TODO
+const byte servo_tower_tilt_pin = 13;
+Servo servo_tower_tilt; //TODO
 
 const byte motor_tower_pinA = 7;
 const byte motor_tower_pinB = 8;
@@ -100,6 +117,7 @@ void setup()
   pinMode(14, INPUT);// pinA0 // in3 for motor2
   pinMode(15, INPUT);// pinA1 // switch(right) for чего-нибудь/ если его включить, то на А1 будет подаваться Vin (7.2В)
 
+  pinMode(A6, INPUT);
   Serial.begin(115200);
 
   ColorTracker = CColorTracker(S0, S1, S2, S3, color_out);
@@ -114,17 +132,42 @@ void setup()
 //  if (is_correct == true) Serial.println("OK");
 //  else Serial.println("FAIL");
 
-  servo_tilt_tower.attach(servo_tilt_tower_pin);
-  servo_tilt_tower.write(0);
+  servo_tower_tilt.attach(servo_tower_tilt_pin);
+  servo_tower_tilt.write(0);
+
+  servo_gripper.attach(servo_gripper_pin);
+  servo_gripper.write(0);
+
+//  TowerMotor.setSpeed(255);
+//  TowerMotor.forward();
+//  delay(50);
+//  TowerMotor.stop();
+//
+//  DriveAxis->setSpeed(255);
+//  DriveAxis->forward();
+//  delay(100);
+//  DriveAxis->stop();
 
   last_time = millis();
 }
 
-//int tower_angle = 0;
-//int last_btn_state = HIGH;
+int tower_angle = 0;
+int gripper_angle = 0;
+int last_btn_state = HIGH;
+int incomingByte = 0;
 
 void loop()
 {
+
+//int rightLF = analogRead(right_line_follower_pin);
+//  if (rightLF > LF_SENSOR_THRESHOLD)
+//    rightLF = HIGH;
+//  else
+//    rightLF = LOW;
+//Serial.println(rightLF);
+//
+//DriveAxis->setSpeed(255);
+//DriveAxis->forward();
 
 //  ColorTracker.Calibrate(EDC_BLUE);
 
@@ -133,21 +176,115 @@ void loop()
 //  int right = digitalRead(right_line_follower_pin);
 //  DriveControl.search_lines(left, right);
 
+//servo_gripper.write(5);
 
-  collect_coins();
+//  collect_coins();
 
 
 // testing of tower     
 //    if (digitalRead(3) == LOW && last_btn_state == HIGH){
 //      servo_lip.write(++tower_angle);
-//      delay(2000);
+//      delay(100);
 //      last_btn_state = LOW;
 //      Serial.println(tower_angle);
 //    }
 //    else
 //      last_btn_state = HIGH;
-    
 
+
+
+  if (Serial.available() > 0)
+  {
+    incomingByte = Serial.read();
+
+    Serial.print("I received: ");
+    Serial.println(incomingByte, DEC);   
+    Serial.read(); 
+  }
+
+     if (tower_angle < 20 && incomingByte == 50)
+    {
+      servo_tower_tilt.write(++tower_angle);
+      delay(50);
+//      last_btn_state = LOW;
+      Serial.println(tower_angle);
+      Serial.read();
+    }
+
+    if (tower_angle < 40 && incomingByte == 51)
+    {
+      servo_tower_tilt.write(++tower_angle);
+      delay(100);
+//      last_btn_state = LOW;
+      Serial.println(tower_angle);
+      Serial.read();
+    }
+
+    if (tower_angle < 60 && incomingByte == 52)
+    {
+      servo_tower_tilt.write(++tower_angle);
+      delay(100);
+//      last_btn_state = LOW;
+      Serial.println(tower_angle);
+      Serial.read();
+    }
+
+    
+    if (tower_angle < 80 && incomingByte == 53)
+    {
+      servo_tower_tilt.write(++tower_angle);
+      delay(100);
+//      last_btn_state = LOW;
+      Serial.println(tower_angle);
+      Serial.read();
+    }
+
+    
+    if (tower_angle < 90 && incomingByte == 54)
+    {
+      servo_tower_tilt.write(++tower_angle);
+      delay(100);
+//      last_btn_state = LOW;
+      Serial.println(tower_angle);
+      Serial.read();
+    }
+
+    
+    if (incomingByte == 119)
+    {
+      servo_tower_tilt.write(++tower_angle);
+      delay(100);
+//      last_btn_state = LOW;
+      Serial.println(tower_angle);
+      Serial.read();
+      incomingByte = 0;
+    }
+
+    if (tower_angle > 0 && incomingByte == 55)
+    {
+      servo_tower_tilt.write(--tower_angle);
+      delay(100);
+//      last_btn_state = LOW;
+      Serial.println(tower_angle);
+    }
+
+    if (gripper_angle < 100 && incomingByte == 117) // lift up [u]
+    {
+      servo_gripper.write(++gripper_angle);
+      delay(10);
+//      last_btn_state = LOW;
+      Serial.println(gripper_angle);
+      Serial.read();
+    }
+
+    if (gripper_angle > 0 && incomingByte == 100) // lift down [d]
+    {
+      servo_gripper.write(--gripper_angle);
+      delay(10);
+//      last_btn_state = LOW;
+      Serial.println(gripper_angle);
+      Serial.read();
+    }
 }
 
 // выполнение задачи сбора фишек
@@ -160,7 +297,7 @@ void collect_coins()
   if (TaskPhase == ETP_READY)
   {
     //  Считываем данные о положении фишек и роботов
-    uint8_t correct_data[] = {3, 4, 5, 6, 3, 4, 5, 6};
+    uint8_t correct_data[] = {5, 6, 8, 4, 5, 6, 4, 3};
     data_is_read = true;
     if (data_is_read == false)
     {
@@ -235,9 +372,13 @@ void collect_coins()
   else if (TaskPhase == ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN)
   {
 //    Serial.println("ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN");
-    int left = digitalRead(left_line_follower_pin);
-    int right = digitalRead(right_line_follower_pin);
-    if (DriveControl.loop(left, right) == FINAL_TURN_OVER)
+    int leftLF = digitalRead(left_line_follower_pin);
+    int rightLF = analogRead(right_line_follower_pin);
+    if (rightLF > LF_SENSOR_THRESHOLD)
+      rightLF = HIGH;
+    else
+      rightLF = LOW;
+    if (DriveControl.loop(leftLF, rightLF) == FINAL_TURN_OVER)
     {
       Serial.println("Got FINAL_TURN_OVER return code");
       TaskPhase = ETP_MOVING_ALONG_BLACK_LINE_TO_NEXT_COIN;
@@ -254,6 +395,7 @@ void collect_coins()
     {
       Serial.println("REACH BLUE");
       Serial.println();
+      ColorTracker.Clear();
 //      DriveAxis->stop();
 //      delay(2000);
       passedMoveCount++;
@@ -262,7 +404,11 @@ void collect_coins()
       {
         TaskPhase = ETP_FINISH_FIELD; // ВРЕМЕННО !!! убрать на полноценном поле!
         Serial.println("GOT ALL COINS");
+        // Захватить фишки
+        // Поднять платформу
+        // Повернуть платформу
         // Можно поднять платформу (сначала подобрав монетки)
+        TowerControl();
       }
     }
     else if ((passedMoveCount >= 3) && (ColorTracker.GetColor(EDC_GREEN) == EDC_GREEN))
@@ -277,19 +423,31 @@ void collect_coins()
 
   else if (TaskPhase == ETP_FINISH_FIELD)
   {
-    delay(500);
+    delay(1000);
     DriveAxis->stop();
     return;
   }
 }
 
+void TowerControl()
+{
+  // Захватить фишки
+  // Поднять платформу
+  // Повернуть платформу
+}
+
 
 
 // движение по черной полосе
+// Можно вынести в класс, передавая ссылку на объект управления движением
 void move_by_line()
 {
   int leftLF = digitalRead(left_line_follower_pin);
-  int rightLF = digitalRead(right_line_follower_pin);
+  int rightLF = analogRead(right_line_follower_pin);
+  if (rightLF > LF_SENSOR_THRESHOLD)
+    rightLF = HIGH;
+  else
+    rightLF = LOW;
 
 //  Serial.print(leftLF);
 //  Serial.print("\t");
@@ -335,8 +493,6 @@ void move_by_line()
 //    Serial.println("to LEFT");
   }
 }
-
-
 
 // проверка исполнения команд движения
 void testing_movement()
