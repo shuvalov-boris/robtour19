@@ -4,6 +4,7 @@
 #include "CDriveControl.h"
 #include "CGearMotor.h"
 #include "CHammingCode.h"
+#include "CTowerControl.h"
 
 // задержка на срабатывание книпки старта
 #define BTN_TIME 1000 // [ms]
@@ -21,15 +22,15 @@ enum ETaskPhase
   ETP_FINISH_FIELD
 };
 
-// Стадия сбора
-enum ECoinsLiftPhase
+// стадия работы с фишками
+enum ECoinsManipulationPhase
 {
-  ECLP_COLLECTING, // сбор фишек
-  ECLP_GRIPPING,   // захват фишек
-  ECLP_LIFTING,    // подъём и поворот вверх лапы с фишками
-  ECLP_TOWER_TILT,
-  ECLP_COMPLETED
-};
+  ECMP_COLLECTING, // сбор фишек
+  ECMP_GRIPPING,   // захват фишек
+  ECMP_LIFTING,    // подъём и поворот вверх лапы с фишками
+  ECMP_TOWER_TILT, // наклон башни вперёд для размещения фишек на мишени
+  ECMP_COMPLETED   // задание выполнено
+} coins_manipulation_phase;
 
 const byte start_button_pin = A7;
 
@@ -51,21 +52,21 @@ const byte servo_rotate_right_wheel = 2;
 
 // сервопривод управления лапой (платформа с липучкой для сбора фишек)
 const byte servo_gripper_pin = A0;
-Servo servo_gripper; //TODO init
 
 // сервопривод управления натяжением верёвки для подъёма лапы
 const byte servo_rope_tension_pin = 123;
-Servo servo_rope_tension; //TODO init
 
 // наклон башни
 const byte servo_tower_tilt_pin = 13;
-Servo servo_tower_tilt; //TODO
 
 const byte motor_tower_pinA = 7;
 const byte motor_tower_pinB = 8;
 const byte motor_tower_pinE = 9;
 //const byte STBY = 12; // standby
-CGearMotor TowerMotor; // Мотор для подъема платформы с фишками
+CGearMotor *TowerMotor; // Мотор для подъема платформы с фишками
+
+// Управление башней и закрепленной на ней платформе с фишками
+CTowerControl TowerControl;
 
 // мотор ведущей оси
 const byte motor_drive_pinA = 4;
@@ -86,8 +87,7 @@ CHammingCode HammingCode(RECV_pin);
 
 bool data_is_read = false;
 
-long last_time = 0;
-const long TIME_TO_WAIT = 10000;
+//long last_time = 0;
 
 // for testing
 byte passedMoveCount = 0;
@@ -125,18 +125,20 @@ void setup()
   DriveAxis = new CGearMotor(motor_drive_pinA, motor_drive_pinE, motor_drive_pinB, STBY);
   DriveControl = CDriveControl(DriveAxis, servo_rotate_right_wheel, servo_rotate_right_wheel); // TODO rm left servo
 
-  TowerMotor = CGearMotor(motor_tower_pinA, motor_tower_pinE, motor_tower_pinB, STBY);
+  TowerMotor = new CGearMotor(motor_tower_pinA, motor_tower_pinE, motor_tower_pinB, STBY);
+  TowerControl = CTowerControl(TowerMotor, servo_gripper_pin, servo_rope_tension_pin, servo_tower_tilt_pin);
 
+  
 //  Serial.print("testing HammingCode...\t\t");
 //  bool is_correct = HammingCode.test();
 //  if (is_correct == true) Serial.println("OK");
 //  else Serial.println("FAIL");
 
-  servo_tower_tilt.attach(servo_tower_tilt_pin);
-  servo_tower_tilt.write(0);
-
-  servo_gripper.attach(servo_gripper_pin);
-  servo_gripper.write(0);
+//  servo_tower_tilt.attach(servo_tower_tilt_pin);
+//  servo_tower_tilt.write(0);
+//
+//  servo_gripper.attach(servo_gripper_pin);
+//  servo_gripper.write(0);
 
 //  TowerMotor.setSpeed(255);
 //  TowerMotor.forward();
@@ -148,13 +150,13 @@ void setup()
 //  delay(100);
 //  DriveAxis->stop();
 
-  last_time = millis();
+//  last_time = millis();
 }
 
-int tower_angle = 0;
-int gripper_angle = 0;
-int last_btn_state = HIGH;
-int incomingByte = 0;
+//int tower_angle = 0;
+//int gripper_angle = 0;
+//int last_btn_state = HIGH;
+//int incomingByte = 0;
 
 void loop()
 {
@@ -195,96 +197,15 @@ void loop()
 
   if (Serial.available() > 0)
   {
-    incomingByte = Serial.read();
+    int incomingByte = Serial.read();
 
     Serial.print("I received: ");
-    Serial.println(incomingByte, DEC);   
+    Serial.println(incomingByte, DEC);
+    TowerControl.ProcessCommand(incomingByte);   
     Serial.read(); 
   }
 
-     if (tower_angle < 20 && incomingByte == 50)
-    {
-      servo_tower_tilt.write(++tower_angle);
-      delay(50);
-//      last_btn_state = LOW;
-      Serial.println(tower_angle);
-      Serial.read();
-    }
-
-    if (tower_angle < 40 && incomingByte == 51)
-    {
-      servo_tower_tilt.write(++tower_angle);
-      delay(100);
-//      last_btn_state = LOW;
-      Serial.println(tower_angle);
-      Serial.read();
-    }
-
-    if (tower_angle < 60 && incomingByte == 52)
-    {
-      servo_tower_tilt.write(++tower_angle);
-      delay(100);
-//      last_btn_state = LOW;
-      Serial.println(tower_angle);
-      Serial.read();
-    }
-
     
-    if (tower_angle < 80 && incomingByte == 53)
-    {
-      servo_tower_tilt.write(++tower_angle);
-      delay(100);
-//      last_btn_state = LOW;
-      Serial.println(tower_angle);
-      Serial.read();
-    }
-
-    
-    if (tower_angle < 90 && incomingByte == 54)
-    {
-      servo_tower_tilt.write(++tower_angle);
-      delay(100);
-//      last_btn_state = LOW;
-      Serial.println(tower_angle);
-      Serial.read();
-    }
-
-    
-    if (incomingByte == 119)
-    {
-      servo_tower_tilt.write(++tower_angle);
-      delay(100);
-//      last_btn_state = LOW;
-      Serial.println(tower_angle);
-      Serial.read();
-      incomingByte = 0;
-    }
-
-    if (tower_angle > 0 && incomingByte == 55)
-    {
-      servo_tower_tilt.write(--tower_angle);
-      delay(100);
-//      last_btn_state = LOW;
-      Serial.println(tower_angle);
-    }
-
-    if (gripper_angle < 100 && incomingByte == 117) // lift up [u]
-    {
-      servo_gripper.write(++gripper_angle);
-      delay(10);
-//      last_btn_state = LOW;
-      Serial.println(gripper_angle);
-      Serial.read();
-    }
-
-    if (gripper_angle > 0 && incomingByte == 100) // lift down [d]
-    {
-      servo_gripper.write(--gripper_angle);
-      delay(10);
-//      last_btn_state = LOW;
-      Serial.println(gripper_angle);
-      Serial.read();
-    }
 }
 
 // выполнение задачи сбора фишек
@@ -408,7 +329,7 @@ void collect_coins()
         // Поднять платформу
         // Повернуть платформу
         // Можно поднять платформу (сначала подобрав монетки)
-        TowerControl();
+        TowerControl.Start();
       }
     }
     else if ((passedMoveCount >= 3) && (ColorTracker.GetColor(EDC_GREEN) == EDC_GREEN))
@@ -428,15 +349,6 @@ void collect_coins()
     return;
   }
 }
-
-void TowerControl()
-{
-  // Захватить фишки
-  // Поднять платформу
-  // Повернуть платформу
-}
-
-
 
 // движение по черной полосе
 // Можно вынести в класс, передавая ссылку на объект управления движением
