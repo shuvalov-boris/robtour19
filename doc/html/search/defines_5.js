@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['message_5fsize_190',['MESSAGE_SIZE',['../_c_hamming_code_8h.html#aeca90e1c1c62b70670514ffc18c9dfd4',1,'CHammingCode.h']]]
+  ['ik_5frecv_5fsimulation_276',['IK_RECV_SIMULATION',['../_c_hamming_code_8h.html#ac659eb4497b5e5f76fd9f99cdd82d9b1',1,'CHammingCode.h']]]
 ];

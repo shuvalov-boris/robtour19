@@ -66,7 +66,7 @@ void CDriveControl::move_counting_lines(int dist_in_lines)
   black_lines_count_to_pass = abs(dist_in_lines) - 1;
   passed_black_lines = 0;
   
-  turn_time = 800 + (MAX_TURN_TIME - 800) / black_lines_count_to_pass;
+  turn_time = MIN_TURN_TIME + (MAX_TURN_TIME - MIN_TURN_TIME) / (8 - black_lines_count_to_pass);
   if (turn_time > MAX_TURN_TIME) turn_time = MAX_TURN_TIME;
   if (black_lines_count_to_pass == 0)
   {
@@ -137,6 +137,9 @@ byte CDriveControl::loop(int leftEn, int rightEn)
     {
       // левый/правый датчики приводим к ведущему/ведомому
       search_lines(leftEn, rightEn);
+      if (Maneuver == EMS_FINAL_TURN)
+        return COUNTED_BLACK_LINES;
+      else
       return COUNTING_BLACK_LINES;
     }
 
@@ -151,14 +154,17 @@ byte CDriveControl::loop(int leftEn, int rightEn)
 //        
 //        return FINAL_TURN_OVER;
 //      }
-      if ( millis() - maneuver_time > turn_time + 100)
+      if ( millis() - maneuver_time > turn_time)
       {
         move_forward();
         Maneuver = EMS_ALONG_BLACK_LINE;
         Serial.println("DONE FINAL turn");
         return FINAL_TURN_OVER;
       }
-      return FINAL_TURN;
+      else if ( millis() - maneuver_time > turn_time / 1.2)
+        return FINAL_TURN;
+      else
+        return FINAL_TURN_START;
     }
   }
 }
@@ -167,6 +173,12 @@ void CDriveControl::start_second_turn()
 {
   Maneuver = EMS_FINAL_TURN;
   maneuver_time = millis();
+  
+  if (black_lines_count_to_pass > 0)
+    turn_time /= 2;
+
+  Serial.print("for second turn turn_time is ");
+  Serial.println(turn_time);
   
   if (left_turn)
   {
@@ -223,6 +235,7 @@ void CDriveControl::search_lines(int leftEn, int rightEn)
         {  // прошли все линии -> выруливаем на следующую черную полосу
           Serial.println("DONE BLACK LINES counting");
           start_second_turn();
+          return;
         }
       }
       return;

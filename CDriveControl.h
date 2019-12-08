@@ -8,7 +8,7 @@
 
 /// максимальное время, в течение которого робот поворачивается при перестроении на черную линию со следующей фишкой
 #define MAX_TURN_TIME 1600 // [ms]
-#define MIN_TURN_TIME 400 // [ms]
+#define MIN_TURN_TIME 350 // [ms]
 
 /// время, спустя которое после поворота начинать считать черные линии
 #define TURN_TIME_CROSS_LINE 250 // [ms]
@@ -16,18 +16,20 @@
 // коды выполнения движений (поворотов) для достижения следующей фишки (для метода loop)
 #define DIRECTING_TURN 100
 #define DIRECTING_TURN_OVER 101 // первый поворот окончен
-#define COUNTING_BLACK_LINES 102 //
-#define FINAL_TURN 103 // второй поворот выполняетс
-#define FINAL_TURN_OVER 104 // второй поворот окончен
+#define COUNTING_BLACK_LINES 102 
+#define COUNTED_BLACK_LINES 106 
+#define FINAL_TURN_START 103
+#define FINAL_TURN 104 // второй поворот выполняется
+#define FINAL_TURN_OVER 105 // второй поворот окончен
 
-#define SPEED 120 // forward   // 100
-#define TURN_SPEED 120        //  80
+#define SPEED 200 // forward   // 100
+#define TURN_SPEED 200        //  80
 
-#define SECOND_TURN_ANGLE_DECREASE_FACTOR 1 // 2.5 for 3->8
+#define SECOND_TURN_ANGLE_DECREASE_FACTOR 1.5 // 2.5 for 3->8
 
 
 const byte TURN_DRIVE_ANGLE = 15;
-const byte TURN_ANGLE = 47;
+const byte TURN_ANGLE = 40;
 const byte FORWARD_ANGLE = 90; // угол сервопривода для езды прямо
 
 // направление движения робота

@@ -88,17 +88,19 @@ $(function() {
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keywordtype">bool</span> <a class="code" href="class_c_hamming_code.html#ae7199d800ecc3701010baaf707171954">test</a>();</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;  uint8_t * CHammingCode::CorrectMessage(uint8_t * raw_data);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  <span class="keywordtype">byte</span> Hamming74 (uint8_t input);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  IRrecv *irrecv;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  decode_results results;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  uint8_t rcv_counter = 0; <span class="comment">// 1 - получены первые 4 байта; 2 - вторые 4 байта</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  uint8_t received_data[<a class="code" href="_c_hamming_code_8h.html#aeca90e1c1c62b70670514ffc18c9dfd4">MESSAGE_SIZE</a>]; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;};</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  uint8_t * CHammingCode::CorrectMessage(uint8_t * raw_data);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;  <span class="keywordtype">byte</span> Hamming74 (uint8_t input);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;  IRrecv *irrecv;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  decode_results results;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  uint8_t rcv_counter = 0; <span class="comment">// 1 - получены первые 4 байта; 2 - вторые 4 байта</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;  uint8_t received_data[<a class="code" href="_c_hamming_code_8h.html#aeca90e1c1c62b70670514ffc18c9dfd4">MESSAGE_SIZE</a>]; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="a_c_hamming_code_8h_html"><div class="ttname"><a href="_c_hamming_code_8h.html">CHammingCode.h</a></div></div>
 <div class="ttc" id="aclass_c_hamming_code_html_a1ee3dd890fd4c28afb5573e10af2e883"><div class="ttname"><a href="class_c_hamming_code.html#a1ee3dd890fd4c28afb5573e10af2e883">CHammingCode::ReceiveData</a></div><div class="ttdeci">bool ReceiveData(uint8_t *data)</div><div class="ttdoc">Принимает положение фишек и роботов от ИК передатчика</div><div class="ttdef"><b>Definition:</b> CHammingCode.cpp:9</div></div>

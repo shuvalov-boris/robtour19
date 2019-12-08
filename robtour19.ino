@@ -1,12 +1,13 @@
 /**@file robtour19.ino */
 
 #include "CColorTracker.h"
+
 #include "CDriveControl.h"
 #include "CGearMotor.h"
 #include "CHammingCode.h"
 #include "CTowerControl.h"
 
-// задержка на срабатывание книпки старта
+// задержка на срабатывание кнопки старта
 #define BTN_TIME 1000 // [ms]
 
 // порог аналогово-цифрового преобразования для датчика черной полосы
@@ -19,6 +20,7 @@ enum ETaskPhase
   ETP_START_FIELD,
   ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN,
   ETP_MOVING_ALONG_BLACK_LINE_TO_NEXT_COIN,
+  ETP_COINS_LIFT,
   ETP_FINISH_FIELD
 };
 
@@ -96,7 +98,10 @@ byte Move = 0;
 
 bool is_setup = false;
 
+Servo servo_gripper;
+Servo servo_tower_tilt;
 
+//Servo servo_tower_tilt;
 ETaskPhase TaskPhase = ETP_READY;
 
 void setup()
@@ -126,8 +131,14 @@ void setup()
   DriveControl = CDriveControl(DriveAxis, servo_rotate_right_wheel, servo_rotate_right_wheel); // TODO rm left servo
 
   TowerMotor = new CGearMotor(motor_tower_pinA, motor_tower_pinE, motor_tower_pinB, STBY);
-  TowerControl = CTowerControl(TowerMotor, servo_gripper_pin, servo_rope_tension_pin, servo_tower_tilt_pin);
+  TowerControl = CTowerControl(TowerMotor, servo_gripper_pin, servo_tower_tilt_pin, servo_rope_tension_pin);
 
+
+  TowerMotor->setSpeed(255);
+//  TowerMotor->forward();
+//
+//  servo_tower_tilt.attach(servo_tower_tilt_pin);
+//  servo_tower_tilt.write(0);
   
 //  Serial.print("testing HammingCode...\t\t");
 //  bool is_correct = HammingCode.test();
@@ -136,7 +147,7 @@ void setup()
 
 //  servo_tower_tilt.attach(servo_tower_tilt_pin);
 //  servo_tower_tilt.write(0);
-//
+////
 //  servo_gripper.attach(servo_gripper_pin);
 //  servo_gripper.write(0);
 
@@ -153,10 +164,12 @@ void setup()
 //  last_time = millis();
 }
 
-//int tower_angle = 0;
-//int gripper_angle = 0;
+int angle = 0;
 //int last_btn_state = HIGH;
-//int incomingByte = 0;
+int incomingByte = 0;
+//int gripper_angle = 0;
+//int tower_angle = 0;
+bool is_start = false;
 
 void loop()
 {
@@ -180,7 +193,7 @@ void loop()
 
 //servo_gripper.write(5);
 
-//  collect_coins();
+  collect_coins();
 
 
 // testing of tower     
@@ -192,21 +205,53 @@ void loop()
 //    }
 //    else
 //      last_btn_state = HIGH;
+//
+//    if (!is_start && digitalRead(3) == LOW){
+//      is_start = true;
+//      delay(BTN_TIME);
+//      TowerControl.Start();
+//      Serial.println("START");
+//    }
+//
+//    TowerControl.Loop();
 
 
 
   if (Serial.available() > 0)
   {
-    int incomingByte = Serial.read();
+    incomingByte = Serial.read();
 
     Serial.print("I received: ");
     Serial.println(incomingByte, DEC);
-    TowerControl.ProcessCommand(incomingByte);   
+
     Serial.read(); 
   }
 
+  TowerControl.ProcessCommand(incomingByte);   
+  ColorTracker.ProcessCommand(incomingByte);
+
+
+//  if (angle < 30)
+//  {
+//    Serial.print("tilt angle is ");
+//    Serial.println(angle);
+//    servo_tower_tilt.write(++angle);
+//    delay(100);
+//  }
+//TowerMotor->backward();
+//delay(250);
+//TowerMotor->stop();
+//delay(250);
+//TowerMotor->forward();
+//delay(250);
+//TowerMotor->stop();
+//delay(250);
+
+
     
 }
+
+int _speed = 50;
 
 // выполнение задачи сбора фишек
 void collect_coins()
@@ -218,7 +263,7 @@ void collect_coins()
   if (TaskPhase == ETP_READY)
   {
     //  Считываем данные о положении фишек и роботов
-    uint8_t correct_data[] = {5, 6, 8, 4, 5, 6, 4, 3};
+    uint8_t correct_data[] = {1, 2, 4, 6, 1, 2, 4, 6};
     data_is_read = true;
     if (data_is_read == false)
     {
@@ -282,12 +327,26 @@ void collect_coins()
   
   else if (TaskPhase == ETP_START_FIELD)
   {
-    DriveControl.move_counting_lines(CoinsPos[passedMoveCount + 1] - CoinsPos[passedMoveCount]);
-    TaskPhase = ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN;
-    Serial.print("I'm at position #");
-    Serial.print(CoinsPos[passedMoveCount]);
-    Serial.print(" and head to line #");
-    Serial.println(CoinsPos[passedMoveCount + 1]); 
+    
+    
+//    if (_speed == 50)
+//    {
+//      Serial.print("I'm at position #");
+//      Serial.print(CoinsPos[passedMoveCount]);
+//      Serial.print(" and head to line #");
+//      Serial.println(CoinsPos[passedMoveCount + 1]); 
+//    }
+//    if (_speed++ < 120)
+//    {
+//      DriveAxis->setSpeed(_speed);
+//      DriveAxis->forward();
+//      delay(50);
+//    }
+//    else
+//    {
+      DriveControl.move_counting_lines(CoinsPos[passedMoveCount + 1] - CoinsPos[passedMoveCount]);
+      TaskPhase = ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN;
+//    }  
     return;
   }
   else if (TaskPhase == ETP_MOVING_TO_BLACK_LINE_OF_NEXT_COIN)
@@ -299,22 +358,25 @@ void collect_coins()
       rightLF = HIGH;
     else
       rightLF = LOW;
-    if (DriveControl.loop(leftLF, rightLF) == FINAL_TURN_OVER)
+    int dc_result = DriveControl.loop(leftLF, rightLF);
+
+    if (passedMoveCount > 2 && dc_result == COUNTED_BLACK_LINES)
+    {
+      delay(100);
+      Serial.println("COUNT all black lines and DO DELAY 100");
+    }
+    if (dc_result == FINAL_TURN_OVER)
     {
       Serial.println("Got FINAL_TURN_OVER return code");
       TaskPhase = ETP_MOVING_ALONG_BLACK_LINE_TO_NEXT_COIN;
       move_by_line();
     }
-    return;
-  }
-  else if (TaskPhase == ETP_MOVING_ALONG_BLACK_LINE_TO_NEXT_COIN)
-  {
-    move_by_line();
-//    Serial.println("Searching BLUE");
-// TODO Может начинать искать синий еще при завершающем повороте (для нашего тестового поля с короткими расстояниями)
-    if ((passedMoveCount < 3) && (ColorTracker.GetColor(EDC_BLUE) == EDC_BLUE))
+    else if (passedMoveCount > 0 && dc_result == FINAL_TURN && (ColorTracker.GetColor(EDC_BLUE) == EDC_BLUE))
     {
-      Serial.println("REACH BLUE");
+      Serial.println("while final turn GOT BLUE LINE");
+
+      Serial.print("REACH BLUE ");
+      Serial.print(passedMoveCount + 1);
       Serial.println();
       ColorTracker.Clear();
 //      DriveAxis->stop();
@@ -323,25 +385,76 @@ void collect_coins()
       TaskPhase = ETP_START_FIELD;
       if (passedMoveCount == 3)
       {
-        TaskPhase = ETP_FINISH_FIELD; // ВРЕМЕННО !!! убрать на полноценном поле!
+//        TaskPhase = ETP_FINISH_FIELD; // ВРЕМЕННО !!! убрать на полноценном поле!
         Serial.println("GOT ALL COINS");
         // Захватить фишки
         // Поднять платформу
         // Повернуть платформу
         // Можно поднять платформу (сначала подобрав монетки)
+        DriveAxis->stop();
+        delay(500);
         TowerControl.Start();
+        TaskPhase = ETP_COINS_LIFT;
+      }
+    }
+    return;
+  }
+  else if (TaskPhase == ETP_MOVING_ALONG_BLACK_LINE_TO_NEXT_COIN)
+  {
+    move_by_line();
+//    Serial.println("Searching BLUE");
+//    if (passedMoveCount == 1)
+//    {
+//      DriveAxis->stop();
+//      Serial.println("ALMOST GOT TWO COINS");
+//    }
+//    else 
+    if (passedMoveCount == 3)
+      DriveAxis->stop();
+// TODO Может начинать искать синий еще при завершающем повороте (для нашего тестового поля с короткими расстояниями)
+    if ((passedMoveCount < 3) && (ColorTracker.GetColor(EDC_BLUE) == EDC_BLUE))
+    {
+      Serial.print("REACH BLUE ");
+      Serial.print(passedMoveCount);
+      Serial.println();
+      ColorTracker.Clear();
+//      DriveAxis->stop();
+//      delay(2000);
+      passedMoveCount++;
+      TaskPhase = ETP_START_FIELD;
+      if (passedMoveCount == 3)
+      {
+//        TaskPhase = ETP_FINISH_FIELD; // ВРЕМЕННО !!! убрать на полноценном поле!
+        Serial.println("GOT ALL COINS");
+        // Захватить фишки
+        // Поднять платформу
+        // Повернуть платформу
+        // Можно поднять платформу (сначала подобрав монетки)
+        delay(100);
+        DriveAxis->stop();
+        delay(500);
+        TowerControl.Start();
+        TaskPhase = ETP_COINS_LIFT;
       }
     }
     else if ((passedMoveCount >= 3) && (ColorTracker.GetColor(EDC_GREEN) == EDC_GREEN))
     {
       Serial.println("FINISH");
       TaskPhase = ETP_FINISH_FIELD;
-      // На финише. Поднять платформу! раньше надо было
+      
+      // На финише. Поднять платформу! раньше можно было
     }
 //    break;
     return;
   }
-
+  else if (TaskPhase == ETP_COINS_LIFT)
+  {
+    if (TowerControl.Loop() == 1)
+    {
+      TaskPhase = ETP_START_FIELD;
+      Serial.println("GOT ALL COINS AND COINS ARE READY FOR TARGET");
+    }
+  }
   else if (TaskPhase == ETP_FINISH_FIELD)
   {
     delay(1000);

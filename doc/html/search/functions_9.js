@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['test_128',['test',['../class_c_hamming_code.html#ae7199d800ecc3701010baaf707171954',1,'CHammingCode']]],
-  ['testing_5fmovement_129',['testing_movement',['../robtour19_8ino.html#a97cbda62853f83d2b66ced0b97c83940',1,'robtour19.ino']]],
-  ['turn_5fleft_130',['turn_left',['../class_c_drive_control.html#a8a0b8078c4a1869c047dcf79302b20e0',1,'CDriveControl']]],
-  ['turn_5fright_131',['turn_right',['../class_c_drive_control.html#a7c502d16e1226631a5d7c9e0a3b10634',1,'CDriveControl']]]
+  ['search_5flines_179',['search_lines',['../class_c_drive_control.html#a40e71902ba9df0b2120a933f6eecdf6b',1,'CDriveControl']]],
+  ['setspeed_180',['setSpeed',['../class_c_gear_motor.html#ada296059adce0cf7487db874d6b53dcc',1,'CGearMotor']]],
+  ['setup_181',['setup',['../robtour19_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'robtour19.ino']]],
+  ['start_182',['Start',['../class_c_tower_control.html#ab00004ad2894e42979bd7037b538dafc',1,'CTowerControl']]],
+  ['stop_183',['stop',['../class_c_gear_motor.html#a929d50779177280d65582802a1797641',1,'CGearMotor']]]
 ];

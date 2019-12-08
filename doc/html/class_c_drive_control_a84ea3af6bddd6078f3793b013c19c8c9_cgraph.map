@@ -1,8 +1,7 @@
 <map id="CDriveControl::loop" name="CDriveControl::loop">
-<area shape="rect" id="node1" title="Движение робота к фишке" alt="" coords="5,71,137,98"/>
-<area shape="rect" id="node2" href="$class_c_drive_control.html#a2c7473331fe035f183e1a37a9596ec3e" title="Ехать прямо вперёд" alt="" coords="193,5,332,47"/>
-<area shape="rect" id="node5" href="$class_c_drive_control.html#a8a0b8078c4a1869c047dcf79302b20e0" title=" " alt="" coords="185,71,340,98"/>
-<area shape="rect" id="node6" href="$class_c_drive_control.html#a7c502d16e1226631a5d7c9e0a3b10634" title=" " alt="" coords="197,123,328,164"/>
-<area shape="rect" id="node3" href="$class_c_drive_axis.html#ad7ab6a9182464753a3b5f3dcb4d15daa" title=" " alt="" coords="395,46,529,73"/>
-<area shape="rect" id="node4" href="$class_c_drive_axis.html#a1621a0c988e0018522366f1c81c5276e" title=" " alt="" coords="388,97,536,123"/>
+<area shape="rect" id="node1" title="Движение робота к фишке" alt="" coords="5,64,137,91"/>
+<area shape="rect" id="node2" href="$class_c_drive_control.html#a2c7473331fe035f183e1a37a9596ec3e" title="Ехать прямо вперёд" alt="" coords="189,23,328,65"/>
+<area shape="rect" id="node5" href="$class_c_drive_control.html#a40e71902ba9df0b2120a933f6eecdf6b" title=" " alt="" coords="185,89,332,130"/>
+<area shape="rect" id="node3" href="$class_c_gear_motor.html#a3380e7a0050f3ac54871e0308fdbdf03" title="Запустить вращение мотора вперед (или по/против часовой)" alt="" coords="387,5,528,32"/>
+<area shape="rect" id="node4" href="$class_c_gear_motor.html#ada296059adce0cf7487db874d6b53dcc" title=" " alt="" coords="380,56,535,83"/>
 </map>

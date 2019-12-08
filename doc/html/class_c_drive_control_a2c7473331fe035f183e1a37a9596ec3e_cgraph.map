@@ -1,5 +1,5 @@
 <map id="CDriveControl::move_forward" name="CDriveControl::move_forward">
 <area shape="rect" id="node1" title="Ехать прямо вперёд" alt="" coords="5,23,144,65"/>
-<area shape="rect" id="node2" href="$class_c_drive_axis.html#ad7ab6a9182464753a3b5f3dcb4d15daa" title=" " alt="" coords="199,5,333,32"/>
-<area shape="rect" id="node3" href="$class_c_drive_axis.html#a1621a0c988e0018522366f1c81c5276e" title=" " alt="" coords="192,56,340,83"/>
+<area shape="rect" id="node2" href="$class_c_gear_motor.html#a3380e7a0050f3ac54871e0308fdbdf03" title="Запустить вращение мотора вперед (или по/против часовой)" alt="" coords="199,5,340,32"/>
+<area shape="rect" id="node3" href="$class_c_gear_motor.html#ada296059adce0cf7487db874d6b53dcc" title=" " alt="" coords="192,56,347,83"/>
 </map>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['getcolor_117',['GetColor',['../class_c_color_tracker.html#ad4668b0e3afb1c19274757c46478d7a6',1,'CColorTracker']]],
-  ['getspeed_118',['getSpeed',['../class_c_drive_axis.html#abbd8388583bc2f2b10587bb624fe9d73',1,'CDriveAxis']]]
+  ['getcolor_170',['GetColor',['../class_c_color_tracker.html#a750fa7e7395d9736fab696363ce0323a',1,'CColorTracker']]],
+  ['getspeed_171',['getSpeed',['../class_c_gear_motor.html#ada86dd37ced9c73207deccba33bd1eec',1,'CGearMotor']]]
 ];

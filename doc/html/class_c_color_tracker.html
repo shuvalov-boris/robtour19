@@ -69,14 +69,15 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Класс работы с датчиком цвета на TCS3200.  
+ <a href="class_c_color_tracker.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_c_color_tracker_8h_source.html">CColorTracker.h</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for CColorTracker:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_c_color_tracker__coll__graph.png" border="0" usemap="#_c_color_tracker_coll__map" alt="Collaboration graph"/></div>
-<map name="_c_color_tracker_coll__map" id="_c_color_tracker_coll__map">
-<area shape="rect" title=" " alt="" coords="5,5,139,141"/>
-</map>
+<!-- MAP 0 -->
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -85,14 +86,23 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a781cbd13c30e25d1bb8fb8a216e6f4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7bce45d9e06b4d261f1ae49c195c178a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_color_tracker.html#a7bce45d9e06b4d261f1ae49c195c178a">CColorTracker</a> (byte s0, byte s1, byte s2, byte s3, byte out)</td></tr>
 <tr class="separator:a7bce45d9e06b4d261f1ae49c195c178a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafb1c1711baf1067e0dc65fc1ae82b15"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_color_tracker.html#aafb1c1711baf1067e0dc65fc1ae82b15">Calibrate</a> ()</td></tr>
-<tr class="separator:aafb1c1711baf1067e0dc65fc1ae82b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a076c0d338bcd2788f5c00f51b1c4be7c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_color_tracker.html#a076c0d338bcd2788f5c00f51b1c4be7c">Calibrate</a> (<a class="el" href="_c_color_tracker_8h.html#a4cce3c957245fd145d9cb8977e2cde2f">EDefinedColor</a> color)</td></tr>
+<tr class="separator:a076c0d338bcd2788f5c00f51b1c4be7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa0a3cbb152608122ab2131d70492cde"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_color_tracker.html#aaa0a3cbb152608122ab2131d70492cde">DefineColorNow</a> (<a class="el" href="_c_color_tracker_8h.html#a4cce3c957245fd145d9cb8977e2cde2f">EDefinedColor</a> AColor)</td></tr>
 <tr class="separator:aaa0a3cbb152608122ab2131d70492cde"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4668b0e3afb1c19274757c46478d7a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_c_color_tracker_8h.html#a4cce3c957245fd145d9cb8977e2cde2f">EDefinedColor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_color_tracker.html#ad4668b0e3afb1c19274757c46478d7a6">GetColor</a> ()</td></tr>
-<tr class="separator:ad4668b0e3afb1c19274757c46478d7a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a750fa7e7395d9736fab696363ce0323a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_c_color_tracker_8h.html#a4cce3c957245fd145d9cb8977e2cde2f">EDefinedColor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_color_tracker.html#a750fa7e7395d9736fab696363ce0323a">GetColor</a> (<a class="el" href="_c_color_tracker_8h.html#a4cce3c957245fd145d9cb8977e2cde2f">EDefinedColor</a> color)</td></tr>
+<tr class="separator:a750fa7e7395d9736fab696363ce0323a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30ac72131bdec5d8dfb44b8cd3e247f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_c_color_tracker_8h.html#a4cce3c957245fd145d9cb8977e2cde2f">EDefinedColor</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_color_tracker.html#a30ac72131bdec5d8dfb44b8cd3e247f5">DefineStartField</a> ()</td></tr>
+<tr class="separator:a30ac72131bdec5d8dfb44b8cd3e247f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb14a498a47f13108169d49fe7204b8f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_color_tracker.html#acb14a498a47f13108169d49fe7204b8f">ProcessCommand</a> (const int cmd)</td></tr>
+<tr class="separator:acb14a498a47f13108169d49fe7204b8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad796ef69d1faae211dd2a116f8f45f58"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_color_tracker.html#ad796ef69d1faae211dd2a116f8f45f58">Clear</a> ()</td></tr>
+<tr class="separator:ad796ef69d1faae211dd2a116f8f45f58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Класс работы с датчиком цвета на TCS3200. </p>
+<p>Отвечает за определение поля (1 или 2(!)) - распознавание цвета на старте, определение достижения синей полосы и зоны финиша (зеленого цвета) </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Диапазон чувствительности у разных цветов датчика может быть разным, поэтому стоит их привести к общему знаменателю: greenColor = map(greenFrequency, 100, 199, 255, 0); </dd></dl>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a781cbd13c30e25d1bb8fb8a216e6f4cd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a781cbd13c30e25d1bb8fb8a216e6f4cd">&#9670;&nbsp;</a></span>CColorTracker() <span class="overload">[1/2]</span></h2>
 
@@ -165,8 +175,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aafb1c1711baf1067e0dc65fc1ae82b15"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aafb1c1711baf1067e0dc65fc1ae82b15">&#9670;&nbsp;</a></span>Calibrate()</h2>
+<a id="a076c0d338bcd2788f5c00f51b1c4be7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a076c0d338bcd2788f5c00f51b1c4be7c">&#9670;&nbsp;</a></span>Calibrate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -174,11 +184,41 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void CColorTracker::Calibrate </td>
           <td>(</td>
+          <td class="paramtype"><a class="el" href="_c_color_tracker_8h.html#a4cce3c957245fd145d9cb8977e2cde2f">EDefinedColor</a>&#160;</td>
+          <td class="paramname"><em>color</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_c_color_tracker_a076c0d338bcd2788f5c00f51b1c4be7c_icgraph.png" border="0" usemap="#class_c_color_tracker_a076c0d338bcd2788f5c00f51b1c4be7c_icgraph" alt=""/></div>
+<!-- MAP 1 -->
+</div>
+
+</div>
+</div>
+<a id="ad796ef69d1faae211dd2a116f8f45f58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad796ef69d1faae211dd2a116f8f45f58">&#9670;&nbsp;</a></span>Clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CColorTracker::Clear </td>
+          <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_c_color_tracker_ad796ef69d1faae211dd2a116f8f45f58_icgraph.png" border="0" usemap="#class_c_color_tracker_ad796ef69d1faae211dd2a116f8f45f58_icgraph" alt=""/></div>
+<!-- MAP 2 -->
+</div>
 
 </div>
 </div>
@@ -208,14 +248,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ad4668b0e3afb1c19274757c46478d7a6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4668b0e3afb1c19274757c46478d7a6">&#9670;&nbsp;</a></span>GetColor()</h2>
+<a id="a30ac72131bdec5d8dfb44b8cd3e247f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30ac72131bdec5d8dfb44b8cd3e247f5">&#9670;&nbsp;</a></span>DefineStartField()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="_c_color_tracker_8h.html#a4cce3c957245fd145d9cb8977e2cde2f">EDefinedColor</a> CColorTracker::GetColor </td>
+          <td class="memname"><a class="el" href="_c_color_tracker_8h.html#a4cce3c957245fd145d9cb8977e2cde2f">EDefinedColor</a> CColorTracker::DefineStartField </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -225,12 +265,56 @@ Public Member Functions</h2></td></tr>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="class_c_color_tracker_ad4668b0e3afb1c19274757c46478d7a6_icgraph.png" border="0" usemap="#class_c_color_tracker_ad4668b0e3afb1c19274757c46478d7a6_icgraph" alt=""/></div>
-<map name="class_c_color_tracker_ad4668b0e3afb1c19274757c46478d7a6_icgraph" id="class_c_color_tracker_ad4668b0e3afb1c19274757c46478d7a6_icgraph">
-<area shape="rect" title=" " alt="" coords="247,5,409,32"/>
-<area shape="rect" href="robtour19_8ino.html#a3753695beec721ce1eefc2332f7890a0" title=" " alt="" coords="100,5,199,32"/>
-<area shape="rect" href="robtour19_8ino.html#afe461d27b9c48d5921c00d521181f12f" title=" " alt="" coords="5,5,52,32"/>
-</map>
+<div class="center"><img src="class_c_color_tracker_a30ac72131bdec5d8dfb44b8cd3e247f5_icgraph.png" border="0" usemap="#class_c_color_tracker_a30ac72131bdec5d8dfb44b8cd3e247f5_icgraph" alt=""/></div>
+<!-- MAP 3 -->
+</div>
+
+</div>
+</div>
+<a id="a750fa7e7395d9736fab696363ce0323a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a750fa7e7395d9736fab696363ce0323a">&#9670;&nbsp;</a></span>GetColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_c_color_tracker_8h.html#a4cce3c957245fd145d9cb8977e2cde2f">EDefinedColor</a> CColorTracker::GetColor </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_c_color_tracker_8h.html#a4cce3c957245fd145d9cb8977e2cde2f">EDefinedColor</a>&#160;</td>
+          <td class="paramname"><em>color</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_c_color_tracker_a750fa7e7395d9736fab696363ce0323a_icgraph.png" border="0" usemap="#class_c_color_tracker_a750fa7e7395d9736fab696363ce0323a_icgraph" alt=""/></div>
+<!-- MAP 4 -->
+</div>
+
+</div>
+</div>
+<a id="acb14a498a47f13108169d49fe7204b8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb14a498a47f13108169d49fe7204b8f">&#9670;&nbsp;</a></span>ProcessCommand()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CColorTracker::ProcessCommand </td>
+          <td>(</td>
+          <td class="paramtype">const int&#160;</td>
+          <td class="paramname"><em>cmd</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_c_color_tracker_acb14a498a47f13108169d49fe7204b8f_cgraph.png" border="0" usemap="#class_c_color_tracker_acb14a498a47f13108169d49fe7204b8f_cgraph" alt=""/></div>
+<!-- MAP 5 -->
 </div>
 
 </div>

@@ -158,7 +158,7 @@ EDefinedColor CColorTracker::GetColor(EDefinedColor color)
       
     }
   }
-
+  return EDC_UNKNOW;
 
   if (color = EDC_GREEN)
   {
@@ -216,8 +216,8 @@ EDefinedColor CColorTracker::GetColor(EDefinedColor color)
           return EDC_UNKNOW;
         }
       }
+    } 
   }
-}
 }
 
 EDefinedColor CColorTracker::DefineStartField()
@@ -243,9 +243,29 @@ EDefinedColor CColorTracker::DefineStartField()
     return EDC_RED;
   }
 }
+void CColorTracker::ProcessCommand(const int cmd)
+{
+  if (cmd == 114) // red
+    Calibrate(EDC_RED);
+
+  if (cmd == 98) // blue
+    Calibrate(EDC_BLUE);
+
+  if (cmd == 103) // green
+    Calibrate(EDC_GREEN);
+
+  if (cmd == 99)
+    Clear();
+}
 
 void CColorTracker::Clear()
 {
   count = 0;
   value = 0;
+
+  min_value = 255;
+  max_value = 0;
+
+  sum = 0;
+  _count = 0;
 }

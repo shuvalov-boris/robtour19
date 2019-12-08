@@ -5,7 +5,7 @@ CTowerControl::CTowerControl(const CGearMotor *AGripperLift, const byte gripper_
   GripperLift = AGripperLift;
   
   servo_gripper.attach(gripper_pin);
-  servo_gripper.write(0);
+  servo_gripper.write(GRIPPER_START_TILT);
   
   servo_tower_tilt.attach(tower_tilt_pin);
   servo_tower_tilt.write(0);
@@ -15,14 +15,28 @@ CTowerControl::CTowerControl(const CGearMotor *AGripperLift, const byte gripper_
   
   coins_manipulation_phase = ECMP_COLLECTING;
   gripper_time = tower_time = millis();
+  Serial.println("CTowerControl constructor");
+
+  coins_manipulation_phase = ECMP_COLLECTING;
 }
 
-void CTowerControl::Loop()
+int CTowerControl::Loop()
 {
   switch (coins_manipulation_phase)
   {
+    // поднимаем платформу
     case ECMP_LIFTING:
-      if (millis() - gripper_time > GRIPPER_TILT_DELAY && gripper_angle < GRIPPER_TARGET_TILT) // TODO add delay
+      if (millis() - gripper_lift_time > GRIPPER_LIFT_TIME)
+      {
+        GripperLift->stop();
+        coins_manipulation_phase = ECMP_GRIPPER_TILTING;
+      }
+      break;
+      
+    case ECMP_GRIPPER_TILTING:
+      if (millis() - gripper_time < GRIPPER_TILT_DELAY)
+        break;
+      if (gripper_angle < GRIPPER_TARGET_TILT)
       {
         servo_gripper.write(++gripper_angle);
         gripper_time = millis();
@@ -36,7 +50,9 @@ void CTowerControl::Loop()
       break;
 
     case ECMP_TOWER_TILT:   
-      if (millis() - tower_time > TOWER_TILT_DELAY && tower_angle < TOWER_TARGET_TILT) // add delay
+      if (millis() - tower_time < TOWER_TILT_DELAY)
+        break;
+      if (tower_angle < TOWER_TARGET_TILT)
       {
         servo_tower_tilt.write(++tower_angle);
         tower_time = millis();
@@ -45,104 +61,160 @@ void CTowerControl::Loop()
 //        Serial.println(tower_angle);
 //        Serial.read();
       }
-      else
+      else {
         coins_manipulation_phase = ECMP_COMPLETED;
+        return 1;
+      }
       break;
   }
+  return 0;
 }
 
 void CTowerControl::Start()
 {
-  GripCoins();
+  Serial.println("CTowerControl::Start");
+  GripCoins();  
 }
 
-void CTowerControl::ProcessCommand(int incomingByte)
+void CTowerControl::ProcessCommand(int cmd)
 {
-  if (tower_angle < 20 && incomingByte == 50)
+//  Serial.print("TowerControl: got command ");
+//  Serial.println(cmd);
+  
+  if (tower_angle < 20 && cmd == 50) // 2 - наклон башни до 20 градусов
   {
     servo_tower_tilt.write(++tower_angle);
     delay(50);
+    Serial.print("tower tilt angle is ");
     Serial.println(tower_angle);
   }
 
-  if (tower_angle < 40 && incomingByte == 51)
+  if (tower_angle < 40 && cmd == 51) // 3 - наклон башни до 40 градусов
   {
     servo_tower_tilt.write(++tower_angle);
     delay(100);
+    Serial.print("tower tilt angle is ");
     Serial.println(tower_angle);
   }
 
-  if (tower_angle < 60 && incomingByte == 52)
+  if (tower_angle < 60 && cmd == 52)  // 4 - наклон башни до 60 градусов
   {
     servo_tower_tilt.write(++tower_angle);
     delay(100);
+    Serial.print("tower tilt angle is ");
     Serial.println(tower_angle);
   }
 
   
-  if (tower_angle < 80 && incomingByte == 53)
+  if (tower_angle < 80 && cmd == 53)
   {
     servo_tower_tilt.write(++tower_angle);
     delay(100);
+    Serial.print("tower tilt angle is ");
     Serial.println(tower_angle);
   }
   
-  if (tower_angle < 90 && incomingByte == 54)
+  if (tower_angle < 90 && cmd == 54)
   {
     servo_tower_tilt.write(++tower_angle);
     delay(100);
+    Serial.print("tower tilt angle is ");
     Serial.println(tower_angle);
   }
   
   
-  if (incomingByte == 119)
+  if (cmd == 119) // w
   {
     servo_tower_tilt.write(++tower_angle);
-    delay(100);
+    delay(50);
+    Serial.print("tower tilt angle is ");
     Serial.println(tower_angle);
-    incomingByte = 0;
+    cmd = 0;
   }
 
-  if (tower_angle > 0 && incomingByte == 55)
+  if (tower_angle > 0 && cmd == 55) // [7] - подъём башни в нулевое положение
   {
     servo_tower_tilt.write(--tower_angle);
-    delay(100);
+    delay(50);
+    Serial.print("tower tilt angle is ");
     Serial.println(tower_angle);
   }
 
-  if (gripper_angle < 100 && incomingByte == 117) // lift up [u]
+  if (gripper_angle < 100 && cmd == 117) // lift up [u]
   {
     servo_gripper.write(++gripper_angle);
     delay(10);
+    Serial.print("gripper angle is ");
     Serial.println(gripper_angle);
   }
 
-  if (gripper_angle > 0 && incomingByte == 100) // lift down [d]
+  if (gripper_angle > 0 && cmd == 100) // lift down [d]
   {
     servo_gripper.write(--gripper_angle);
     delay(10);
+    Serial.print("gripper angle is ");
     Serial.println(gripper_angle);
+  }
+
+  if (cmd == 97) // [a] платформу вверх
+  {
+    GripperLift->setSpeed(255);
+  // подъём лапы с фишками
+    GripperLift->forward();
+    Serial.println('gripper up');
+  }
+
+  if (cmd == 122) // [z] платформу вниз
+  {
+    GripperLift->setSpeed(255);
+  // подъём лапы с фишками
+    GripperLift->backward();
+    Serial.println('gripper down');
   }
 }
 
 void CTowerControl::GripCoins()
 {
+  Serial.println("CTowerControl::GripCoins");
   coins_manipulation_phase = ECMP_GRIPPING;
-//      if (gripper_angle < 100 && incomingByte == 117) // lift up [u]
-    
-  servo_gripper.write(0);
 
-  coins_manipulation_phase = ECMP_LIFTING;
-  
+  // опускаем лапу для захвата фишек
+  GripperLift->setSpeed(100);  
+  GripperLift->backward();
+  delay(120);
+  GripperLift->stop();
+  Serial.println('gripper is down');
+
+  // наклоняем лапу, чтобы точно взять фишки
+  servo_gripper.write(0);
+  delay(500);
+  servo_gripper.write(15);
+  delay(500);
+  servo_gripper.write(0);
+  delay(500);
+  servo_gripper.write(15);
+  delay(500);
+
+  GripperLift->backward();
+  delay(70);
+  GripperLift->stop();
+
+  servo_gripper.write(0);
+  delay(500);
+  servo_gripper.write(15);
+  delay(500);
+
+  LiftGripper();  
 }
 
 void CTowerControl::LiftGripper()
 {
   coins_manipulation_phase = ECMP_LIFTING;
+  gripper_lift_time = millis();
 
   GripperLift->setSpeed(255);
   // подъём лапы с фишками
-  GripperLift->backward();
+  GripperLift->forward();
 }
 
 void CTowerControl::TiltTower()

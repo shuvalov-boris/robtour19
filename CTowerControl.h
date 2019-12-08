@@ -6,12 +6,15 @@
 #include "CGearMotor.h"
 
 
-#define GRIPPER_START_TILT 15
-#define GRIPPER_TARGET_TILT 100
+#define GRIPPER_START_TILT 20
+#define GRIPPER_TARGET_TILT 120
 #define GRIPPER_TILT_DELAY 10
+#define GRIPPER_LIFT_TIME 3000
 
-#define TOWER_TARGET_TILT 40
-#define TOWER_TILT_DELAY 100
+// угол целевого наклона башни для закрепления фишек на мишени
+#define TOWER_TARGET_TILT 60
+// скорость наклона
+#define TOWER_TILT_DELAY 50
 
 
 class CTowerControl
@@ -20,7 +23,7 @@ public:
   CTowerControl() {}
   CTowerControl(const CGearMotor *AGripperLift, const byte gripper_pin, const byte tower_tilt_pin, const byte rope_tension_pin);
 
-  void Loop();
+  int Loop();
 
   void Start();
 
@@ -33,12 +36,14 @@ private:
   {
     ECMP_COLLECTING, // сбор фишек
     ECMP_GRIPPING,   // захват фишек
-    ECMP_LIFTING,    // подъём и поворот вверх лапы с фишками
-    ECMP_TOWER_TILT, // наклон башни вперёд для размещения фишек на мишени
+    ECMP_LIFTING,    // подъём вверх лапы с фишками
+    ECMP_GRIPPER_TILTING, // поворот вверх лапы, чтобы фишки оказались параллельно мишени
+    ECMP_TOWER_TILT, // наклон башни вперёд, чтобы фишки оказались параллельно мишени
     ECMP_COMPLETED   // задание выполнено
   } coins_manipulation_phase;
 
   long gripper_time;
+  long gripper_lift_time;
   long tower_time;
 
   int tower_angle = 0;

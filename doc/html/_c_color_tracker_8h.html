@@ -95,16 +95,23 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_color_tracker.html">CColorTracker</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Класс работы с датчиком цвета на TCS3200.  <a href="class_c_color_tracker.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a5decbeeec0a1706fcf226390b3762839"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_color_tracker_8h.html#a5decbeeec0a1706fcf226390b3762839">red_orange_threshold</a>&#160;&#160;&#160;35</td></tr>
 <tr class="separator:a5decbeeec0a1706fcf226390b3762839"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a573509d91e32fc1c0bf3d37b61e36d0f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_color_tracker_8h.html#a573509d91e32fc1c0bf3d37b61e36d0f">blue_white_threshold</a>&#160;&#160;&#160;22</td></tr>
+<tr class="memitem:a573509d91e32fc1c0bf3d37b61e36d0f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_color_tracker_8h.html#a573509d91e32fc1c0bf3d37b61e36d0f">blue_white_threshold</a>&#160;&#160;&#160;15</td></tr>
 <tr class="separator:a573509d91e32fc1c0bf3d37b61e36d0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99fe5513b0e3a69f8fb7fb15c55502b2"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_color_tracker_8h.html#a99fe5513b0e3a69f8fb7fb15c55502b2">blue_black_threshold</a>&#160;&#160;&#160;25</td></tr>
+<tr class="separator:a99fe5513b0e3a69f8fb7fb15c55502b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e0f42127321295313ca472d73a9a721"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_color_tracker_8h.html#a9e0f42127321295313ca472d73a9a721">green_white_threshold</a>&#160;&#160;&#160;45</td></tr>
 <tr class="separator:a9e0f42127321295313ca472d73a9a721"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c0a8b30bae0b156dc90463d1e0abe2d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_color_tracker_8h.html#a7c0a8b30bae0b156dc90463d1e0abe2d">green_black_threshold</a>&#160;&#160;&#160;61</td></tr>
+<tr class="separator:a7c0a8b30bae0b156dc90463d1e0abe2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a222462e6ae01b5269f42ba972bd5d185"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_c_color_tracker_8h.html#a222462e6ae01b5269f42ba972bd5d185">CHAIN_SIZE</a>&#160;&#160;&#160;2</td></tr>
+<tr class="separator:a222462e6ae01b5269f42ba972bd5d185"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -115,12 +122,30 @@ Enumerations</h2></td></tr>
 <a class="el" href="_c_color_tracker_8h.html#a4cce3c957245fd145d9cb8977e2cde2faea86a53b84e879b3827626d006305804">EDC_BLUE</a>, 
 <br />
 &#160;&#160;<a class="el" href="_c_color_tracker_8h.html#a4cce3c957245fd145d9cb8977e2cde2fa0e412313c37caab32d752c38dc451a37">EDC_GREEN</a>, 
-<a class="el" href="_c_color_tracker_8h.html#a4cce3c957245fd145d9cb8977e2cde2fa64fe66433afa438ddab5c6669263aee4">EDC_YELLOW</a>
+<a class="el" href="_c_color_tracker_8h.html#a4cce3c957245fd145d9cb8977e2cde2fa64fe66433afa438ddab5c6669263aee4">EDC_YELLOW</a>, 
+<a class="el" href="_c_color_tracker_8h.html#a4cce3c957245fd145d9cb8977e2cde2fa8bcd03c1a5cd8f6e670de6d036a112b5">EDC_WHITE</a>, 
+<a class="el" href="_c_color_tracker_8h.html#a4cce3c957245fd145d9cb8977e2cde2fadf04a2f1b2bc96d4ce5a3a7d36799604">EDC_BLACK</a>, 
+<br />
+&#160;&#160;<a class="el" href="_c_color_tracker_8h.html#a4cce3c957245fd145d9cb8977e2cde2fa78ff37f37fb30db1194044f95c9f1489">EDC_ALL</a>
 <br />
  }</td></tr>
 <tr class="separator:a4cce3c957245fd145d9cb8977e2cde2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a99fe5513b0e3a69f8fb7fb15c55502b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99fe5513b0e3a69f8fb7fb15c55502b2">&#9670;&nbsp;</a></span>blue_black_threshold</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define blue_black_threshold&#160;&#160;&#160;25</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a573509d91e32fc1c0bf3d37b61e36d0f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a573509d91e32fc1c0bf3d37b61e36d0f">&#9670;&nbsp;</a></span>blue_white_threshold</h2>
 
@@ -128,7 +153,35 @@ Enumerations</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define blue_white_threshold&#160;&#160;&#160;22</td>
+          <td class="memname">#define blue_white_threshold&#160;&#160;&#160;15</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a222462e6ae01b5269f42ba972bd5d185"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a222462e6ae01b5269f42ba972bd5d185">&#9670;&nbsp;</a></span>CHAIN_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define CHAIN_SIZE&#160;&#160;&#160;2</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7c0a8b30bae0b156dc90463d1e0abe2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c0a8b30bae0b156dc90463d1e0abe2d">&#9670;&nbsp;</a></span>green_black_threshold</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define green_black_threshold&#160;&#160;&#160;61</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -182,6 +235,9 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a4cce3c957245fd145d9cb8977e2cde2faea86a53b84e879b3827626d006305804"></a>EDC_BLUE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a4cce3c957245fd145d9cb8977e2cde2fa0e412313c37caab32d752c38dc451a37"></a>EDC_GREEN&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a4cce3c957245fd145d9cb8977e2cde2fa64fe66433afa438ddab5c6669263aee4"></a>EDC_YELLOW&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a4cce3c957245fd145d9cb8977e2cde2fa8bcd03c1a5cd8f6e670de6d036a112b5"></a>EDC_WHITE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a4cce3c957245fd145d9cb8977e2cde2fadf04a2f1b2bc96d4ce5a3a7d36799604"></a>EDC_BLACK&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a4cce3c957245fd145d9cb8977e2cde2fa78ff37f37fb30db1194044f95c9f1489"></a>EDC_ALL&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>

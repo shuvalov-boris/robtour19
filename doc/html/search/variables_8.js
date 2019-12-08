@@ -1,12 +1,10 @@
 var searchData=
 [
-  ['s0_151',['S0',['../robtour19_8ino.html#a3714c18e6493a568961f125da447f738',1,'robtour19.ino']]],
-  ['s1_152',['S1',['../robtour19_8ino.html#a04aea3b8b1cf539a469966f30ff3a602',1,'robtour19.ino']]],
-  ['s2_153',['S2',['../robtour19_8ino.html#ad4a502f27e2270723a557ab17de16fe2',1,'robtour19.ino']]],
-  ['s3_154',['S3',['../robtour19_8ino.html#ac0bb270c5fc1811813212dbd97f6d1c8',1,'robtour19.ino']]],
-  ['servo_5frotate_5fleft_5fwheel_155',['servo_rotate_left_wheel',['../robtour19_8ino.html#a5e00ad44c0e652d123508e8f61ba16d8',1,'robtour19.ino']]],
-  ['servo_5frotate_5fright_5fwheel_156',['servo_rotate_right_wheel',['../robtour19_8ino.html#a68e74db24d99021e3c6e62101bec55bb',1,'robtour19.ino']]],
-  ['simulation_5fdata_157',['SIMULATION_DATA',['../_c_hamming_code_8h.html#a37bec83496942422ba8b3093c0fb250f',1,'CHammingCode.h']]],
-  ['start_5fbutton_5fpin_158',['start_button_pin',['../robtour19_8ino.html#a8acc87e7a9f2585e725114c117557745',1,'robtour19.ino']]],
-  ['stby_159',['STBY',['../robtour19_8ino.html#a95a829530f5b51aaaa5b42a1942b4ec0',1,'robtour19.ino']]]
+  ['motor_5fdrive_5fpina_204',['motor_drive_pinA',['../robtour19_8ino.html#a38ab9376e4b7573a20aed18a04fe13dd',1,'robtour19.ino']]],
+  ['motor_5fdrive_5fpinb_205',['motor_drive_pinB',['../robtour19_8ino.html#a9506f470425909cc02f646f3cb9e4b06',1,'robtour19.ino']]],
+  ['motor_5fdrive_5fpine_206',['motor_drive_pinE',['../robtour19_8ino.html#aca238e6bb28d0cd4da32e2e70073cf0c',1,'robtour19.ino']]],
+  ['motor_5ftower_5fpina_207',['motor_tower_pinA',['../robtour19_8ino.html#ad5c123697c21e80913c3d70b7d909302',1,'robtour19.ino']]],
+  ['motor_5ftower_5fpinb_208',['motor_tower_pinB',['../robtour19_8ino.html#a9f39cc24a40637814a45cfead8e860db',1,'robtour19.ino']]],
+  ['motor_5ftower_5fpine_209',['motor_tower_pinE',['../robtour19_8ino.html#a2a020c00387c68740b6d99bfdc1226df',1,'robtour19.ino']]],
+  ['move_210',['Move',['../robtour19_8ino.html#a43544ba2523c881c8f8c26242731c902',1,'robtour19.ino']]]
 ];
