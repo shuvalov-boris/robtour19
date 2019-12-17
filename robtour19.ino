@@ -97,11 +97,6 @@ byte CoinsPos[5] = {2, 6, 1, 8, 5};
 byte Move = 0;
 
 bool is_setup = false;
-
-Servo servo_gripper;
-Servo servo_tower_tilt;
-
-//Servo servo_tower_tilt;
 ETaskPhase TaskPhase = ETP_READY;
 
 void setup()
@@ -134,121 +129,32 @@ void setup()
   TowerControl = CTowerControl(TowerMotor, servo_gripper_pin, servo_tower_tilt_pin, servo_rope_tension_pin);
 
 
-  TowerMotor->setSpeed(255);
-//  TowerMotor->forward();
-//
-//  servo_tower_tilt.attach(servo_tower_tilt_pin);
-//  servo_tower_tilt.write(0);
-  
-//  Serial.print("testing HammingCode...\t\t");
-//  bool is_correct = HammingCode.test();
-//  if (is_correct == true) Serial.println("OK");
-//  else Serial.println("FAIL");
-
-//  servo_tower_tilt.attach(servo_tower_tilt_pin);
-//  servo_tower_tilt.write(0);
-////
-//  servo_gripper.attach(servo_gripper_pin);
-//  servo_gripper.write(0);
-
-//  TowerMotor.setSpeed(255);
-//  TowerMotor.forward();
-//  delay(50);
-//  TowerMotor.stop();
-//
-//  DriveAxis->setSpeed(255);
-//  DriveAxis->forward();
-//  delay(100);
-//  DriveAxis->stop();
-
-//  last_time = millis();
+ 
 }
 
 int angle = 0;
-//int last_btn_state = HIGH;
 int incomingByte = 0;
-//int gripper_angle = 0;
-//int tower_angle = 0;
 bool is_start = false;
 
 void loop()
 {
 
-//int rightLF = analogRead(right_line_follower_pin);
-//  if (rightLF > LF_SENSOR_THRESHOLD)
-//    rightLF = HIGH;
-//  else
-//    rightLF = LOW;
-//Serial.println(rightLF);
-//
-//DriveAxis->setSpeed(255);
-//DriveAxis->forward();
-
-//  ColorTracker.Calibrate(EDC_BLUE);
-
-//  проверка подсчета черных линий
-//  int left = digitalRead(left_line_follower_pin);
-//  int right = digitalRead(right_line_follower_pin);
-//  DriveControl.search_lines(left, right);
-
-//servo_gripper.write(5);
-
   collect_coins();
-
-
-// testing of tower     
-//    if (digitalRead(3) == LOW && last_btn_state == HIGH){
-//      servo_lip.write(++tower_angle);
-//      delay(100);
-//      last_btn_state = LOW;
-//      Serial.println(tower_angle);
-//    }
-//    else
-//      last_btn_state = HIGH;
-//
-//    if (!is_start && digitalRead(3) == LOW){
-//      is_start = true;
-//      delay(BTN_TIME);
-//      TowerControl.Start();
-//      Serial.println("START");
-//    }
-//
-//    TowerControl.Loop();
-
-
-
-  if (Serial.available() > 0)
-  {
-    incomingByte = Serial.read();
-
-    Serial.print("I received: ");
-    Serial.println(incomingByte, DEC);
-
-    Serial.read(); 
-  }
-
-  TowerControl.ProcessCommand(incomingByte);   
-  ColorTracker.ProcessCommand(incomingByte);
-
-
-//  if (angle < 30)
+  
+/// Режим управления командами
+//  if (Serial.available() > 0)
 //  {
-//    Serial.print("tilt angle is ");
-//    Serial.println(angle);
-//    servo_tower_tilt.write(++angle);
-//    delay(100);
+//    incomingByte = Serial.read();
+//
+//    Serial.print("I received: ");
+//    Serial.println(incomingByte, DEC);
+//
+//    Serial.read(); 
 //  }
-//TowerMotor->backward();
-//delay(250);
-//TowerMotor->stop();
-//delay(250);
-//TowerMotor->forward();
-//delay(250);
-//TowerMotor->stop();
-//delay(250);
+//
+//  TowerControl.ProcessCommand(incomingByte);   
+//  ColorTracker.ProcessCommand(incomingByte);
 
-
-    
 }
 
 int _speed = 50;
@@ -263,7 +169,7 @@ void collect_coins()
   if (TaskPhase == ETP_READY)
   {
     //  Считываем данные о положении фишек и роботов
-    uint8_t correct_data[] = {1, 2, 4, 6, 1, 2, 4, 6};
+    uint8_t correct_data[] = {1, 2, 3, 5, 1, 2, 3, 5};
     data_is_read = true;
     if (data_is_read == false)
     {

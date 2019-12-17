@@ -7,7 +7,7 @@
 #include "CGearMotor.h"
 
 /// максимальное время, в течение которого робот поворачивается при перестроении на черную линию со следующей фишкой
-#define MAX_TURN_TIME 1600 // [ms]
+#define MAX_TURN_TIME 1800 // [ms]
 #define MIN_TURN_TIME 350 // [ms]
 
 /// время, спустя которое после поворота начинать считать черные линии
@@ -25,11 +25,10 @@
 #define SPEED 200 // forward   // 100
 #define TURN_SPEED 200        //  80
 
-#define SECOND_TURN_ANGLE_DECREASE_FACTOR 1.5 // 2.5 for 3->8
-
+#define SECOND_TURN_ANGLE_DECREASE_FACTOR 2 // 2.5 for 3->8
 
 const byte TURN_DRIVE_ANGLE = 15;
-const byte TURN_ANGLE = 40;
+const byte TURN_ANGLE = 35;
 const byte FORWARD_ANGLE = 90; // угол сервопривода для езды прямо
 
 // направление движения робота

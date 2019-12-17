@@ -66,7 +66,7 @@ void CDriveControl::move_counting_lines(int dist_in_lines)
   black_lines_count_to_pass = abs(dist_in_lines) - 1;
   passed_black_lines = 0;
   
-  turn_time = MIN_TURN_TIME + (MAX_TURN_TIME - MIN_TURN_TIME) / (8 - black_lines_count_to_pass);
+  turn_time = MIN_TURN_TIME + (MAX_TURN_TIME - MIN_TURN_TIME) * black_lines_count_to_pass / 7;
   if (turn_time > MAX_TURN_TIME) turn_time = MAX_TURN_TIME;
   if (black_lines_count_to_pass == 0)
   {

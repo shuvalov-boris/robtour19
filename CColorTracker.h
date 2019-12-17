@@ -6,10 +6,11 @@
 // пороги определения цвета
 #define red_orange_threshold  35 // R-component: orange < 35 < red
 
-// BLUE THRESHOLDs: white 22 blue 41 black 49 CLUB
+
+// BLUE THRESHOLDs: white 19 blue 37 black 41 CLUB
 // BLUE THRESHOLDs: white 13 blue 18 black 40
-#define blue_white_threshold  33 // B-component: white < 22 < blue
-#define blue_black_threshold 44
+#define blue_white_threshold  34 // B-component: white < 22 < blue
+#define blue_black_threshold 38
 
 // GREEN THRESHOLDs: white 16-17 green ~30  black 75-88
 #define green_white_threshold 45 // G-component: white < 45 < green
@@ -19,7 +20,7 @@
 
 // Количество подряд идущих измерений, соответствующих частоте конкретного цвета, чтобы считать измерения истинными.
 // Параметр позволяет отбросить шумы датчика цвета.
-#define CHAIN_SIZE 3
+#define CHAIN_SIZE 2
 
 enum EDefinedColor
 {
