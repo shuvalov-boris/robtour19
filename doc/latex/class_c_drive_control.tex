@@ -1,0 +1,204 @@
+\hypertarget{class_c_drive_control}{}\doxysection{C\+Drive\+Control Class Reference}
+\label{class_c_drive_control}\index{CDriveControl@{CDriveControl}}
+
+
+Осуществляет управление движением робота  
+
+
+
+
+{\ttfamily \#include $<$C\+Drive\+Control.\+h$>$}
+
+
+
+Collaboration diagram for C\+Drive\+Control\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=202pt]{class_c_drive_control__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_c_drive_control_acb70a7911ed7f5653c50fc15ff04d59d}{C\+Drive\+Control}} ()
+\item 
+\mbox{\hyperlink{class_c_drive_control_ae626d8fa280e3e8f478dd48e952dd04a}{C\+Drive\+Control}} (\mbox{\hyperlink{class_c_gear_motor}{C\+Gear\+Motor}} $\ast$A\+Drive\+Axis, byte left\+\_\+rot\+\_\+pin, byte right\+\_\+rot\+\_\+pin)
+\item 
+void \mbox{\hyperlink{class_c_drive_control_a2c7473331fe035f183e1a37a9596ec3e}{move\+\_\+forward}} ()
+\begin{DoxyCompactList}\small\item\em Ехать прямо вперёд \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_c_drive_control_a734ade3f33c34c924c0dc60abe2a08fc}{move\+\_\+backward}} ()
+\begin{DoxyCompactList}\small\item\em Ехать назад \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_c_drive_control_aa270b0d48b9bc76149c5c41db8bf265c}{turn\+\_\+left}} (byte aangle=T\+U\+R\+N\+\_\+\+D\+R\+I\+V\+E\+\_\+\+A\+N\+G\+LE)
+\item 
+void \mbox{\hyperlink{class_c_drive_control_afa9d3a93fbedcdc70915d30e9ac30b38}{turn\+\_\+right}} (byte aangle=T\+U\+R\+N\+\_\+\+D\+R\+I\+V\+E\+\_\+\+A\+N\+G\+LE)
+\item 
+void \mbox{\hyperlink{class_c_drive_control_ad4063995bea6b98e1219ff143bd8afb5}{move\+\_\+counting\+\_\+lines}} (int dist\+\_\+in\+\_\+lines)
+\item 
+byte \mbox{\hyperlink{class_c_drive_control_a84ea3af6bddd6078f3793b013c19c8c9}{loop}} (int left\+En, int right\+En)
+\begin{DoxyCompactList}\small\item\em Движение робота к фишке \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_c_drive_control_a40e71902ba9df0b2120a933f6eecdf6b}{search\+\_\+lines}} (int left\+En, int right\+In)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Осуществляет управление движением робота 
+
+Реализует как простые функции движения (ехать прямо, повороты), так и алгоритм перемещения до следующей синей полосы со смещением на определенной количество черных полос всторону (алгоритм движения к фишке). 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_c_drive_control_acb70a7911ed7f5653c50fc15ff04d59d}\label{class_c_drive_control_acb70a7911ed7f5653c50fc15ff04d59d}} 
+\index{CDriveControl@{CDriveControl}!CDriveControl@{CDriveControl}}
+\index{CDriveControl@{CDriveControl}!CDriveControl@{CDriveControl}}
+\doxysubsubsection{\texorpdfstring{CDriveControl()}{CDriveControl()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily C\+Drive\+Control\+::\+C\+Drive\+Control (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_c_drive_control_ae626d8fa280e3e8f478dd48e952dd04a}\label{class_c_drive_control_ae626d8fa280e3e8f478dd48e952dd04a}} 
+\index{CDriveControl@{CDriveControl}!CDriveControl@{CDriveControl}}
+\index{CDriveControl@{CDriveControl}!CDriveControl@{CDriveControl}}
+\doxysubsubsection{\texorpdfstring{CDriveControl()}{CDriveControl()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily C\+Drive\+Control\+::\+C\+Drive\+Control (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_c_gear_motor}{C\+Gear\+Motor}} $\ast$}]{A\+Drive\+Axis,  }\item[{byte}]{left\+\_\+rot\+\_\+pin,  }\item[{byte}]{right\+\_\+rot\+\_\+pin }\end{DoxyParamCaption})}
+
+Конструктор, который устанавливает связь с ведущей задней осью и переднеми колесами на серво 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em A\+Drive\+Axis} & Объект класса управления мотором на ведущей оси \\
+\hline
+\mbox{\texttt{ in}}  & {\em left\+\_\+rot\+\_\+pin} & Пин сервопривода левого переднего колеса робота \\
+\hline
+\mbox{\texttt{ in}}  & {\em right\+\_\+rot\+\_\+pin} & Пин сервопривода правого переднего колеса робота \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_c_drive_control_ae626d8fa280e3e8f478dd48e952dd04a_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_c_drive_control_a84ea3af6bddd6078f3793b013c19c8c9}\label{class_c_drive_control_a84ea3af6bddd6078f3793b013c19c8c9}} 
+\index{CDriveControl@{CDriveControl}!loop@{loop}}
+\index{loop@{loop}!CDriveControl@{CDriveControl}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily byte C\+Drive\+Control\+::loop (\begin{DoxyParamCaption}\item[{int}]{left\+En,  }\item[{int}]{right\+En }\end{DoxyParamCaption})}
+
+
+
+Движение робота к фишке 
+
+Необходимо вызывать в цикле до конца работы алгоритма. Движение контролируется на основе данных от датчиков линии. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em left\+En} & Показание левого датчика линии\+: \char`\"{}0\char`\"{} -\/ белое поле; \char`\"{}1\char`\"{} -\/ черная линия \\
+\hline
+\mbox{\texttt{ in}}  & {\em right\+En} & Показание правого датчика линии\+: \char`\"{}0\char`\"{} -\/ белое поле; \char`\"{}1\char`\"{} -\/ черная линия \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+код завершения конректного этапа алгоритма, необходимый для перехода, например, к алгоритму движения по черной линии 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_c_drive_control_a734ade3f33c34c924c0dc60abe2a08fc}\label{class_c_drive_control_a734ade3f33c34c924c0dc60abe2a08fc}} 
+\index{CDriveControl@{CDriveControl}!move\_backward@{move\_backward}}
+\index{move\_backward@{move\_backward}!CDriveControl@{CDriveControl}}
+\doxysubsubsection{\texorpdfstring{move\_backward()}{move\_backward()}}
+{\footnotesize\ttfamily void C\+Drive\+Control\+::move\+\_\+backward (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Ехать назад 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{class_c_drive_control_a734ade3f33c34c924c0dc60abe2a08fc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_c_drive_control_ad4063995bea6b98e1219ff143bd8afb5}\label{class_c_drive_control_ad4063995bea6b98e1219ff143bd8afb5}} 
+\index{CDriveControl@{CDriveControl}!move\_counting\_lines@{move\_counting\_lines}}
+\index{move\_counting\_lines@{move\_counting\_lines}!CDriveControl@{CDriveControl}}
+\doxysubsubsection{\texorpdfstring{move\_counting\_lines()}{move\_counting\_lines()}}
+{\footnotesize\ttfamily void C\+Drive\+Control\+::move\+\_\+counting\+\_\+lines (\begin{DoxyParamCaption}\item[{int}]{dist\+\_\+in\+\_\+lines }\end{DoxyParamCaption})}
+
+Команда движения к следующей фишке.
+
+Команда движения от одной цветной полосы (зоны) к следующей. Команда только инициирует движение робота. Для полного выполнения алгоритма необходимо в цикле вызывать метод \mbox{\hyperlink{class_c_drive_control_a84ea3af6bddd6078f3793b013c19c8c9}{loop()}} 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em A\+Drive\+Axis} & Объект класса управления мотором на ведущей оси \\
+\hline
+\mbox{\texttt{ in}}  & {\em left\+\_\+rot\+\_\+pin} & Пин сервопривода левого переднего колеса робота \\
+\hline
+\mbox{\texttt{ in}}  & {\em right\+\_\+rot\+\_\+pin} & Пин сервопривода правого переднего колеса робота \\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+Перед применением требуется настройка параметров в зависимости от развиваемой скорости. 
+\end{DoxyWarning}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000002}{Todo}}]Необходимо отладить алгоритм. Работает частично. \end{DoxyRefDesc}
+\mbox{\Hypertarget{class_c_drive_control_a2c7473331fe035f183e1a37a9596ec3e}\label{class_c_drive_control_a2c7473331fe035f183e1a37a9596ec3e}} 
+\index{CDriveControl@{CDriveControl}!move\_forward@{move\_forward}}
+\index{move\_forward@{move\_forward}!CDriveControl@{CDriveControl}}
+\doxysubsubsection{\texorpdfstring{move\_forward()}{move\_forward()}}
+{\footnotesize\ttfamily void C\+Drive\+Control\+::move\+\_\+forward (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Ехать прямо вперёд 
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{class_c_drive_control_a2c7473331fe035f183e1a37a9596ec3e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_c_drive_control_a40e71902ba9df0b2120a933f6eecdf6b}\label{class_c_drive_control_a40e71902ba9df0b2120a933f6eecdf6b}} 
+\index{CDriveControl@{CDriveControl}!search\_lines@{search\_lines}}
+\index{search\_lines@{search\_lines}!CDriveControl@{CDriveControl}}
+\doxysubsubsection{\texorpdfstring{search\_lines()}{search\_lines()}}
+{\footnotesize\ttfamily void C\+Drive\+Control\+::search\+\_\+lines (\begin{DoxyParamCaption}\item[{int}]{left\+En,  }\item[{int}]{right\+In }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_c_drive_control_aa270b0d48b9bc76149c5c41db8bf265c}\label{class_c_drive_control_aa270b0d48b9bc76149c5c41db8bf265c}} 
+\index{CDriveControl@{CDriveControl}!turn\_left@{turn\_left}}
+\index{turn\_left@{turn\_left}!CDriveControl@{CDriveControl}}
+\doxysubsubsection{\texorpdfstring{turn\_left()}{turn\_left()}}
+{\footnotesize\ttfamily void C\+Drive\+Control\+::turn\+\_\+left (\begin{DoxyParamCaption}\item[{byte}]{aangle = {\ttfamily TURN\+\_\+DRIVE\+\_\+ANGLE} }\end{DoxyParamCaption})}
+
+Ехать прямо и налево 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em aangle} & угол в градусах, на который поворачивать передние колеса при повороте \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{class_c_drive_control_aa270b0d48b9bc76149c5c41db8bf265c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_c_drive_control_afa9d3a93fbedcdc70915d30e9ac30b38}\label{class_c_drive_control_afa9d3a93fbedcdc70915d30e9ac30b38}} 
+\index{CDriveControl@{CDriveControl}!turn\_right@{turn\_right}}
+\index{turn\_right@{turn\_right}!CDriveControl@{CDriveControl}}
+\doxysubsubsection{\texorpdfstring{turn\_right()}{turn\_right()}}
+{\footnotesize\ttfamily void C\+Drive\+Control\+::turn\+\_\+right (\begin{DoxyParamCaption}\item[{byte}]{aangle = {\ttfamily TURN\+\_\+DRIVE\+\_\+ANGLE} }\end{DoxyParamCaption})}
+
+Ехать прямо и направо 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em aangle} & угол в градусах, на который поворачивать передние колеса при повороте \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=330pt]{class_c_drive_control_afa9d3a93fbedcdc70915d30e9ac30b38_cgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_c_drive_control_8h}{C\+Drive\+Control.\+h}}\item 
+\mbox{\hyperlink{_c_drive_control_8cpp}{C\+Drive\+Control.\+cpp}}\end{DoxyCompactItemize}

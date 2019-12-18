@@ -1,0 +1,10 @@
+<map id="CGearMotor::setSpeed" name="CGearMotor::setSpeed">
+<area shape="rect" id="node1" title=" " alt="" coords="369,162,524,189"/>
+<area shape="rect" id="node2" href="$class_c_drive_control.html#a734ade3f33c34c924c0dc60abe2a08fc" title="Ехать назад" alt="" coords="141,5,280,47"/>
+<area shape="rect" id="node3" href="$class_c_drive_control.html#a2c7473331fe035f183e1a37a9596ec3e" title="Ехать прямо вперёд" alt="" coords="141,71,280,112"/>
+<area shape="rect" id="node4" href="$class_c_tower_control.html#a28ace31ce3c6768182dd7d99ec10695b" title=" " alt="" coords="100,137,321,163"/>
+<area shape="rect" id="node6" href="$robtour19_8ino.html#a4fc01d736fe50cf5b977f755b675f11d" title=" " alt="" coords="183,187,238,214"/>
+<area shape="rect" id="node7" href="$class_c_drive_control.html#aa270b0d48b9bc76149c5c41db8bf265c" title=" " alt="" coords="133,238,288,265"/>
+<area shape="rect" id="node8" href="$class_c_drive_control.html#afa9d3a93fbedcdc70915d30e9ac30b38" title=" " alt="" coords="145,289,276,331"/>
+<area shape="rect" id="node5" href="$robtour19_8ino.html#afe461d27b9c48d5921c00d521181f12f" title=" " alt="" coords="5,137,52,163"/>
+</map>

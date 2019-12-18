@@ -1,0 +1,210 @@
+\hypertarget{_c_drive_control_8h}{}\doxysection{C\+Drive\+Control.\+h File Reference}
+\label{_c_drive_control_8h}\index{CDriveControl.h@{CDriveControl.h}}
+{\ttfamily \#include $<$Arduino.\+h$>$}\newline
+{\ttfamily \#include $<$Servo.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}C\+Drive\+Axis.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}C\+Gear\+Motor.\+h\char`\"{}}\newline
+Include dependency graph for C\+Drive\+Control.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=328pt]{_c_drive_control_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=266pt]{_c_drive_control_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_c_drive_control}{C\+Drive\+Control}}
+\begin{DoxyCompactList}\small\item\em Осуществляет управление движением робота \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_c_drive_control_8h_a446482422e943c5a229f9fbe26e11789}{M\+A\+X\+\_\+\+T\+U\+R\+N\+\_\+\+T\+I\+ME}}~1600
+\item 
+\#define \mbox{\hyperlink{_c_drive_control_8h_a446482422e943c5a229f9fbe26e11789}{M\+A\+X\+\_\+\+T\+U\+R\+N\+\_\+\+T\+I\+ME}}~1800
+\item 
+\#define \mbox{\hyperlink{_c_drive_control_8h_a29816855dd5d88317e619a34cd8a0de9}{M\+I\+N\+\_\+\+T\+U\+R\+N\+\_\+\+T\+I\+ME}}~350
+\item 
+\#define \mbox{\hyperlink{_c_drive_control_8h_ad8867b1db7eb853106f894d83c8ca059}{T\+U\+R\+N\+\_\+\+T\+I\+M\+E\+\_\+\+C\+R\+O\+S\+S\+\_\+\+L\+I\+NE}}~250
+\item 
+\#define \mbox{\hyperlink{_c_drive_control_8h_af0703a9336b9dda0d6fb49473a09bcbe}{D\+I\+R\+E\+C\+T\+I\+N\+G\+\_\+\+T\+U\+RN}}~100
+\item 
+\#define \mbox{\hyperlink{_c_drive_control_8h_a51d59c2f4cb909c27372da9843d49327}{D\+I\+R\+E\+C\+T\+I\+N\+G\+\_\+\+T\+U\+R\+N\+\_\+\+O\+V\+ER}}~101
+\item 
+\#define \mbox{\hyperlink{_c_drive_control_8h_ab194ce36788dd120ad641c7ce4136b52}{C\+O\+U\+N\+T\+I\+N\+G\+\_\+\+B\+L\+A\+C\+K\+\_\+\+L\+I\+N\+ES}}~102
+\item 
+\#define \mbox{\hyperlink{_c_drive_control_8h_a0cbd814a6591fcf658cabf81e0eae3a3}{C\+O\+U\+N\+T\+E\+D\+\_\+\+B\+L\+A\+C\+K\+\_\+\+L\+I\+N\+ES}}~106
+\item 
+\#define \mbox{\hyperlink{_c_drive_control_8h_a9b32dc9d108cf22b2b46e06d7c381803}{F\+I\+N\+A\+L\+\_\+\+T\+U\+R\+N\+\_\+\+S\+T\+A\+RT}}~103
+\item 
+\#define \mbox{\hyperlink{_c_drive_control_8h_afaaee46e8fd3628ed19be8de0bdd0f9f}{F\+I\+N\+A\+L\+\_\+\+T\+U\+RN}}~104
+\item 
+\#define \mbox{\hyperlink{_c_drive_control_8h_a7dacc5510077768604e93e3c3c7f56be}{F\+I\+N\+A\+L\+\_\+\+T\+U\+R\+N\+\_\+\+O\+V\+ER}}~105
+\item 
+\#define \mbox{\hyperlink{_c_drive_control_8h_aac3553b3932cbfeeac4526ce7ca0336b}{S\+P\+E\+ED}}~200
+\item 
+\#define \mbox{\hyperlink{_c_drive_control_8h_afa9188776d909e94ead6cf6ffbbdd1e8}{T\+U\+R\+N\+\_\+\+S\+P\+E\+ED}}~200
+\item 
+\#define \mbox{\hyperlink{_c_drive_control_8h_aff218ed4ea632c9c0a1f4bc3fe63a9a1}{S\+E\+C\+O\+N\+D\+\_\+\+T\+U\+R\+N\+\_\+\+A\+N\+G\+L\+E\+\_\+\+D\+E\+C\+R\+E\+A\+S\+E\+\_\+\+F\+A\+C\+T\+OR}}~1.\+5
+\item 
+\#define \mbox{\hyperlink{_c_drive_control_8h_aff218ed4ea632c9c0a1f4bc3fe63a9a1}{S\+E\+C\+O\+N\+D\+\_\+\+T\+U\+R\+N\+\_\+\+A\+N\+G\+L\+E\+\_\+\+D\+E\+C\+R\+E\+A\+S\+E\+\_\+\+F\+A\+C\+T\+OR}}~2
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726d}{E\+Movement\+Direction}} \{ \newline
+\mbox{\hyperlink{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726da909a94769bd06b574ca53db11fe7f161}{E\+M\+D\+\_\+\+N\+O\+NE}}, 
+\mbox{\hyperlink{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726da55751153bd105ed2d1b8a3dfc8d4ac7d}{E\+M\+D\+\_\+\+F\+O\+R\+W\+A\+RD}}, 
+\mbox{\hyperlink{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726da6878e08fa15ebd3414ef7e0bff92a1e0}{E\+M\+D\+\_\+\+T\+U\+R\+N\+\_\+\+L\+E\+FT}}, 
+\mbox{\hyperlink{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726da68870c492e37cc556d8be8f4a90e20a9}{E\+M\+D\+\_\+\+T\+U\+R\+N\+\_\+\+R\+I\+G\+HT}}, 
+\newline
+\mbox{\hyperlink{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726daee28c5117ad86b6e593cf02700ac97ab}{E\+M\+D\+\_\+\+R\+O\+T\+A\+T\+E\+\_\+\+L\+E\+FT}}, 
+\mbox{\hyperlink{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726dade71c1e1b0f9d1ad4e2662fb46e9eb00}{E\+M\+D\+\_\+\+R\+O\+T\+A\+T\+E\+\_\+\+R\+I\+G\+HT}}, 
+\mbox{\hyperlink{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726da82a4bf099fa7cfc11c7626a2580b79aa}{E\+M\+D\+\_\+\+B\+A\+C\+K\+W\+A\+RD}}, 
+\mbox{\hyperlink{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726dace4a88af5318404f3dc00106e203b620}{E\+M\+D\+\_\+\+S\+T\+OP}}
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_c_drive_control_8h_a0cbd814a6591fcf658cabf81e0eae3a3}\label{_c_drive_control_8h_a0cbd814a6591fcf658cabf81e0eae3a3}} 
+\index{CDriveControl.h@{CDriveControl.h}!COUNTED\_BLACK\_LINES@{COUNTED\_BLACK\_LINES}}
+\index{COUNTED\_BLACK\_LINES@{COUNTED\_BLACK\_LINES}!CDriveControl.h@{CDriveControl.h}}
+\doxysubsubsection{\texorpdfstring{COUNTED\_BLACK\_LINES}{COUNTED\_BLACK\_LINES}}
+{\footnotesize\ttfamily \#define C\+O\+U\+N\+T\+E\+D\+\_\+\+B\+L\+A\+C\+K\+\_\+\+L\+I\+N\+ES~106}
+
+\mbox{\Hypertarget{_c_drive_control_8h_ab194ce36788dd120ad641c7ce4136b52}\label{_c_drive_control_8h_ab194ce36788dd120ad641c7ce4136b52}} 
+\index{CDriveControl.h@{CDriveControl.h}!COUNTING\_BLACK\_LINES@{COUNTING\_BLACK\_LINES}}
+\index{COUNTING\_BLACK\_LINES@{COUNTING\_BLACK\_LINES}!CDriveControl.h@{CDriveControl.h}}
+\doxysubsubsection{\texorpdfstring{COUNTING\_BLACK\_LINES}{COUNTING\_BLACK\_LINES}}
+{\footnotesize\ttfamily \#define C\+O\+U\+N\+T\+I\+N\+G\+\_\+\+B\+L\+A\+C\+K\+\_\+\+L\+I\+N\+ES~102}
+
+\mbox{\Hypertarget{_c_drive_control_8h_af0703a9336b9dda0d6fb49473a09bcbe}\label{_c_drive_control_8h_af0703a9336b9dda0d6fb49473a09bcbe}} 
+\index{CDriveControl.h@{CDriveControl.h}!DIRECTING\_TURN@{DIRECTING\_TURN}}
+\index{DIRECTING\_TURN@{DIRECTING\_TURN}!CDriveControl.h@{CDriveControl.h}}
+\doxysubsubsection{\texorpdfstring{DIRECTING\_TURN}{DIRECTING\_TURN}}
+{\footnotesize\ttfamily \#define D\+I\+R\+E\+C\+T\+I\+N\+G\+\_\+\+T\+U\+RN~100}
+
+\mbox{\Hypertarget{_c_drive_control_8h_a51d59c2f4cb909c27372da9843d49327}\label{_c_drive_control_8h_a51d59c2f4cb909c27372da9843d49327}} 
+\index{CDriveControl.h@{CDriveControl.h}!DIRECTING\_TURN\_OVER@{DIRECTING\_TURN\_OVER}}
+\index{DIRECTING\_TURN\_OVER@{DIRECTING\_TURN\_OVER}!CDriveControl.h@{CDriveControl.h}}
+\doxysubsubsection{\texorpdfstring{DIRECTING\_TURN\_OVER}{DIRECTING\_TURN\_OVER}}
+{\footnotesize\ttfamily \#define D\+I\+R\+E\+C\+T\+I\+N\+G\+\_\+\+T\+U\+R\+N\+\_\+\+O\+V\+ER~101}
+
+\mbox{\Hypertarget{_c_drive_control_8h_afaaee46e8fd3628ed19be8de0bdd0f9f}\label{_c_drive_control_8h_afaaee46e8fd3628ed19be8de0bdd0f9f}} 
+\index{CDriveControl.h@{CDriveControl.h}!FINAL\_TURN@{FINAL\_TURN}}
+\index{FINAL\_TURN@{FINAL\_TURN}!CDriveControl.h@{CDriveControl.h}}
+\doxysubsubsection{\texorpdfstring{FINAL\_TURN}{FINAL\_TURN}}
+{\footnotesize\ttfamily \#define F\+I\+N\+A\+L\+\_\+\+T\+U\+RN~104}
+
+\mbox{\Hypertarget{_c_drive_control_8h_a7dacc5510077768604e93e3c3c7f56be}\label{_c_drive_control_8h_a7dacc5510077768604e93e3c3c7f56be}} 
+\index{CDriveControl.h@{CDriveControl.h}!FINAL\_TURN\_OVER@{FINAL\_TURN\_OVER}}
+\index{FINAL\_TURN\_OVER@{FINAL\_TURN\_OVER}!CDriveControl.h@{CDriveControl.h}}
+\doxysubsubsection{\texorpdfstring{FINAL\_TURN\_OVER}{FINAL\_TURN\_OVER}}
+{\footnotesize\ttfamily \#define F\+I\+N\+A\+L\+\_\+\+T\+U\+R\+N\+\_\+\+O\+V\+ER~105}
+
+\mbox{\Hypertarget{_c_drive_control_8h_a9b32dc9d108cf22b2b46e06d7c381803}\label{_c_drive_control_8h_a9b32dc9d108cf22b2b46e06d7c381803}} 
+\index{CDriveControl.h@{CDriveControl.h}!FINAL\_TURN\_START@{FINAL\_TURN\_START}}
+\index{FINAL\_TURN\_START@{FINAL\_TURN\_START}!CDriveControl.h@{CDriveControl.h}}
+\doxysubsubsection{\texorpdfstring{FINAL\_TURN\_START}{FINAL\_TURN\_START}}
+{\footnotesize\ttfamily \#define F\+I\+N\+A\+L\+\_\+\+T\+U\+R\+N\+\_\+\+S\+T\+A\+RT~103}
+
+\mbox{\Hypertarget{_c_drive_control_8h_a446482422e943c5a229f9fbe26e11789}\label{_c_drive_control_8h_a446482422e943c5a229f9fbe26e11789}} 
+\index{CDriveControl.h@{CDriveControl.h}!MAX\_TURN\_TIME@{MAX\_TURN\_TIME}}
+\index{MAX\_TURN\_TIME@{MAX\_TURN\_TIME}!CDriveControl.h@{CDriveControl.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_TURN\_TIME}{MAX\_TURN\_TIME}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define M\+A\+X\+\_\+\+T\+U\+R\+N\+\_\+\+T\+I\+ME~1600}
+
+\mbox{\Hypertarget{_c_drive_control_8h_a446482422e943c5a229f9fbe26e11789}\label{_c_drive_control_8h_a446482422e943c5a229f9fbe26e11789}} 
+\index{CDriveControl.h@{CDriveControl.h}!MAX\_TURN\_TIME@{MAX\_TURN\_TIME}}
+\index{MAX\_TURN\_TIME@{MAX\_TURN\_TIME}!CDriveControl.h@{CDriveControl.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_TURN\_TIME}{MAX\_TURN\_TIME}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define M\+A\+X\+\_\+\+T\+U\+R\+N\+\_\+\+T\+I\+ME~1800}
+
+\mbox{\Hypertarget{_c_drive_control_8h_a29816855dd5d88317e619a34cd8a0de9}\label{_c_drive_control_8h_a29816855dd5d88317e619a34cd8a0de9}} 
+\index{CDriveControl.h@{CDriveControl.h}!MIN\_TURN\_TIME@{MIN\_TURN\_TIME}}
+\index{MIN\_TURN\_TIME@{MIN\_TURN\_TIME}!CDriveControl.h@{CDriveControl.h}}
+\doxysubsubsection{\texorpdfstring{MIN\_TURN\_TIME}{MIN\_TURN\_TIME}}
+{\footnotesize\ttfamily \#define M\+I\+N\+\_\+\+T\+U\+R\+N\+\_\+\+T\+I\+ME~350}
+
+\mbox{\Hypertarget{_c_drive_control_8h_aff218ed4ea632c9c0a1f4bc3fe63a9a1}\label{_c_drive_control_8h_aff218ed4ea632c9c0a1f4bc3fe63a9a1}} 
+\index{CDriveControl.h@{CDriveControl.h}!SECOND\_TURN\_ANGLE\_DECREASE\_FACTOR@{SECOND\_TURN\_ANGLE\_DECREASE\_FACTOR}}
+\index{SECOND\_TURN\_ANGLE\_DECREASE\_FACTOR@{SECOND\_TURN\_ANGLE\_DECREASE\_FACTOR}!CDriveControl.h@{CDriveControl.h}}
+\doxysubsubsection{\texorpdfstring{SECOND\_TURN\_ANGLE\_DECREASE\_FACTOR}{SECOND\_TURN\_ANGLE\_DECREASE\_FACTOR}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \#define S\+E\+C\+O\+N\+D\+\_\+\+T\+U\+R\+N\+\_\+\+A\+N\+G\+L\+E\+\_\+\+D\+E\+C\+R\+E\+A\+S\+E\+\_\+\+F\+A\+C\+T\+OR~1.\+5}
+
+\mbox{\Hypertarget{_c_drive_control_8h_aff218ed4ea632c9c0a1f4bc3fe63a9a1}\label{_c_drive_control_8h_aff218ed4ea632c9c0a1f4bc3fe63a9a1}} 
+\index{CDriveControl.h@{CDriveControl.h}!SECOND\_TURN\_ANGLE\_DECREASE\_FACTOR@{SECOND\_TURN\_ANGLE\_DECREASE\_FACTOR}}
+\index{SECOND\_TURN\_ANGLE\_DECREASE\_FACTOR@{SECOND\_TURN\_ANGLE\_DECREASE\_FACTOR}!CDriveControl.h@{CDriveControl.h}}
+\doxysubsubsection{\texorpdfstring{SECOND\_TURN\_ANGLE\_DECREASE\_FACTOR}{SECOND\_TURN\_ANGLE\_DECREASE\_FACTOR}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \#define S\+E\+C\+O\+N\+D\+\_\+\+T\+U\+R\+N\+\_\+\+A\+N\+G\+L\+E\+\_\+\+D\+E\+C\+R\+E\+A\+S\+E\+\_\+\+F\+A\+C\+T\+OR~2}
+
+\mbox{\Hypertarget{_c_drive_control_8h_aac3553b3932cbfeeac4526ce7ca0336b}\label{_c_drive_control_8h_aac3553b3932cbfeeac4526ce7ca0336b}} 
+\index{CDriveControl.h@{CDriveControl.h}!SPEED@{SPEED}}
+\index{SPEED@{SPEED}!CDriveControl.h@{CDriveControl.h}}
+\doxysubsubsection{\texorpdfstring{SPEED}{SPEED}}
+{\footnotesize\ttfamily \#define S\+P\+E\+ED~200}
+
+\mbox{\Hypertarget{_c_drive_control_8h_afa9188776d909e94ead6cf6ffbbdd1e8}\label{_c_drive_control_8h_afa9188776d909e94ead6cf6ffbbdd1e8}} 
+\index{CDriveControl.h@{CDriveControl.h}!TURN\_SPEED@{TURN\_SPEED}}
+\index{TURN\_SPEED@{TURN\_SPEED}!CDriveControl.h@{CDriveControl.h}}
+\doxysubsubsection{\texorpdfstring{TURN\_SPEED}{TURN\_SPEED}}
+{\footnotesize\ttfamily \#define T\+U\+R\+N\+\_\+\+S\+P\+E\+ED~200}
+
+\mbox{\Hypertarget{_c_drive_control_8h_ad8867b1db7eb853106f894d83c8ca059}\label{_c_drive_control_8h_ad8867b1db7eb853106f894d83c8ca059}} 
+\index{CDriveControl.h@{CDriveControl.h}!TURN\_TIME\_CROSS\_LINE@{TURN\_TIME\_CROSS\_LINE}}
+\index{TURN\_TIME\_CROSS\_LINE@{TURN\_TIME\_CROSS\_LINE}!CDriveControl.h@{CDriveControl.h}}
+\doxysubsubsection{\texorpdfstring{TURN\_TIME\_CROSS\_LINE}{TURN\_TIME\_CROSS\_LINE}}
+{\footnotesize\ttfamily \#define T\+U\+R\+N\+\_\+\+T\+I\+M\+E\+\_\+\+C\+R\+O\+S\+S\+\_\+\+L\+I\+NE~250}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726d}\label{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726d}} 
+\index{CDriveControl.h@{CDriveControl.h}!EMovementDirection@{EMovementDirection}}
+\index{EMovementDirection@{EMovementDirection}!CDriveControl.h@{CDriveControl.h}}
+\doxysubsubsection{\texorpdfstring{EMovementDirection}{EMovementDirection}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726d}{E\+Movement\+Direction}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EMD\_NONE@{EMD\_NONE}!CDriveControl.h@{CDriveControl.h}}\index{CDriveControl.h@{CDriveControl.h}!EMD\_NONE@{EMD\_NONE}}}\mbox{\Hypertarget{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726da909a94769bd06b574ca53db11fe7f161}\label{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726da909a94769bd06b574ca53db11fe7f161}} 
+E\+M\+D\+\_\+\+N\+O\+NE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EMD\_FORWARD@{EMD\_FORWARD}!CDriveControl.h@{CDriveControl.h}}\index{CDriveControl.h@{CDriveControl.h}!EMD\_FORWARD@{EMD\_FORWARD}}}\mbox{\Hypertarget{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726da55751153bd105ed2d1b8a3dfc8d4ac7d}\label{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726da55751153bd105ed2d1b8a3dfc8d4ac7d}} 
+E\+M\+D\+\_\+\+F\+O\+R\+W\+A\+RD&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EMD\_TURN\_LEFT@{EMD\_TURN\_LEFT}!CDriveControl.h@{CDriveControl.h}}\index{CDriveControl.h@{CDriveControl.h}!EMD\_TURN\_LEFT@{EMD\_TURN\_LEFT}}}\mbox{\Hypertarget{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726da6878e08fa15ebd3414ef7e0bff92a1e0}\label{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726da6878e08fa15ebd3414ef7e0bff92a1e0}} 
+E\+M\+D\+\_\+\+T\+U\+R\+N\+\_\+\+L\+E\+FT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EMD\_TURN\_RIGHT@{EMD\_TURN\_RIGHT}!CDriveControl.h@{CDriveControl.h}}\index{CDriveControl.h@{CDriveControl.h}!EMD\_TURN\_RIGHT@{EMD\_TURN\_RIGHT}}}\mbox{\Hypertarget{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726da68870c492e37cc556d8be8f4a90e20a9}\label{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726da68870c492e37cc556d8be8f4a90e20a9}} 
+E\+M\+D\+\_\+\+T\+U\+R\+N\+\_\+\+R\+I\+G\+HT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EMD\_ROTATE\_LEFT@{EMD\_ROTATE\_LEFT}!CDriveControl.h@{CDriveControl.h}}\index{CDriveControl.h@{CDriveControl.h}!EMD\_ROTATE\_LEFT@{EMD\_ROTATE\_LEFT}}}\mbox{\Hypertarget{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726daee28c5117ad86b6e593cf02700ac97ab}\label{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726daee28c5117ad86b6e593cf02700ac97ab}} 
+E\+M\+D\+\_\+\+R\+O\+T\+A\+T\+E\+\_\+\+L\+E\+FT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EMD\_ROTATE\_RIGHT@{EMD\_ROTATE\_RIGHT}!CDriveControl.h@{CDriveControl.h}}\index{CDriveControl.h@{CDriveControl.h}!EMD\_ROTATE\_RIGHT@{EMD\_ROTATE\_RIGHT}}}\mbox{\Hypertarget{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726dade71c1e1b0f9d1ad4e2662fb46e9eb00}\label{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726dade71c1e1b0f9d1ad4e2662fb46e9eb00}} 
+E\+M\+D\+\_\+\+R\+O\+T\+A\+T\+E\+\_\+\+R\+I\+G\+HT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EMD\_BACKWARD@{EMD\_BACKWARD}!CDriveControl.h@{CDriveControl.h}}\index{CDriveControl.h@{CDriveControl.h}!EMD\_BACKWARD@{EMD\_BACKWARD}}}\mbox{\Hypertarget{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726da82a4bf099fa7cfc11c7626a2580b79aa}\label{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726da82a4bf099fa7cfc11c7626a2580b79aa}} 
+E\+M\+D\+\_\+\+B\+A\+C\+K\+W\+A\+RD&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EMD\_STOP@{EMD\_STOP}!CDriveControl.h@{CDriveControl.h}}\index{CDriveControl.h@{CDriveControl.h}!EMD\_STOP@{EMD\_STOP}}}\mbox{\Hypertarget{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726dace4a88af5318404f3dc00106e203b620}\label{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726dace4a88af5318404f3dc00106e203b620}} 
+E\+M\+D\+\_\+\+S\+T\+OP&\\
+\hline
+
+\end{DoxyEnumFields}

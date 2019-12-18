@@ -1,0 +1,119 @@
+\hypertarget{class_c_color_tracker}{}\doxysection{C\+Color\+Tracker Class Reference}
+\label{class_c_color_tracker}\index{CColorTracker@{CColorTracker}}
+
+
+Класс работы с датчиком цвета на T\+C\+S3200.  
+
+
+
+
+{\ttfamily \#include $<$C\+Color\+Tracker.\+h$>$}
+
+
+
+Collaboration diagram for C\+Color\+Tracker\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=192pt]{class_c_color_tracker__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_c_color_tracker_a781cbd13c30e25d1bb8fb8a216e6f4cd}{C\+Color\+Tracker}} ()
+\item 
+\mbox{\hyperlink{class_c_color_tracker_a7bce45d9e06b4d261f1ae49c195c178a}{C\+Color\+Tracker}} (byte s0, byte s1, byte s2, byte s3, byte out)
+\item 
+void \mbox{\hyperlink{class_c_color_tracker_a076c0d338bcd2788f5c00f51b1c4be7c}{Calibrate}} (\mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2f}{E\+Defined\+Color}} color)
+\item 
+void \mbox{\hyperlink{class_c_color_tracker_aaa0a3cbb152608122ab2131d70492cde}{Define\+Color\+Now}} (\mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2f}{E\+Defined\+Color}} A\+Color)
+\item 
+\mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2f}{E\+Defined\+Color}} \mbox{\hyperlink{class_c_color_tracker_a750fa7e7395d9736fab696363ce0323a}{Get\+Color}} (\mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2f}{E\+Defined\+Color}} color)
+\item 
+\mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2f}{E\+Defined\+Color}} \mbox{\hyperlink{class_c_color_tracker_a30ac72131bdec5d8dfb44b8cd3e247f5}{Define\+Start\+Field}} ()
+\item 
+void \mbox{\hyperlink{class_c_color_tracker_acb14a498a47f13108169d49fe7204b8f}{Process\+Command}} (const int cmd)
+\item 
+void \mbox{\hyperlink{class_c_color_tracker_ad796ef69d1faae211dd2a116f8f45f58}{Clear}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс работы с датчиком цвета на T\+C\+S3200. 
+
+Отвечает за определение поля (1 или 2(!)) -\/ распознавание цвета на старте, определение достижения синей полосы и зоны финиша (зеленого цвета) \begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000001}{Todo}}]Диапазон чувствительности у разных цветов датчика может быть разным, поэтому стоит их привести к общему знаменателю\+: green\+Color = map(green\+Frequency, 100, 199, 255, 0); \end{DoxyRefDesc}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_c_color_tracker_a781cbd13c30e25d1bb8fb8a216e6f4cd}\label{class_c_color_tracker_a781cbd13c30e25d1bb8fb8a216e6f4cd}} 
+\index{CColorTracker@{CColorTracker}!CColorTracker@{CColorTracker}}
+\index{CColorTracker@{CColorTracker}!CColorTracker@{CColorTracker}}
+\doxysubsubsection{\texorpdfstring{CColorTracker()}{CColorTracker()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily C\+Color\+Tracker\+::\+C\+Color\+Tracker (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_c_color_tracker_a7bce45d9e06b4d261f1ae49c195c178a}\label{class_c_color_tracker_a7bce45d9e06b4d261f1ae49c195c178a}} 
+\index{CColorTracker@{CColorTracker}!CColorTracker@{CColorTracker}}
+\index{CColorTracker@{CColorTracker}!CColorTracker@{CColorTracker}}
+\doxysubsubsection{\texorpdfstring{CColorTracker()}{CColorTracker()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily C\+Color\+Tracker\+::\+C\+Color\+Tracker (\begin{DoxyParamCaption}\item[{byte}]{s0,  }\item[{byte}]{s1,  }\item[{byte}]{s2,  }\item[{byte}]{s3,  }\item[{byte}]{out }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_c_color_tracker_a076c0d338bcd2788f5c00f51b1c4be7c}\label{class_c_color_tracker_a076c0d338bcd2788f5c00f51b1c4be7c}} 
+\index{CColorTracker@{CColorTracker}!Calibrate@{Calibrate}}
+\index{Calibrate@{Calibrate}!CColorTracker@{CColorTracker}}
+\doxysubsubsection{\texorpdfstring{Calibrate()}{Calibrate()}}
+{\footnotesize\ttfamily void C\+Color\+Tracker\+::\+Calibrate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2f}{E\+Defined\+Color}}}]{color }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+% FIG 0
+\mbox{\Hypertarget{class_c_color_tracker_ad796ef69d1faae211dd2a116f8f45f58}\label{class_c_color_tracker_ad796ef69d1faae211dd2a116f8f45f58}} 
+\index{CColorTracker@{CColorTracker}!Clear@{Clear}}
+\index{Clear@{Clear}!CColorTracker@{CColorTracker}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily void C\+Color\+Tracker\+::\+Clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+% FIG 1
+\mbox{\Hypertarget{class_c_color_tracker_aaa0a3cbb152608122ab2131d70492cde}\label{class_c_color_tracker_aaa0a3cbb152608122ab2131d70492cde}} 
+\index{CColorTracker@{CColorTracker}!DefineColorNow@{DefineColorNow}}
+\index{DefineColorNow@{DefineColorNow}!CColorTracker@{CColorTracker}}
+\doxysubsubsection{\texorpdfstring{DefineColorNow()}{DefineColorNow()}}
+{\footnotesize\ttfamily void C\+Color\+Tracker\+::\+Define\+Color\+Now (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2f}{E\+Defined\+Color}}}]{A\+Color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_c_color_tracker_a30ac72131bdec5d8dfb44b8cd3e247f5}\label{class_c_color_tracker_a30ac72131bdec5d8dfb44b8cd3e247f5}} 
+\index{CColorTracker@{CColorTracker}!DefineStartField@{DefineStartField}}
+\index{DefineStartField@{DefineStartField}!CColorTracker@{CColorTracker}}
+\doxysubsubsection{\texorpdfstring{DefineStartField()}{DefineStartField()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2f}{E\+Defined\+Color}} C\+Color\+Tracker\+::\+Define\+Start\+Field (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_c_color_tracker_a750fa7e7395d9736fab696363ce0323a}\label{class_c_color_tracker_a750fa7e7395d9736fab696363ce0323a}} 
+\index{CColorTracker@{CColorTracker}!GetColor@{GetColor}}
+\index{GetColor@{GetColor}!CColorTracker@{CColorTracker}}
+\doxysubsubsection{\texorpdfstring{GetColor()}{GetColor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2f}{E\+Defined\+Color}} C\+Color\+Tracker\+::\+Get\+Color (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2f}{E\+Defined\+Color}}}]{color }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_c_color_tracker_acb14a498a47f13108169d49fe7204b8f}\label{class_c_color_tracker_acb14a498a47f13108169d49fe7204b8f}} 
+\index{CColorTracker@{CColorTracker}!ProcessCommand@{ProcessCommand}}
+\index{ProcessCommand@{ProcessCommand}!CColorTracker@{CColorTracker}}
+\doxysubsubsection{\texorpdfstring{ProcessCommand()}{ProcessCommand()}}
+{\footnotesize\ttfamily void C\+Color\+Tracker\+::\+Process\+Command (\begin{DoxyParamCaption}\item[{const int}]{cmd }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_c_color_tracker_acb14a498a47f13108169d49fe7204b8f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+% FIG 2
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_c_color_tracker_8h}{C\+Color\+Tracker.\+h}}\item 
+\mbox{\hyperlink{_c_color_tracker_8cpp}{C\+Color\+Tracker.\+cpp}}\end{DoxyCompactItemize}

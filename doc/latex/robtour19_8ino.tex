@@ -1,0 +1,491 @@
+\hypertarget{robtour19_8ino}{}\doxysection{robtour19.\+ino File Reference}
+\label{robtour19_8ino}\index{robtour19.ino@{robtour19.ino}}
+{\ttfamily \#include \char`\"{}C\+Color\+Tracker.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}C\+Drive\+Control.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}C\+Gear\+Motor.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}C\+Hamming\+Code.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}C\+Tower\+Control.\+h\char`\"{}}\newline
+Include dependency graph for robtour19.\+ino\+:
+% FIG 0
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{robtour19_8ino_abe82ea9f1de5ed9e20c876f0bbd665f4}{B\+T\+N\+\_\+\+T\+I\+ME}}~1000
+\item 
+\#define \mbox{\hyperlink{robtour19_8ino_a32ad276466ca6067d282cd06eb36cc3b}{L\+F\+\_\+\+S\+E\+N\+S\+O\+R\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD}}~900
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65}{E\+Task\+Phase}} \{ \newline
+\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65aa1079d6e9855962b3f8751bd73b870e5}{E\+T\+P\+\_\+\+R\+E\+A\+DY}}, 
+\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a916151560f6a85404cb8e61daa3c5118}{E\+T\+P\+\_\+\+S\+T\+A\+R\+T\+\_\+\+F\+I\+E\+LD}}, 
+\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65acef8195e02507e12addaf856016c5ecd}{E\+T\+P\+\_\+\+M\+O\+V\+I\+N\+G\+\_\+\+T\+O\+\_\+\+B\+L\+A\+C\+K\+\_\+\+L\+I\+N\+E\+\_\+\+O\+F\+\_\+\+N\+E\+X\+T\+\_\+\+C\+O\+IN}}, 
+\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65aee1e5ea08d4bcf7830aff144769b48ec}{E\+T\+P\+\_\+\+M\+O\+V\+I\+N\+G\+\_\+\+A\+L\+O\+N\+G\+\_\+\+B\+L\+A\+C\+K\+\_\+\+L\+I\+N\+E\+\_\+\+T\+O\+\_\+\+N\+E\+X\+T\+\_\+\+C\+O\+IN}}, 
+\newline
+\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a67d28f471de5fa89d6f5dcdba0062bfc}{E\+T\+P\+\_\+\+C\+O\+I\+N\+S\+\_\+\+L\+I\+FT}}, 
+\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a3ee3055bdebf5ff102a4b0d579fe2f79}{E\+T\+P\+\_\+\+F\+I\+N\+I\+S\+H\+\_\+\+F\+I\+E\+LD}}
+ \}
+\item 
+enum \mbox{\hyperlink{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3d}{E\+Coins\+Manipulation\+Phase}} \{ \newline
+\mbox{\hyperlink{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3daad8ae154d83c23145d6e6e232442b448}{E\+C\+M\+P\+\_\+\+C\+O\+L\+L\+E\+C\+T\+I\+NG}}, 
+\mbox{\hyperlink{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3da5a0e76189608000817bf2c00394e99b1}{E\+C\+M\+P\+\_\+\+G\+R\+I\+P\+P\+I\+NG}}, 
+\mbox{\hyperlink{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3da91928c782f78c8740dfdb23f2fc26692}{E\+C\+M\+P\+\_\+\+L\+I\+F\+T\+I\+NG}}, 
+\mbox{\hyperlink{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3daa6fe9451ad4285a2e4a61e0cca4259bc}{E\+C\+M\+P\+\_\+\+T\+O\+W\+E\+R\+\_\+\+T\+I\+LT}}, 
+\newline
+\mbox{\hyperlink{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3dacfdd81e6efdbe654e4683aaa4882e16f}{E\+C\+M\+P\+\_\+\+C\+O\+M\+P\+L\+E\+T\+ED}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{robtour19_8ino_a4fc01d736fe50cf5b977f755b675f11d}{setup}} ()
+\item 
+void \mbox{\hyperlink{robtour19_8ino_afe461d27b9c48d5921c00d521181f12f}{loop}} ()
+\item 
+$<$$<$$<$$<$$<$$<$$<$ Updated upstream=======$<$$<$$<$$<$$<$$<$$<$ Updated upstream=======$>$$>$$>$$>$$>$$>$$>$ Stashed changes void collect\+\_\+coins() \{ if(\mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}}==\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65aa1079d6e9855962b3f8751bd73b870e5}{E\+T\+P\+\_\+\+R\+E\+A\+DY}}) \{$<$$<$$<$$<$$<$$<$$<$ Updated upstream uint8\+\_\+t correct\+\_\+data\mbox{[}$\,$\mbox{]}=\{1, 2, 4, 6, 1, 2, 4, 6\};=======uint8\+\_\+t correct\+\_\+data\mbox{[}$\,$\mbox{]}=\{1, 2, 3, 5, 1, 2, 3, 5\};$>$$>$$>$$>$$>$$>$$>$ Stashed changes \mbox{\hyperlink{robtour19_8ino_ac4c07fd651266fdde6b8517777b89175}{data\+\_\+is\+\_\+read}}=true;if(\mbox{\hyperlink{robtour19_8ino_ac4c07fd651266fdde6b8517777b89175}{data\+\_\+is\+\_\+read}}==false) \{ \mbox{\hyperlink{robtour19_8ino_ac4c07fd651266fdde6b8517777b89175}{data\+\_\+is\+\_\+read}}=Hamming\+Code.\+Receive\+Data(correct\+\_\+data);\} if(\mbox{\hyperlink{robtour19_8ino_ac4c07fd651266fdde6b8517777b89175}{data\+\_\+is\+\_\+read}}==true \&\&\mbox{\hyperlink{robtour19_8ino_abe4d0487b2ac337eed8caeb05a98d857}{is\+\_\+setup}}==false) \{ Serial.\+print(\char`\"{}IR Received data\+:\char`\"{});for(int i=0;i$<$ 8;i++) \{ Serial.\+print(\char`\"{} \char`\"{});Serial.\+print(correct\+\_\+data\mbox{[}i\mbox{]});\} Serial.\+println();Serial.\+println(\char`\"{}R\+E\+AD IR R\+E\+M\+O\+TE D\+A\+TA\char`\"{});E\+Defined\+Color color=Color\+Tracker.\+Define\+Start\+Field();if(color==\mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2fa64fe66433afa438ddab5c6669263aee4}{E\+D\+C\+\_\+\+Y\+E\+L\+L\+OW}}) \{ Serial.\+println(\char`\"{}Y\+E\+L\+L\+OW start field\char`\"{});for(int i=0;i$<$ 4;i++) \{ \mbox{\hyperlink{robtour19_8ino_a07c8659a288fc57eda074fc72c74f045}{Coins\+Pos}}\mbox{[}i\mbox{]}=correct\+\_\+data\mbox{[}i\mbox{]};Serial.\+print(\mbox{\hyperlink{robtour19_8ino_a07c8659a288fc57eda074fc72c74f045}{Coins\+Pos}}\mbox{[}i\mbox{]});Serial.\+print(\char`\"{}\textbackslash{}t\char`\"{});\} Serial.\+println();\} else if(color==\mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2fa9bc731be8eb72894439dcbb6cd47057c}{E\+D\+C\+\_\+\+R\+ED}}) \{ Serial.\+println(\char`\"{}R\+ED start field\char`\"{});for(int i=0;i$<$ 4;i++) \{ \mbox{\hyperlink{robtour19_8ino_a07c8659a288fc57eda074fc72c74f045}{Coins\+Pos}}\mbox{[}i\mbox{]}=correct\+\_\+data\mbox{[}i+4\mbox{]};Serial.\+print(\mbox{\hyperlink{robtour19_8ino_a07c8659a288fc57eda074fc72c74f045}{Coins\+Pos}}\mbox{[}i\mbox{]});Serial.\+print(\char`\"{}\textbackslash{}t\char`\"{});\} Serial.\+println();\} else \{ Serial.\+print(\char`\"{}got color \char`\"{});Serial.\+println(color);\} Serial.\+println();\mbox{\hyperlink{robtour19_8ino_a07c8659a288fc57eda074fc72c74f045}{Coins\+Pos}}\mbox{[}4\mbox{]}=5;\mbox{\hyperlink{robtour19_8ino_abe4d0487b2ac337eed8caeb05a98d857}{is\+\_\+setup}}=true;\} if(digital\+Read(3)==L\+OW)\{ delay(\mbox{\hyperlink{robtour19_8ino_abe82ea9f1de5ed9e20c876f0bbd665f4}{B\+T\+N\+\_\+\+T\+I\+ME}});\mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}}=\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a916151560f6a85404cb8e61daa3c5118}{E\+T\+P\+\_\+\+S\+T\+A\+R\+T\+\_\+\+F\+I\+E\+LD}};Serial.\+println(\char`\"{}S\+T\+A\+RT\char`\"{});\} return;\} else if(\mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}}==\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a916151560f6a85404cb8e61daa3c5118}{E\+T\+P\+\_\+\+S\+T\+A\+R\+T\+\_\+\+F\+I\+E\+LD}}) \{ Drive\+Control.\+move\+\_\+counting\+\_\+lines(\mbox{\hyperlink{robtour19_8ino_a07c8659a288fc57eda074fc72c74f045}{Coins\+Pos}}\mbox{[}\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}}+1\mbox{]} -\/ \mbox{\hyperlink{robtour19_8ino_a07c8659a288fc57eda074fc72c74f045}{Coins\+Pos}}\mbox{[}\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}}\mbox{]});\mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}}=\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65acef8195e02507e12addaf856016c5ecd}{E\+T\+P\+\_\+\+M\+O\+V\+I\+N\+G\+\_\+\+T\+O\+\_\+\+B\+L\+A\+C\+K\+\_\+\+L\+I\+N\+E\+\_\+\+O\+F\+\_\+\+N\+E\+X\+T\+\_\+\+C\+O\+IN}};return;\} else if(\mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}}==\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65acef8195e02507e12addaf856016c5ecd}{E\+T\+P\+\_\+\+M\+O\+V\+I\+N\+G\+\_\+\+T\+O\+\_\+\+B\+L\+A\+C\+K\+\_\+\+L\+I\+N\+E\+\_\+\+O\+F\+\_\+\+N\+E\+X\+T\+\_\+\+C\+O\+IN}}) \{ int left\+LF=digital\+Read(\mbox{\hyperlink{robtour19_8ino_ac3d05ac0995a38475e2e3230364f5d8b}{left\+\_\+line\+\_\+follower\+\_\+pin}});int right\+LF=analog\+Read(\mbox{\hyperlink{robtour19_8ino_a1469b774c2cf6fb92c967f9b78de7eba}{right\+\_\+line\+\_\+follower\+\_\+pin}});if(right\+LF $>$ \mbox{\hyperlink{robtour19_8ino_a32ad276466ca6067d282cd06eb36cc3b}{L\+F\+\_\+\+S\+E\+N\+S\+O\+R\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD}}) right\+LF=H\+I\+GH;else right\+LF=L\+OW;int dc\+\_\+result=\mbox{\hyperlink{robtour19_8ino_afe461d27b9c48d5921c00d521181f12f}{Drive\+Control.\+loop}}(left\+LF, right\+LF);if(\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}} $>$ 2 \&\&dc\+\_\+result==\mbox{\hyperlink{_c_drive_control_8h_a0cbd814a6591fcf658cabf81e0eae3a3}{C\+O\+U\+N\+T\+E\+D\+\_\+\+B\+L\+A\+C\+K\+\_\+\+L\+I\+N\+ES}}) \{ delay(100);Serial.\+println(\char`\"{}C\+O\+U\+NT all black lines and DO D\+E\+L\+AY 100\char`\"{});\} if(dc\+\_\+result==\mbox{\hyperlink{_c_drive_control_8h_a7dacc5510077768604e93e3c3c7f56be}{F\+I\+N\+A\+L\+\_\+\+T\+U\+R\+N\+\_\+\+O\+V\+ER}}) \{ Serial.\+println(\char`\"{}Got \mbox{\hyperlink{_c_drive_control_8h_a7dacc5510077768604e93e3c3c7f56be}{F\+I\+N\+A\+L\+\_\+\+T\+U\+R\+N\+\_\+\+O\+V\+ER}} return code\char`\"{});Task\+Phase=\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65aee1e5ea08d4bcf7830aff144769b48ec}{E\+T\+P\+\_\+\+M\+O\+V\+I\+N\+G\+\_\+\+A\+L\+O\+N\+G\+\_\+\+B\+L\+A\+C\+K\+\_\+\+L\+I\+N\+E\+\_\+\+T\+O\+\_\+\+N\+E\+X\+T\+\_\+\+C\+O\+IN}};move\+\_\+by\+\_\+line();\} else if(\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}} $>$ 0 \&\&dc\+\_\+result==\mbox{\hyperlink{_c_drive_control_8h_afaaee46e8fd3628ed19be8de0bdd0f9f}{F\+I\+N\+A\+L\+\_\+\+T\+U\+RN}} \&\&(Color\+Tracker.\+Get\+Color(\mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2faea86a53b84e879b3827626d006305804}{E\+D\+C\+\_\+\+B\+L\+UE}})==\mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2faea86a53b84e879b3827626d006305804}{E\+D\+C\+\_\+\+B\+L\+UE}})) \{ Serial.\+println(\char`\"{}while final turn G\+OT B\+L\+UE L\+I\+NE\char`\"{});Serial.\+print(\char`\"{}R\+E\+A\+CH B\+L\+UE \char`\"{});Serial.\+print(\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}}+1);Serial.\+println();Color\+Tracker.\+Clear();\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}}++;\mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}}=\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a916151560f6a85404cb8e61daa3c5118}{E\+T\+P\+\_\+\+S\+T\+A\+R\+T\+\_\+\+F\+I\+E\+LD}};if(\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}}==3) \{ Serial.\+println(\char`\"{}G\+OT A\+LL C\+O\+I\+NS\char`\"{});Drive\+Axis-\/$>$stop();delay(500);Tower\+Control.\+Start();\mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}}=\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a67d28f471de5fa89d6f5dcdba0062bfc}{E\+T\+P\+\_\+\+C\+O\+I\+N\+S\+\_\+\+L\+I\+FT}};\} \} return;\} else if(\mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}}==\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65aee1e5ea08d4bcf7830aff144769b48ec}{E\+T\+P\+\_\+\+M\+O\+V\+I\+N\+G\+\_\+\+A\+L\+O\+N\+G\+\_\+\+B\+L\+A\+C\+K\+\_\+\+L\+I\+N\+E\+\_\+\+T\+O\+\_\+\+N\+E\+X\+T\+\_\+\+C\+O\+IN}}) \{ move\+\_\+by\+\_\+line();if(\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}}==3) Drive\+Axis-\/$>$stop();if((\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}}$<$ 3) \&\&(Color\+Tracker.\+Get\+Color(\mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2faea86a53b84e879b3827626d006305804}{E\+D\+C\+\_\+\+B\+L\+UE}})==\mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2faea86a53b84e879b3827626d006305804}{E\+D\+C\+\_\+\+B\+L\+UE}})) \{ Serial.\+print(\char`\"{}R\+E\+A\+CH B\+L\+UE \char`\"{});Serial.\+print(\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}});Serial.\+println();Color\+Tracker.\+Clear();\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}}++;\mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}}=\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a916151560f6a85404cb8e61daa3c5118}{E\+T\+P\+\_\+\+S\+T\+A\+R\+T\+\_\+\+F\+I\+E\+LD}};if(\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}}==3) \{ Serial.\+println(\char`\"{}G\+OT A\+LL C\+O\+I\+NS\char`\"{});delay(100);Drive\+Axis-\/$>$stop();delay(500);Tower\+Control.\+Start();\mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}}=\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a67d28f471de5fa89d6f5dcdba0062bfc}{E\+T\+P\+\_\+\+C\+O\+I\+N\+S\+\_\+\+L\+I\+FT}};\} \} else if((\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}} $>$=3) \&\&(Color\+Tracker.\+Get\+Color(\mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2fa0e412313c37caab32d752c38dc451a37}{E\+D\+C\+\_\+\+G\+R\+E\+EN}})==\mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2fa0e412313c37caab32d752c38dc451a37}{E\+D\+C\+\_\+\+G\+R\+E\+EN}})) \{ Serial.\+println(\char`\"{}F\+I\+N\+I\+SH\char`\"{});Task\+Phase=\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a3ee3055bdebf5ff102a4b0d579fe2f79}{E\+T\+P\+\_\+\+F\+I\+N\+I\+S\+H\+\_\+\+F\+I\+E\+LD}};\} return;\} else if(\mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}}==\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a67d28f471de5fa89d6f5dcdba0062bfc}{E\+T\+P\+\_\+\+C\+O\+I\+N\+S\+\_\+\+L\+I\+FT}}) \{ if(Tower\+Control.\+Loop()==1) \{ \mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}}=\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a916151560f6a85404cb8e61daa3c5118}{E\+T\+P\+\_\+\+S\+T\+A\+R\+T\+\_\+\+F\+I\+E\+LD}};Serial.\+println(\char`\"{}G\+OT A\+LL C\+O\+I\+NS A\+ND C\+O\+I\+NS A\+RE R\+E\+A\+DY F\+OR T\+A\+R\+G\+ET\char`\"{});\} \} else if(\mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}}==\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a3ee3055bdebf5ff102a4b0d579fe2f79}{E\+T\+P\+\_\+\+F\+I\+N\+I\+S\+H\+\_\+\+F\+I\+E\+LD}}) \{ delay(1000);Drive\+Axis-\/$>$stop();return;\} \}$<$$<$$<$$<$$<$$<$$<$ Updated upstream=======$>$$>$$>$$>$$>$$>$$>$ Stashed changes $>$$>$ Stashed changes void \mbox{\hyperlink{robtour19_8ino_a7be6ce9f7e4e25f919238c8951d1f85c}{move\+\_\+by\+\_\+line}} ()
+\item 
+void \mbox{\hyperlink{robtour19_8ino_a97cbda62853f83d2b66ced0b97c83940}{testing\+\_\+movement}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3d}{E\+Coins\+Manipulation\+Phase}} \mbox{\hyperlink{robtour19_8ino_a7046612bd9ca79da3d5f228c1d637310}{coins\+\_\+manipulation\+\_\+phase}}
+\item 
+const byte \mbox{\hyperlink{robtour19_8ino_a8acc87e7a9f2585e725114c117557745}{start\+\_\+button\+\_\+pin}} = A7
+\item 
+const byte \mbox{\hyperlink{robtour19_8ino_ac3d05ac0995a38475e2e3230364f5d8b}{left\+\_\+line\+\_\+follower\+\_\+pin}} = A1
+\item 
+const byte \mbox{\hyperlink{robtour19_8ino_a1469b774c2cf6fb92c967f9b78de7eba}{right\+\_\+line\+\_\+follower\+\_\+pin}} = A6
+\item 
+const byte \mbox{\hyperlink{robtour19_8ino_a3714c18e6493a568961f125da447f738}{S0}} = 16
+\item 
+const byte \mbox{\hyperlink{robtour19_8ino_a04aea3b8b1cf539a469966f30ff3a602}{S1}} = 18
+\item 
+const byte \mbox{\hyperlink{robtour19_8ino_ad4a502f27e2270723a557ab17de16fe2}{S2}} = 19
+\item 
+const byte \mbox{\hyperlink{robtour19_8ino_ac0bb270c5fc1811813212dbd97f6d1c8}{S3}} = 17
+\item 
+const byte \mbox{\hyperlink{robtour19_8ino_a7a2fed841f28b51cd487a2c605d828b3}{color\+\_\+out}} = 10
+\item 
+const byte \mbox{\hyperlink{robtour19_8ino_a68e74db24d99021e3c6e62101bec55bb}{servo\+\_\+rotate\+\_\+right\+\_\+wheel}} = 2
+\item 
+const byte \mbox{\hyperlink{robtour19_8ino_a699905de7ab081ac0982a13b75065cd9}{servo\+\_\+gripper\+\_\+pin}} = A0
+\item 
+const byte \mbox{\hyperlink{robtour19_8ino_ae5aa0c43121069760e67a314e96075d6}{servo\+\_\+rope\+\_\+tension\+\_\+pin}} = 123
+\item 
+const byte \mbox{\hyperlink{robtour19_8ino_a1882d68acccb4f35bf7575e750b38411}{servo\+\_\+tower\+\_\+tilt\+\_\+pin}} = 13
+\item 
+const byte \mbox{\hyperlink{robtour19_8ino_ad5c123697c21e80913c3d70b7d909302}{motor\+\_\+tower\+\_\+pinA}} = 7
+\item 
+const byte \mbox{\hyperlink{robtour19_8ino_a9f39cc24a40637814a45cfead8e860db}{motor\+\_\+tower\+\_\+pinB}} = 8
+\item 
+const byte \mbox{\hyperlink{robtour19_8ino_a2a020c00387c68740b6d99bfdc1226df}{motor\+\_\+tower\+\_\+pinE}} = 9
+\item 
+\mbox{\hyperlink{class_c_gear_motor}{C\+Gear\+Motor}} $\ast$ \mbox{\hyperlink{robtour19_8ino_a0d9a0943fa15cabb465417f66ba883af}{Tower\+Motor}}
+\item 
+\mbox{\hyperlink{class_c_tower_control}{C\+Tower\+Control}} \mbox{\hyperlink{robtour19_8ino_a6c203347fdf75520b23ec19b843dd0b8}{Tower\+Control}}
+\item 
+const byte \mbox{\hyperlink{robtour19_8ino_a38ab9376e4b7573a20aed18a04fe13dd}{motor\+\_\+drive\+\_\+pinA}} = 4
+\item 
+const byte \mbox{\hyperlink{robtour19_8ino_a9506f470425909cc02f646f3cb9e4b06}{motor\+\_\+drive\+\_\+pinB}} = 5
+\item 
+const byte \mbox{\hyperlink{robtour19_8ino_aca238e6bb28d0cd4da32e2e70073cf0c}{motor\+\_\+drive\+\_\+pinE}} = 6
+\item 
+const byte \mbox{\hyperlink{robtour19_8ino_a95a829530f5b51aaaa5b42a1942b4ec0}{S\+T\+BY}} = 12
+\item 
+$<$$<$$<$$<$$<$$<$$<$ H\+E\+AD C\+Drive\+Axis $\ast$Drive\+Axis;=======\mbox{\hyperlink{class_c_gear_motor}{C\+Gear\+Motor}} $\ast$Drive\+Axis;$>$$>$$>$$>$$>$$>$ develop \mbox{\hyperlink{class_c_drive_control}{C\+Drive\+Control}} \mbox{\hyperlink{robtour19_8ino_acb220b5a372bdf116141368af584eac0}{Drive\+Control}}
+\item 
+byte \mbox{\hyperlink{robtour19_8ino_a554144d0406c7f462799e73391a61f90}{D\+C\+Returned\+Code}} = 0
+\item 
+\mbox{\hyperlink{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726d}{E\+Movement\+Direction}} \mbox{\hyperlink{robtour19_8ino_a090a0b8fba0341993fd753a4c0e159c9}{last\+\_\+move\+\_\+cmd}} = \mbox{\hyperlink{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726da909a94769bd06b574ca53db11fe7f161}{E\+M\+D\+\_\+\+N\+O\+NE}}
+\item 
+\mbox{\hyperlink{class_c_color_tracker}{C\+Color\+Tracker}} \mbox{\hyperlink{robtour19_8ino_ad914ac880fd3623e0c4939a601185394}{Color\+Tracker}}
+\item 
+int \mbox{\hyperlink{robtour19_8ino_a706db81bcf063de0afda94676a67cc02}{R\+E\+C\+V\+\_\+pin}} = 11
+\item 
+\mbox{\hyperlink{class_c_hamming_code}{C\+Hamming\+Code}} \mbox{\hyperlink{robtour19_8ino_ab6b046d469dcc35f0ed9f5d596f9c9f2}{Hamming\+Code}} (\mbox{\hyperlink{robtour19_8ino_a706db81bcf063de0afda94676a67cc02}{R\+E\+C\+V\+\_\+pin}})
+\item 
+bool \mbox{\hyperlink{robtour19_8ino_ac4c07fd651266fdde6b8517777b89175}{data\+\_\+is\+\_\+read}} = false
+\item 
+byte \mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}} = 0
+\item 
+byte \mbox{\hyperlink{robtour19_8ino_a07c8659a288fc57eda074fc72c74f045}{Coins\+Pos}} \mbox{[}5\mbox{]} = \{2, 6, 1, 8, 5\}
+\item 
+byte \mbox{\hyperlink{robtour19_8ino_a43544ba2523c881c8f8c26242731c902}{Move}} = 0
+\item 
+bool \mbox{\hyperlink{robtour19_8ino_abe4d0487b2ac337eed8caeb05a98d857}{is\+\_\+setup}} = false
+\item 
+Servo \mbox{\hyperlink{robtour19_8ino_a9c6ba23b04d72b6833f78b313817dcc4}{servo\+\_\+gripper}}
+\item 
+Servo \mbox{\hyperlink{robtour19_8ino_a862a9d8c779d33d7d25a98b43eac4925}{servo\+\_\+tower\+\_\+tilt}}
+\item 
+\mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65}{E\+Task\+Phase}} \mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}} = \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65aa1079d6e9855962b3f8751bd73b870e5}{E\+T\+P\+\_\+\+R\+E\+A\+DY}}
+\item 
+int \mbox{\hyperlink{robtour19_8ino_a63177970cacb40efba67ce501ea89210}{angle}} = 0
+\item 
+int \mbox{\hyperlink{robtour19_8ino_ae563354a0218546aca0b276f84a85755}{incoming\+Byte}} = 0
+\item 
+bool \mbox{\hyperlink{robtour19_8ino_a0437e68459618830effdd71d4d1da252}{is\+\_\+start}} = false
+\item 
+int \mbox{\hyperlink{robtour19_8ino_a811c4d778bf155f058f516e39bbd9db2}{\+\_\+speed}} = 50
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{robtour19_8ino_abe82ea9f1de5ed9e20c876f0bbd665f4}\label{robtour19_8ino_abe82ea9f1de5ed9e20c876f0bbd665f4}} 
+\index{robtour19.ino@{robtour19.ino}!BTN\_TIME@{BTN\_TIME}}
+\index{BTN\_TIME@{BTN\_TIME}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{BTN\_TIME}{BTN\_TIME}}
+{\footnotesize\ttfamily \#define B\+T\+N\+\_\+\+T\+I\+ME~1000}
+
+\mbox{\Hypertarget{robtour19_8ino_a32ad276466ca6067d282cd06eb36cc3b}\label{robtour19_8ino_a32ad276466ca6067d282cd06eb36cc3b}} 
+\index{robtour19.ino@{robtour19.ino}!LF\_SENSOR\_THRESHOLD@{LF\_SENSOR\_THRESHOLD}}
+\index{LF\_SENSOR\_THRESHOLD@{LF\_SENSOR\_THRESHOLD}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{LF\_SENSOR\_THRESHOLD}{LF\_SENSOR\_THRESHOLD}}
+{\footnotesize\ttfamily \#define L\+F\+\_\+\+S\+E\+N\+S\+O\+R\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD~900}
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3d}\label{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3d}} 
+\index{robtour19.ino@{robtour19.ino}!ECoinsManipulationPhase@{ECoinsManipulationPhase}}
+\index{ECoinsManipulationPhase@{ECoinsManipulationPhase}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{ECoinsManipulationPhase}{ECoinsManipulationPhase}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3d}{E\+Coins\+Manipulation\+Phase}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ECMP\_COLLECTING@{ECMP\_COLLECTING}!robtour19.ino@{robtour19.ino}}\index{robtour19.ino@{robtour19.ino}!ECMP\_COLLECTING@{ECMP\_COLLECTING}}}\mbox{\Hypertarget{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3daad8ae154d83c23145d6e6e232442b448}\label{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3daad8ae154d83c23145d6e6e232442b448}} 
+E\+C\+M\+P\+\_\+\+C\+O\+L\+L\+E\+C\+T\+I\+NG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ECMP\_GRIPPING@{ECMP\_GRIPPING}!robtour19.ino@{robtour19.ino}}\index{robtour19.ino@{robtour19.ino}!ECMP\_GRIPPING@{ECMP\_GRIPPING}}}\mbox{\Hypertarget{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3da5a0e76189608000817bf2c00394e99b1}\label{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3da5a0e76189608000817bf2c00394e99b1}} 
+E\+C\+M\+P\+\_\+\+G\+R\+I\+P\+P\+I\+NG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ECMP\_LIFTING@{ECMP\_LIFTING}!robtour19.ino@{robtour19.ino}}\index{robtour19.ino@{robtour19.ino}!ECMP\_LIFTING@{ECMP\_LIFTING}}}\mbox{\Hypertarget{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3da91928c782f78c8740dfdb23f2fc26692}\label{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3da91928c782f78c8740dfdb23f2fc26692}} 
+E\+C\+M\+P\+\_\+\+L\+I\+F\+T\+I\+NG&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ECMP\_TOWER\_TILT@{ECMP\_TOWER\_TILT}!robtour19.ino@{robtour19.ino}}\index{robtour19.ino@{robtour19.ino}!ECMP\_TOWER\_TILT@{ECMP\_TOWER\_TILT}}}\mbox{\Hypertarget{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3daa6fe9451ad4285a2e4a61e0cca4259bc}\label{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3daa6fe9451ad4285a2e4a61e0cca4259bc}} 
+E\+C\+M\+P\+\_\+\+T\+O\+W\+E\+R\+\_\+\+T\+I\+LT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ECMP\_COMPLETED@{ECMP\_COMPLETED}!robtour19.ino@{robtour19.ino}}\index{robtour19.ino@{robtour19.ino}!ECMP\_COMPLETED@{ECMP\_COMPLETED}}}\mbox{\Hypertarget{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3dacfdd81e6efdbe654e4683aaa4882e16f}\label{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3dacfdd81e6efdbe654e4683aaa4882e16f}} 
+E\+C\+M\+P\+\_\+\+C\+O\+M\+P\+L\+E\+T\+ED&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65}\label{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65}} 
+\index{robtour19.ino@{robtour19.ino}!ETaskPhase@{ETaskPhase}}
+\index{ETaskPhase@{ETaskPhase}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{ETaskPhase}{ETaskPhase}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65}{E\+Task\+Phase}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ETP\_READY@{ETP\_READY}!robtour19.ino@{robtour19.ino}}\index{robtour19.ino@{robtour19.ino}!ETP\_READY@{ETP\_READY}}}\mbox{\Hypertarget{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65aa1079d6e9855962b3f8751bd73b870e5}\label{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65aa1079d6e9855962b3f8751bd73b870e5}} 
+E\+T\+P\+\_\+\+R\+E\+A\+DY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ETP\_START\_FIELD@{ETP\_START\_FIELD}!robtour19.ino@{robtour19.ino}}\index{robtour19.ino@{robtour19.ino}!ETP\_START\_FIELD@{ETP\_START\_FIELD}}}\mbox{\Hypertarget{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a916151560f6a85404cb8e61daa3c5118}\label{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a916151560f6a85404cb8e61daa3c5118}} 
+E\+T\+P\+\_\+\+S\+T\+A\+R\+T\+\_\+\+F\+I\+E\+LD&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ETP\_MOVING\_TO\_BLACK\_LINE\_OF\_NEXT\_COIN@{ETP\_MOVING\_TO\_BLACK\_LINE\_OF\_NEXT\_COIN}!robtour19.ino@{robtour19.ino}}\index{robtour19.ino@{robtour19.ino}!ETP\_MOVING\_TO\_BLACK\_LINE\_OF\_NEXT\_COIN@{ETP\_MOVING\_TO\_BLACK\_LINE\_OF\_NEXT\_COIN}}}\mbox{\Hypertarget{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65acef8195e02507e12addaf856016c5ecd}\label{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65acef8195e02507e12addaf856016c5ecd}} 
+E\+T\+P\+\_\+\+M\+O\+V\+I\+N\+G\+\_\+\+T\+O\+\_\+\+B\+L\+A\+C\+K\+\_\+\+L\+I\+N\+E\+\_\+\+O\+F\+\_\+\+N\+E\+X\+T\+\_\+\+C\+O\+IN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ETP\_MOVING\_ALONG\_BLACK\_LINE\_TO\_NEXT\_COIN@{ETP\_MOVING\_ALONG\_BLACK\_LINE\_TO\_NEXT\_COIN}!robtour19.ino@{robtour19.ino}}\index{robtour19.ino@{robtour19.ino}!ETP\_MOVING\_ALONG\_BLACK\_LINE\_TO\_NEXT\_COIN@{ETP\_MOVING\_ALONG\_BLACK\_LINE\_TO\_NEXT\_COIN}}}\mbox{\Hypertarget{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65aee1e5ea08d4bcf7830aff144769b48ec}\label{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65aee1e5ea08d4bcf7830aff144769b48ec}} 
+E\+T\+P\+\_\+\+M\+O\+V\+I\+N\+G\+\_\+\+A\+L\+O\+N\+G\+\_\+\+B\+L\+A\+C\+K\+\_\+\+L\+I\+N\+E\+\_\+\+T\+O\+\_\+\+N\+E\+X\+T\+\_\+\+C\+O\+IN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ETP\_COINS\_LIFT@{ETP\_COINS\_LIFT}!robtour19.ino@{robtour19.ino}}\index{robtour19.ino@{robtour19.ino}!ETP\_COINS\_LIFT@{ETP\_COINS\_LIFT}}}\mbox{\Hypertarget{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a67d28f471de5fa89d6f5dcdba0062bfc}\label{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a67d28f471de5fa89d6f5dcdba0062bfc}} 
+E\+T\+P\+\_\+\+C\+O\+I\+N\+S\+\_\+\+L\+I\+FT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ETP\_FINISH\_FIELD@{ETP\_FINISH\_FIELD}!robtour19.ino@{robtour19.ino}}\index{robtour19.ino@{robtour19.ino}!ETP\_FINISH\_FIELD@{ETP\_FINISH\_FIELD}}}\mbox{\Hypertarget{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a3ee3055bdebf5ff102a4b0d579fe2f79}\label{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a3ee3055bdebf5ff102a4b0d579fe2f79}} 
+E\+T\+P\+\_\+\+F\+I\+N\+I\+S\+H\+\_\+\+F\+I\+E\+LD&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{robtour19_8ino_afe461d27b9c48d5921c00d521181f12f}\label{robtour19_8ino_afe461d27b9c48d5921c00d521181f12f}} 
+\index{robtour19.ino@{robtour19.ino}!loop@{loop}}
+\index{loop@{loop}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{loop()}{loop()}}
+{\footnotesize\ttfamily void loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 1
+\mbox{\Hypertarget{robtour19_8ino_a7be6ce9f7e4e25f919238c8951d1f85c}\label{robtour19_8ino_a7be6ce9f7e4e25f919238c8951d1f85c}} 
+\index{robtour19.ino@{robtour19.ino}!move\_by\_line@{move\_by\_line}}
+\index{move\_by\_line@{move\_by\_line}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{move\_by\_line()}{move\_by\_line()}}
+{\footnotesize\ttfamily $<$$<$$<$$<$$<$$<$$<$ Updated upstream ======= $<$$<$$<$$<$$<$$<$$<$ Updated upstream ======= $>$$>$$>$$>$$>$$>$$>$ Stashed changes void collect\+\_\+coins() \{ if (\mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}} == \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65aa1079d6e9855962b3f8751bd73b870e5}{E\+T\+P\+\_\+\+R\+E\+A\+DY}}) \{ $<$$<$$<$$<$$<$$<$$<$ Updated upstream uint8\+\_\+t correct\+\_\+data\mbox{[}$\,$\mbox{]} = \{1, 2, 4, 6, 1, 2, 4, 6\}; ======= uint8\+\_\+t correct\+\_\+data\mbox{[}$\,$\mbox{]} = \{1, 2, 3, 5, 1, 2, 3, 5\}; $>$$>$$>$$>$$>$$>$$>$ Stashed changes \mbox{\hyperlink{robtour19_8ino_ac4c07fd651266fdde6b8517777b89175}{data\+\_\+is\+\_\+read}} = true; if (\mbox{\hyperlink{robtour19_8ino_ac4c07fd651266fdde6b8517777b89175}{data\+\_\+is\+\_\+read}} == false) \{ \mbox{\hyperlink{robtour19_8ino_ac4c07fd651266fdde6b8517777b89175}{data\+\_\+is\+\_\+read}} = Hamming\+Code.\+Receive\+Data(correct\+\_\+data); \} if (\mbox{\hyperlink{robtour19_8ino_ac4c07fd651266fdde6b8517777b89175}{data\+\_\+is\+\_\+read}} == true \&\& \mbox{\hyperlink{robtour19_8ino_abe4d0487b2ac337eed8caeb05a98d857}{is\+\_\+setup}} == false) \{ Serial.\+print(\char`\"{}IR Received data\+:\char`\"{}); for (int i = 0; i $<$ 8; i++) \{ Serial.\+print(\char`\"{} \char`\"{}); Serial.\+print(correct\+\_\+data\mbox{[}i\mbox{]}); \} Serial.\+println(); Serial.\+println(\char`\"{}R\+E\+AD IR R\+E\+M\+O\+TE D\+A\+TA\char`\"{}); E\+Defined\+Color color = Color\+Tracker.\+Define\+Start\+Field(); if (color == \mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2fa64fe66433afa438ddab5c6669263aee4}{E\+D\+C\+\_\+\+Y\+E\+L\+L\+OW}}) \{ Serial.\+println(\char`\"{}Y\+E\+L\+L\+OW start field\char`\"{}); for (int i = 0; i $<$ 4; i++) \{ \mbox{\hyperlink{robtour19_8ino_a07c8659a288fc57eda074fc72c74f045}{Coins\+Pos}}\mbox{[}i\mbox{]} = correct\+\_\+data\mbox{[}i\mbox{]}; Serial.\+print(\mbox{\hyperlink{robtour19_8ino_a07c8659a288fc57eda074fc72c74f045}{Coins\+Pos}}\mbox{[}i\mbox{]}); Serial.\+print(\char`\"{}\textbackslash{}t\char`\"{}); \} Serial.\+println(); \} else if (color == \mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2fa9bc731be8eb72894439dcbb6cd47057c}{E\+D\+C\+\_\+\+R\+ED}}) \{ Serial.\+println(\char`\"{}R\+ED start field\char`\"{}); for (int i = 0; i $<$ 4; i++) \{ \mbox{\hyperlink{robtour19_8ino_a07c8659a288fc57eda074fc72c74f045}{Coins\+Pos}}\mbox{[}i\mbox{]} = correct\+\_\+data\mbox{[}i + 4\mbox{]}; Serial.\+print(\mbox{\hyperlink{robtour19_8ino_a07c8659a288fc57eda074fc72c74f045}{Coins\+Pos}}\mbox{[}i\mbox{]}); Serial.\+print(\char`\"{}\textbackslash{}t\char`\"{}); \} Serial.\+println(); \} else \{ Serial.\+print(\char`\"{}got color \char`\"{}); Serial.\+println(color); \} Serial.\+println(); \mbox{\hyperlink{robtour19_8ino_a07c8659a288fc57eda074fc72c74f045}{Coins\+Pos}}\mbox{[}4\mbox{]} = 5; \mbox{\hyperlink{robtour19_8ino_abe4d0487b2ac337eed8caeb05a98d857}{is\+\_\+setup}} = true; \} if (digital\+Read(3) == L\+OW)\{ delay(\mbox{\hyperlink{robtour19_8ino_abe82ea9f1de5ed9e20c876f0bbd665f4}{B\+T\+N\+\_\+\+T\+I\+ME}}); \mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}} = \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a916151560f6a85404cb8e61daa3c5118}{E\+T\+P\+\_\+\+S\+T\+A\+R\+T\+\_\+\+F\+I\+E\+LD}}; Serial.\+println(\char`\"{}S\+T\+A\+RT\char`\"{}); \} return; \} else if (\mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}} == \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a916151560f6a85404cb8e61daa3c5118}{E\+T\+P\+\_\+\+S\+T\+A\+R\+T\+\_\+\+F\+I\+E\+LD}}) \{ Drive\+Control.\+move\+\_\+counting\+\_\+lines(\mbox{\hyperlink{robtour19_8ino_a07c8659a288fc57eda074fc72c74f045}{Coins\+Pos}}\mbox{[}\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}} + 1\mbox{]} -\/ \mbox{\hyperlink{robtour19_8ino_a07c8659a288fc57eda074fc72c74f045}{Coins\+Pos}}\mbox{[}\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}}\mbox{]}); \mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}} = \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65acef8195e02507e12addaf856016c5ecd}{E\+T\+P\+\_\+\+M\+O\+V\+I\+N\+G\+\_\+\+T\+O\+\_\+\+B\+L\+A\+C\+K\+\_\+\+L\+I\+N\+E\+\_\+\+O\+F\+\_\+\+N\+E\+X\+T\+\_\+\+C\+O\+IN}}; return; \} else if (\mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}} == \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65acef8195e02507e12addaf856016c5ecd}{E\+T\+P\+\_\+\+M\+O\+V\+I\+N\+G\+\_\+\+T\+O\+\_\+\+B\+L\+A\+C\+K\+\_\+\+L\+I\+N\+E\+\_\+\+O\+F\+\_\+\+N\+E\+X\+T\+\_\+\+C\+O\+IN}}) \{ int left\+LF = digital\+Read(\mbox{\hyperlink{robtour19_8ino_ac3d05ac0995a38475e2e3230364f5d8b}{left\+\_\+line\+\_\+follower\+\_\+pin}}); int right\+LF = analog\+Read(\mbox{\hyperlink{robtour19_8ino_a1469b774c2cf6fb92c967f9b78de7eba}{right\+\_\+line\+\_\+follower\+\_\+pin}}); if (right\+LF $>$ \mbox{\hyperlink{robtour19_8ino_a32ad276466ca6067d282cd06eb36cc3b}{L\+F\+\_\+\+S\+E\+N\+S\+O\+R\+\_\+\+T\+H\+R\+E\+S\+H\+O\+LD}}) right\+LF = H\+I\+GH; else right\+LF = L\+OW; int dc\+\_\+result = \mbox{\hyperlink{robtour19_8ino_afe461d27b9c48d5921c00d521181f12f}{Drive\+Control.\+loop}}(left\+LF, right\+LF); if (\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}} $>$ 2 \&\& dc\+\_\+result == \mbox{\hyperlink{_c_drive_control_8h_a0cbd814a6591fcf658cabf81e0eae3a3}{C\+O\+U\+N\+T\+E\+D\+\_\+\+B\+L\+A\+C\+K\+\_\+\+L\+I\+N\+ES}}) \{ delay(100); Serial.\+println(\char`\"{}C\+O\+U\+NT all black lines and DO D\+E\+L\+AY 100\char`\"{}); \} if (dc\+\_\+result == \mbox{\hyperlink{_c_drive_control_8h_a7dacc5510077768604e93e3c3c7f56be}{F\+I\+N\+A\+L\+\_\+\+T\+U\+R\+N\+\_\+\+O\+V\+ER}}) \{ Serial.\+println(\char`\"{}Got \mbox{\hyperlink{_c_drive_control_8h_a7dacc5510077768604e93e3c3c7f56be}{F\+I\+N\+A\+L\+\_\+\+T\+U\+R\+N\+\_\+\+O\+V\+ER}} return code\char`\"{}); Task\+Phase = \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65aee1e5ea08d4bcf7830aff144769b48ec}{E\+T\+P\+\_\+\+M\+O\+V\+I\+N\+G\+\_\+\+A\+L\+O\+N\+G\+\_\+\+B\+L\+A\+C\+K\+\_\+\+L\+I\+N\+E\+\_\+\+T\+O\+\_\+\+N\+E\+X\+T\+\_\+\+C\+O\+IN}}; move\+\_\+by\+\_\+line(); \} else if (\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}} $>$ 0 \&\& dc\+\_\+result == \mbox{\hyperlink{_c_drive_control_8h_afaaee46e8fd3628ed19be8de0bdd0f9f}{F\+I\+N\+A\+L\+\_\+\+T\+U\+RN}} \&\& (Color\+Tracker.\+Get\+Color(\mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2faea86a53b84e879b3827626d006305804}{E\+D\+C\+\_\+\+B\+L\+UE}}) == \mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2faea86a53b84e879b3827626d006305804}{E\+D\+C\+\_\+\+B\+L\+UE}})) \{ Serial.\+println(\char`\"{}while final turn G\+OT B\+L\+UE L\+I\+NE\char`\"{}); Serial.\+print(\char`\"{}R\+E\+A\+CH B\+L\+UE \char`\"{}); Serial.\+print(\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}} + 1); Serial.\+println(); Color\+Tracker.\+Clear(); \mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}}++; \mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}} = \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a916151560f6a85404cb8e61daa3c5118}{E\+T\+P\+\_\+\+S\+T\+A\+R\+T\+\_\+\+F\+I\+E\+LD}}; if (\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}} == 3) \{ Serial.\+println(\char`\"{}G\+OT A\+LL C\+O\+I\+NS\char`\"{}); Drive\+Axis-\/$>$stop(); delay(500); Tower\+Control.\+Start(); \mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}} = \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a67d28f471de5fa89d6f5dcdba0062bfc}{E\+T\+P\+\_\+\+C\+O\+I\+N\+S\+\_\+\+L\+I\+FT}}; \} \} return; \} else if (\mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}} == \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65aee1e5ea08d4bcf7830aff144769b48ec}{E\+T\+P\+\_\+\+M\+O\+V\+I\+N\+G\+\_\+\+A\+L\+O\+N\+G\+\_\+\+B\+L\+A\+C\+K\+\_\+\+L\+I\+N\+E\+\_\+\+T\+O\+\_\+\+N\+E\+X\+T\+\_\+\+C\+O\+IN}}) \{ move\+\_\+by\+\_\+line(); if (\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}} == 3) Drive\+Axis-\/$>$stop(); if ((\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}} $<$ 3) \&\& (Color\+Tracker.\+Get\+Color(\mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2faea86a53b84e879b3827626d006305804}{E\+D\+C\+\_\+\+B\+L\+UE}}) == \mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2faea86a53b84e879b3827626d006305804}{E\+D\+C\+\_\+\+B\+L\+UE}})) \{ Serial.\+print(\char`\"{}R\+E\+A\+CH B\+L\+UE \char`\"{}); Serial.\+print(\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}}); Serial.\+println(); Color\+Tracker.\+Clear(); \mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}}++; \mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}} = \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a916151560f6a85404cb8e61daa3c5118}{E\+T\+P\+\_\+\+S\+T\+A\+R\+T\+\_\+\+F\+I\+E\+LD}}; if (\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}} == 3) \{ Serial.\+println(\char`\"{}G\+OT A\+LL C\+O\+I\+NS\char`\"{}); delay(100); Drive\+Axis-\/$>$stop(); delay(500); Tower\+Control.\+Start(); \mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}} = \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a67d28f471de5fa89d6f5dcdba0062bfc}{E\+T\+P\+\_\+\+C\+O\+I\+N\+S\+\_\+\+L\+I\+FT}}; \} \} else if ((\mbox{\hyperlink{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}{passed\+Move\+Count}} $>$= 3) \&\& (Color\+Tracker.\+Get\+Color(\mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2fa0e412313c37caab32d752c38dc451a37}{E\+D\+C\+\_\+\+G\+R\+E\+EN}}) == \mbox{\hyperlink{_c_color_tracker_8h_a4cce3c957245fd145d9cb8977e2cde2fa0e412313c37caab32d752c38dc451a37}{E\+D\+C\+\_\+\+G\+R\+E\+EN}})) \{ Serial.\+println(\char`\"{}F\+I\+N\+I\+SH\char`\"{}); Task\+Phase = \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a3ee3055bdebf5ff102a4b0d579fe2f79}{E\+T\+P\+\_\+\+F\+I\+N\+I\+S\+H\+\_\+\+F\+I\+E\+LD}}; \} return; \} else if (\mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}} == \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a67d28f471de5fa89d6f5dcdba0062bfc}{E\+T\+P\+\_\+\+C\+O\+I\+N\+S\+\_\+\+L\+I\+FT}}) \{ if (Tower\+Control.\+Loop() == 1) \{ \mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}} = \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a916151560f6a85404cb8e61daa3c5118}{E\+T\+P\+\_\+\+S\+T\+A\+R\+T\+\_\+\+F\+I\+E\+LD}}; Serial.\+println(\char`\"{}G\+OT A\+LL C\+O\+I\+NS A\+ND C\+O\+I\+NS A\+RE R\+E\+A\+DY F\+OR T\+A\+R\+G\+ET\char`\"{}); \} \} else if (\mbox{\hyperlink{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}{Task\+Phase}} == \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65a3ee3055bdebf5ff102a4b0d579fe2f79}{E\+T\+P\+\_\+\+F\+I\+N\+I\+S\+H\+\_\+\+F\+I\+E\+LD}}) \{ delay(1000); Drive\+Axis-\/$>$stop(); return; \} \} $<$$<$$<$$<$$<$$<$$<$ Updated upstream ======= $>$$>$$>$$>$$>$$>$$>$ Stashed changes $>$$>$ Stashed changes void move\+\_\+by\+\_\+line (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+% FIG 2
+\mbox{\Hypertarget{robtour19_8ino_a4fc01d736fe50cf5b977f755b675f11d}\label{robtour19_8ino_a4fc01d736fe50cf5b977f755b675f11d}} 
+\index{robtour19.ino@{robtour19.ino}!setup@{setup}}
+\index{setup@{setup}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{setup()}{setup()}}
+{\footnotesize\ttfamily void setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=273pt]{robtour19_8ino_a4fc01d736fe50cf5b977f755b675f11d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{robtour19_8ino_a97cbda62853f83d2b66ced0b97c83940}\label{robtour19_8ino_a97cbda62853f83d2b66ced0b97c83940}} 
+\index{robtour19.ino@{robtour19.ino}!testing\_movement@{testing\_movement}}
+\index{testing\_movement@{testing\_movement}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{testing\_movement()}{testing\_movement()}}
+{\footnotesize\ttfamily void testing\+\_\+movement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{robtour19_8ino_a811c4d778bf155f058f516e39bbd9db2}\label{robtour19_8ino_a811c4d778bf155f058f516e39bbd9db2}} 
+\index{robtour19.ino@{robtour19.ino}!\_speed@{\_speed}}
+\index{\_speed@{\_speed}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{\_speed}{\_speed}}
+{\footnotesize\ttfamily int \+\_\+speed = 50}
+
+\mbox{\Hypertarget{robtour19_8ino_a63177970cacb40efba67ce501ea89210}\label{robtour19_8ino_a63177970cacb40efba67ce501ea89210}} 
+\index{robtour19.ino@{robtour19.ino}!angle@{angle}}
+\index{angle@{angle}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{angle}{angle}}
+{\footnotesize\ttfamily int angle = 0}
+
+\mbox{\Hypertarget{robtour19_8ino_a7046612bd9ca79da3d5f228c1d637310}\label{robtour19_8ino_a7046612bd9ca79da3d5f228c1d637310}} 
+\index{robtour19.ino@{robtour19.ino}!coins\_manipulation\_phase@{coins\_manipulation\_phase}}
+\index{coins\_manipulation\_phase@{coins\_manipulation\_phase}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{coins\_manipulation\_phase}{coins\_manipulation\_phase}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{robtour19_8ino_ab670c21f9a3d595373fa15da50183e3d}{E\+Coins\+Manipulation\+Phase}}  coins\+\_\+manipulation\+\_\+phase}
+
+\mbox{\Hypertarget{robtour19_8ino_a07c8659a288fc57eda074fc72c74f045}\label{robtour19_8ino_a07c8659a288fc57eda074fc72c74f045}} 
+\index{robtour19.ino@{robtour19.ino}!CoinsPos@{CoinsPos}}
+\index{CoinsPos@{CoinsPos}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{CoinsPos}{CoinsPos}}
+{\footnotesize\ttfamily byte Coins\+Pos\mbox{[}5\mbox{]} = \{2, 6, 1, 8, 5\}}
+
+\mbox{\Hypertarget{robtour19_8ino_a7a2fed841f28b51cd487a2c605d828b3}\label{robtour19_8ino_a7a2fed841f28b51cd487a2c605d828b3}} 
+\index{robtour19.ino@{robtour19.ino}!color\_out@{color\_out}}
+\index{color\_out@{color\_out}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{color\_out}{color\_out}}
+{\footnotesize\ttfamily const byte color\+\_\+out = 10}
+
+\mbox{\Hypertarget{robtour19_8ino_ad914ac880fd3623e0c4939a601185394}\label{robtour19_8ino_ad914ac880fd3623e0c4939a601185394}} 
+\index{robtour19.ino@{robtour19.ino}!ColorTracker@{ColorTracker}}
+\index{ColorTracker@{ColorTracker}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{ColorTracker}{ColorTracker}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_c_color_tracker}{C\+Color\+Tracker}} Color\+Tracker}
+
+\mbox{\Hypertarget{robtour19_8ino_ac4c07fd651266fdde6b8517777b89175}\label{robtour19_8ino_ac4c07fd651266fdde6b8517777b89175}} 
+\index{robtour19.ino@{robtour19.ino}!data\_is\_read@{data\_is\_read}}
+\index{data\_is\_read@{data\_is\_read}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{data\_is\_read}{data\_is\_read}}
+{\footnotesize\ttfamily bool data\+\_\+is\+\_\+read = false}
+
+\mbox{\Hypertarget{robtour19_8ino_a554144d0406c7f462799e73391a61f90}\label{robtour19_8ino_a554144d0406c7f462799e73391a61f90}} 
+\index{robtour19.ino@{robtour19.ino}!DCReturnedCode@{DCReturnedCode}}
+\index{DCReturnedCode@{DCReturnedCode}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{DCReturnedCode}{DCReturnedCode}}
+{\footnotesize\ttfamily byte D\+C\+Returned\+Code = 0}
+
+\mbox{\Hypertarget{robtour19_8ino_acb220b5a372bdf116141368af584eac0}\label{robtour19_8ino_acb220b5a372bdf116141368af584eac0}} 
+\index{robtour19.ino@{robtour19.ino}!DriveControl@{DriveControl}}
+\index{DriveControl@{DriveControl}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{DriveControl}{DriveControl}}
+{\footnotesize\ttfamily $<$$<$$<$$<$$<$$<$$<$ H\+E\+AD C\+Drive\+Axis $\ast$Drive\+Axis; ======= \mbox{\hyperlink{class_c_gear_motor}{C\+Gear\+Motor}} $\ast$Drive\+Axis; $>$$>$$>$$>$$>$$>$ develop \mbox{\hyperlink{class_c_drive_control}{C\+Drive\+Control}} Drive\+Control}
+
+\mbox{\Hypertarget{robtour19_8ino_ab6b046d469dcc35f0ed9f5d596f9c9f2}\label{robtour19_8ino_ab6b046d469dcc35f0ed9f5d596f9c9f2}} 
+\index{robtour19.ino@{robtour19.ino}!HammingCode@{HammingCode}}
+\index{HammingCode@{HammingCode}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{HammingCode}{HammingCode}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_c_hamming_code}{C\+Hamming\+Code}} Hamming\+Code(\mbox{\hyperlink{robtour19_8ino_a706db81bcf063de0afda94676a67cc02}{R\+E\+C\+V\+\_\+pin}})}
+
+\mbox{\Hypertarget{robtour19_8ino_ae563354a0218546aca0b276f84a85755}\label{robtour19_8ino_ae563354a0218546aca0b276f84a85755}} 
+\index{robtour19.ino@{robtour19.ino}!incomingByte@{incomingByte}}
+\index{incomingByte@{incomingByte}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{incomingByte}{incomingByte}}
+{\footnotesize\ttfamily int incoming\+Byte = 0}
+
+\mbox{\Hypertarget{robtour19_8ino_abe4d0487b2ac337eed8caeb05a98d857}\label{robtour19_8ino_abe4d0487b2ac337eed8caeb05a98d857}} 
+\index{robtour19.ino@{robtour19.ino}!is\_setup@{is\_setup}}
+\index{is\_setup@{is\_setup}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{is\_setup}{is\_setup}}
+{\footnotesize\ttfamily bool is\+\_\+setup = false}
+
+\mbox{\Hypertarget{robtour19_8ino_a0437e68459618830effdd71d4d1da252}\label{robtour19_8ino_a0437e68459618830effdd71d4d1da252}} 
+\index{robtour19.ino@{robtour19.ino}!is\_start@{is\_start}}
+\index{is\_start@{is\_start}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{is\_start}{is\_start}}
+{\footnotesize\ttfamily bool is\+\_\+start = false}
+
+\mbox{\Hypertarget{robtour19_8ino_a090a0b8fba0341993fd753a4c0e159c9}\label{robtour19_8ino_a090a0b8fba0341993fd753a4c0e159c9}} 
+\index{robtour19.ino@{robtour19.ino}!last\_move\_cmd@{last\_move\_cmd}}
+\index{last\_move\_cmd@{last\_move\_cmd}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{last\_move\_cmd}{last\_move\_cmd}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726d}{E\+Movement\+Direction}} last\+\_\+move\+\_\+cmd = \mbox{\hyperlink{_c_drive_control_8h_ab8f0290f7ef8763e9130990608e4726da909a94769bd06b574ca53db11fe7f161}{E\+M\+D\+\_\+\+N\+O\+NE}}}
+
+\mbox{\Hypertarget{robtour19_8ino_ac3d05ac0995a38475e2e3230364f5d8b}\label{robtour19_8ino_ac3d05ac0995a38475e2e3230364f5d8b}} 
+\index{robtour19.ino@{robtour19.ino}!left\_line\_follower\_pin@{left\_line\_follower\_pin}}
+\index{left\_line\_follower\_pin@{left\_line\_follower\_pin}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{left\_line\_follower\_pin}{left\_line\_follower\_pin}}
+{\footnotesize\ttfamily const byte left\+\_\+line\+\_\+follower\+\_\+pin = A1}
+
+\mbox{\Hypertarget{robtour19_8ino_a38ab9376e4b7573a20aed18a04fe13dd}\label{robtour19_8ino_a38ab9376e4b7573a20aed18a04fe13dd}} 
+\index{robtour19.ino@{robtour19.ino}!motor\_drive\_pinA@{motor\_drive\_pinA}}
+\index{motor\_drive\_pinA@{motor\_drive\_pinA}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{motor\_drive\_pinA}{motor\_drive\_pinA}}
+{\footnotesize\ttfamily const byte motor\+\_\+drive\+\_\+pinA = 4}
+
+\mbox{\Hypertarget{robtour19_8ino_a9506f470425909cc02f646f3cb9e4b06}\label{robtour19_8ino_a9506f470425909cc02f646f3cb9e4b06}} 
+\index{robtour19.ino@{robtour19.ino}!motor\_drive\_pinB@{motor\_drive\_pinB}}
+\index{motor\_drive\_pinB@{motor\_drive\_pinB}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{motor\_drive\_pinB}{motor\_drive\_pinB}}
+{\footnotesize\ttfamily const byte motor\+\_\+drive\+\_\+pinB = 5}
+
+\mbox{\Hypertarget{robtour19_8ino_aca238e6bb28d0cd4da32e2e70073cf0c}\label{robtour19_8ino_aca238e6bb28d0cd4da32e2e70073cf0c}} 
+\index{robtour19.ino@{robtour19.ino}!motor\_drive\_pinE@{motor\_drive\_pinE}}
+\index{motor\_drive\_pinE@{motor\_drive\_pinE}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{motor\_drive\_pinE}{motor\_drive\_pinE}}
+{\footnotesize\ttfamily const byte motor\+\_\+drive\+\_\+pinE = 6}
+
+\mbox{\Hypertarget{robtour19_8ino_ad5c123697c21e80913c3d70b7d909302}\label{robtour19_8ino_ad5c123697c21e80913c3d70b7d909302}} 
+\index{robtour19.ino@{robtour19.ino}!motor\_tower\_pinA@{motor\_tower\_pinA}}
+\index{motor\_tower\_pinA@{motor\_tower\_pinA}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{motor\_tower\_pinA}{motor\_tower\_pinA}}
+{\footnotesize\ttfamily const byte motor\+\_\+tower\+\_\+pinA = 7}
+
+\mbox{\Hypertarget{robtour19_8ino_a9f39cc24a40637814a45cfead8e860db}\label{robtour19_8ino_a9f39cc24a40637814a45cfead8e860db}} 
+\index{robtour19.ino@{robtour19.ino}!motor\_tower\_pinB@{motor\_tower\_pinB}}
+\index{motor\_tower\_pinB@{motor\_tower\_pinB}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{motor\_tower\_pinB}{motor\_tower\_pinB}}
+{\footnotesize\ttfamily const byte motor\+\_\+tower\+\_\+pinB = 8}
+
+\mbox{\Hypertarget{robtour19_8ino_a2a020c00387c68740b6d99bfdc1226df}\label{robtour19_8ino_a2a020c00387c68740b6d99bfdc1226df}} 
+\index{robtour19.ino@{robtour19.ino}!motor\_tower\_pinE@{motor\_tower\_pinE}}
+\index{motor\_tower\_pinE@{motor\_tower\_pinE}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{motor\_tower\_pinE}{motor\_tower\_pinE}}
+{\footnotesize\ttfamily const byte motor\+\_\+tower\+\_\+pinE = 9}
+
+\mbox{\Hypertarget{robtour19_8ino_a43544ba2523c881c8f8c26242731c902}\label{robtour19_8ino_a43544ba2523c881c8f8c26242731c902}} 
+\index{robtour19.ino@{robtour19.ino}!Move@{Move}}
+\index{Move@{Move}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{Move}{Move}}
+{\footnotesize\ttfamily byte Move = 0}
+
+\mbox{\Hypertarget{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}\label{robtour19_8ino_a9599eb7b1e6acd8747965795d563a597}} 
+\index{robtour19.ino@{robtour19.ino}!passedMoveCount@{passedMoveCount}}
+\index{passedMoveCount@{passedMoveCount}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{passedMoveCount}{passedMoveCount}}
+{\footnotesize\ttfamily byte passed\+Move\+Count = 0}
+
+\mbox{\Hypertarget{robtour19_8ino_a706db81bcf063de0afda94676a67cc02}\label{robtour19_8ino_a706db81bcf063de0afda94676a67cc02}} 
+\index{robtour19.ino@{robtour19.ino}!RECV\_pin@{RECV\_pin}}
+\index{RECV\_pin@{RECV\_pin}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{RECV\_pin}{RECV\_pin}}
+{\footnotesize\ttfamily int R\+E\+C\+V\+\_\+pin = 11}
+
+\mbox{\Hypertarget{robtour19_8ino_a1469b774c2cf6fb92c967f9b78de7eba}\label{robtour19_8ino_a1469b774c2cf6fb92c967f9b78de7eba}} 
+\index{robtour19.ino@{robtour19.ino}!right\_line\_follower\_pin@{right\_line\_follower\_pin}}
+\index{right\_line\_follower\_pin@{right\_line\_follower\_pin}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{right\_line\_follower\_pin}{right\_line\_follower\_pin}}
+{\footnotesize\ttfamily const byte right\+\_\+line\+\_\+follower\+\_\+pin = A6}
+
+\mbox{\Hypertarget{robtour19_8ino_a3714c18e6493a568961f125da447f738}\label{robtour19_8ino_a3714c18e6493a568961f125da447f738}} 
+\index{robtour19.ino@{robtour19.ino}!S0@{S0}}
+\index{S0@{S0}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{S0}{S0}}
+{\footnotesize\ttfamily const byte S0 = 16}
+
+\mbox{\Hypertarget{robtour19_8ino_a04aea3b8b1cf539a469966f30ff3a602}\label{robtour19_8ino_a04aea3b8b1cf539a469966f30ff3a602}} 
+\index{robtour19.ino@{robtour19.ino}!S1@{S1}}
+\index{S1@{S1}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{S1}{S1}}
+{\footnotesize\ttfamily const byte S1 = 18}
+
+\mbox{\Hypertarget{robtour19_8ino_ad4a502f27e2270723a557ab17de16fe2}\label{robtour19_8ino_ad4a502f27e2270723a557ab17de16fe2}} 
+\index{robtour19.ino@{robtour19.ino}!S2@{S2}}
+\index{S2@{S2}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{S2}{S2}}
+{\footnotesize\ttfamily const byte S2 = 19}
+
+\mbox{\Hypertarget{robtour19_8ino_ac0bb270c5fc1811813212dbd97f6d1c8}\label{robtour19_8ino_ac0bb270c5fc1811813212dbd97f6d1c8}} 
+\index{robtour19.ino@{robtour19.ino}!S3@{S3}}
+\index{S3@{S3}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{S3}{S3}}
+{\footnotesize\ttfamily const byte S3 = 17}
+
+\mbox{\Hypertarget{robtour19_8ino_a9c6ba23b04d72b6833f78b313817dcc4}\label{robtour19_8ino_a9c6ba23b04d72b6833f78b313817dcc4}} 
+\index{robtour19.ino@{robtour19.ino}!servo\_gripper@{servo\_gripper}}
+\index{servo\_gripper@{servo\_gripper}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{servo\_gripper}{servo\_gripper}}
+{\footnotesize\ttfamily Servo servo\+\_\+gripper}
+
+\mbox{\Hypertarget{robtour19_8ino_a699905de7ab081ac0982a13b75065cd9}\label{robtour19_8ino_a699905de7ab081ac0982a13b75065cd9}} 
+\index{robtour19.ino@{robtour19.ino}!servo\_gripper\_pin@{servo\_gripper\_pin}}
+\index{servo\_gripper\_pin@{servo\_gripper\_pin}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{servo\_gripper\_pin}{servo\_gripper\_pin}}
+{\footnotesize\ttfamily const byte servo\+\_\+gripper\+\_\+pin = A0}
+
+\mbox{\Hypertarget{robtour19_8ino_ae5aa0c43121069760e67a314e96075d6}\label{robtour19_8ino_ae5aa0c43121069760e67a314e96075d6}} 
+\index{robtour19.ino@{robtour19.ino}!servo\_rope\_tension\_pin@{servo\_rope\_tension\_pin}}
+\index{servo\_rope\_tension\_pin@{servo\_rope\_tension\_pin}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{servo\_rope\_tension\_pin}{servo\_rope\_tension\_pin}}
+{\footnotesize\ttfamily const byte servo\+\_\+rope\+\_\+tension\+\_\+pin = 123}
+
+\mbox{\Hypertarget{robtour19_8ino_a68e74db24d99021e3c6e62101bec55bb}\label{robtour19_8ino_a68e74db24d99021e3c6e62101bec55bb}} 
+\index{robtour19.ino@{robtour19.ino}!servo\_rotate\_right\_wheel@{servo\_rotate\_right\_wheel}}
+\index{servo\_rotate\_right\_wheel@{servo\_rotate\_right\_wheel}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{servo\_rotate\_right\_wheel}{servo\_rotate\_right\_wheel}}
+{\footnotesize\ttfamily const byte servo\+\_\+rotate\+\_\+right\+\_\+wheel = 2}
+
+\mbox{\Hypertarget{robtour19_8ino_a862a9d8c779d33d7d25a98b43eac4925}\label{robtour19_8ino_a862a9d8c779d33d7d25a98b43eac4925}} 
+\index{robtour19.ino@{robtour19.ino}!servo\_tower\_tilt@{servo\_tower\_tilt}}
+\index{servo\_tower\_tilt@{servo\_tower\_tilt}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{servo\_tower\_tilt}{servo\_tower\_tilt}}
+{\footnotesize\ttfamily Servo servo\+\_\+tower\+\_\+tilt}
+
+\mbox{\Hypertarget{robtour19_8ino_a1882d68acccb4f35bf7575e750b38411}\label{robtour19_8ino_a1882d68acccb4f35bf7575e750b38411}} 
+\index{robtour19.ino@{robtour19.ino}!servo\_tower\_tilt\_pin@{servo\_tower\_tilt\_pin}}
+\index{servo\_tower\_tilt\_pin@{servo\_tower\_tilt\_pin}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{servo\_tower\_tilt\_pin}{servo\_tower\_tilt\_pin}}
+{\footnotesize\ttfamily const byte servo\+\_\+tower\+\_\+tilt\+\_\+pin = 13}
+
+\mbox{\Hypertarget{robtour19_8ino_a8acc87e7a9f2585e725114c117557745}\label{robtour19_8ino_a8acc87e7a9f2585e725114c117557745}} 
+\index{robtour19.ino@{robtour19.ino}!start\_button\_pin@{start\_button\_pin}}
+\index{start\_button\_pin@{start\_button\_pin}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{start\_button\_pin}{start\_button\_pin}}
+{\footnotesize\ttfamily const byte start\+\_\+button\+\_\+pin = A7}
+
+\mbox{\Hypertarget{robtour19_8ino_a95a829530f5b51aaaa5b42a1942b4ec0}\label{robtour19_8ino_a95a829530f5b51aaaa5b42a1942b4ec0}} 
+\index{robtour19.ino@{robtour19.ino}!STBY@{STBY}}
+\index{STBY@{STBY}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{STBY}{STBY}}
+{\footnotesize\ttfamily const byte S\+T\+BY = 12}
+
+\mbox{\Hypertarget{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}\label{robtour19_8ino_a8bcf801703b8498c87c4ac1bc5eac186}} 
+\index{robtour19.ino@{robtour19.ino}!TaskPhase@{TaskPhase}}
+\index{TaskPhase@{TaskPhase}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{TaskPhase}{TaskPhase}}
+{\footnotesize\ttfamily \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65}{E\+Task\+Phase}} Task\+Phase = \mbox{\hyperlink{robtour19_8ino_a73aee7fed9618bc8194eefd9f4501f65aa1079d6e9855962b3f8751bd73b870e5}{E\+T\+P\+\_\+\+R\+E\+A\+DY}}}
+
+\mbox{\Hypertarget{robtour19_8ino_a6c203347fdf75520b23ec19b843dd0b8}\label{robtour19_8ino_a6c203347fdf75520b23ec19b843dd0b8}} 
+\index{robtour19.ino@{robtour19.ino}!TowerControl@{TowerControl}}
+\index{TowerControl@{TowerControl}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{TowerControl}{TowerControl}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_c_tower_control}{C\+Tower\+Control}} Tower\+Control}
+
+\mbox{\Hypertarget{robtour19_8ino_a0d9a0943fa15cabb465417f66ba883af}\label{robtour19_8ino_a0d9a0943fa15cabb465417f66ba883af}} 
+\index{robtour19.ino@{robtour19.ino}!TowerMotor@{TowerMotor}}
+\index{TowerMotor@{TowerMotor}!robtour19.ino@{robtour19.ino}}
+\doxysubsubsection{\texorpdfstring{TowerMotor}{TowerMotor}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_c_gear_motor}{C\+Gear\+Motor}}$\ast$ Tower\+Motor}
+

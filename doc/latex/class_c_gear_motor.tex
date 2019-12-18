@@ -1,0 +1,105 @@
+\hypertarget{class_c_gear_motor}{}\doxysection{C\+Gear\+Motor Class Reference}
+\label{class_c_gear_motor}\index{CGearMotor@{CGearMotor}}
+
+
+{\ttfamily \#include $<$C\+Gear\+Motor.\+h$>$}
+
+
+
+Collaboration diagram for C\+Gear\+Motor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=164pt]{class_c_gear_motor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_c_gear_motor_a8b89fd87226fb5ae3675c7beea3b96b5}{C\+Gear\+Motor}} ()
+\item 
+\mbox{\hyperlink{class_c_gear_motor_a119e4a952b8e36aad9f401b832aa632f}{C\+Gear\+Motor}} (byte pin\+\_\+motor\+\_\+A, byte pin\+\_\+speed, byte pin\+\_\+motor\+\_\+B, byte pin\+\_\+standby)
+\item 
+void \mbox{\hyperlink{class_c_gear_motor_a3380e7a0050f3ac54871e0308fdbdf03}{forward}} ()
+\begin{DoxyCompactList}\small\item\em Запустить вращение мотора вперед (или по/против часовой) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_c_gear_motor_a0edbc5be9ff7637973f0915dd65525da}{backward}} ()
+\item 
+void \mbox{\hyperlink{class_c_gear_motor_a929d50779177280d65582802a1797641}{stop}} ()
+\item 
+void \mbox{\hyperlink{class_c_gear_motor_ada296059adce0cf7487db874d6b53dcc}{set\+Speed}} (byte speed)
+\item 
+byte \mbox{\hyperlink{class_c_gear_motor_ada86dd37ced9c73207deccba33bd1eec}{get\+Speed}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_c_gear_motor_a8b89fd87226fb5ae3675c7beea3b96b5}\label{class_c_gear_motor_a8b89fd87226fb5ae3675c7beea3b96b5}} 
+\index{CGearMotor@{CGearMotor}!CGearMotor@{CGearMotor}}
+\index{CGearMotor@{CGearMotor}!CGearMotor@{CGearMotor}}
+\doxysubsubsection{\texorpdfstring{CGearMotor()}{CGearMotor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily C\+Gear\+Motor\+::\+C\+Gear\+Motor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_c_gear_motor_a119e4a952b8e36aad9f401b832aa632f}\label{class_c_gear_motor_a119e4a952b8e36aad9f401b832aa632f}} 
+\index{CGearMotor@{CGearMotor}!CGearMotor@{CGearMotor}}
+\index{CGearMotor@{CGearMotor}!CGearMotor@{CGearMotor}}
+\doxysubsubsection{\texorpdfstring{CGearMotor()}{CGearMotor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily C\+Gear\+Motor\+::\+C\+Gear\+Motor (\begin{DoxyParamCaption}\item[{byte}]{pin\+\_\+motor\+\_\+A,  }\item[{byte}]{pin\+\_\+speed,  }\item[{byte}]{pin\+\_\+motor\+\_\+B,  }\item[{byte}]{pin\+\_\+standby }\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=338pt]{class_c_gear_motor_a119e4a952b8e36aad9f401b832aa632f_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_c_gear_motor_a0edbc5be9ff7637973f0915dd65525da}\label{class_c_gear_motor_a0edbc5be9ff7637973f0915dd65525da}} 
+\index{CGearMotor@{CGearMotor}!backward@{backward}}
+\index{backward@{backward}!CGearMotor@{CGearMotor}}
+\doxysubsubsection{\texorpdfstring{backward()}{backward()}}
+{\footnotesize\ttfamily void C\+Gear\+Motor\+::backward (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+% FIG 0
+\mbox{\Hypertarget{class_c_gear_motor_a3380e7a0050f3ac54871e0308fdbdf03}\label{class_c_gear_motor_a3380e7a0050f3ac54871e0308fdbdf03}} 
+\index{CGearMotor@{CGearMotor}!forward@{forward}}
+\index{forward@{forward}!CGearMotor@{CGearMotor}}
+\doxysubsubsection{\texorpdfstring{forward()}{forward()}}
+{\footnotesize\ttfamily void C\+Gear\+Motor\+::forward (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Запустить вращение мотора вперед (или по/против часовой) 
+
+Также необхожимо установить скорость вращения вала методом \mbox{\hyperlink{class_c_gear_motor_ada296059adce0cf7487db874d6b53dcc}{set\+Speed()}}. Here is the caller graph for this function\+:
+% FIG 1
+\mbox{\Hypertarget{class_c_gear_motor_ada86dd37ced9c73207deccba33bd1eec}\label{class_c_gear_motor_ada86dd37ced9c73207deccba33bd1eec}} 
+\index{CGearMotor@{CGearMotor}!getSpeed@{getSpeed}}
+\index{getSpeed@{getSpeed}!CGearMotor@{CGearMotor}}
+\doxysubsubsection{\texorpdfstring{getSpeed()}{getSpeed()}}
+{\footnotesize\ttfamily byte C\+Gear\+Motor\+::get\+Speed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_c_gear_motor_ada296059adce0cf7487db874d6b53dcc}\label{class_c_gear_motor_ada296059adce0cf7487db874d6b53dcc}} 
+\index{CGearMotor@{CGearMotor}!setSpeed@{setSpeed}}
+\index{setSpeed@{setSpeed}!CGearMotor@{CGearMotor}}
+\doxysubsubsection{\texorpdfstring{setSpeed()}{setSpeed()}}
+{\footnotesize\ttfamily void C\+Gear\+Motor\+::set\+Speed (\begin{DoxyParamCaption}\item[{byte}]{speed }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+% FIG 2
+\mbox{\Hypertarget{class_c_gear_motor_a929d50779177280d65582802a1797641}\label{class_c_gear_motor_a929d50779177280d65582802a1797641}} 
+\index{CGearMotor@{CGearMotor}!stop@{stop}}
+\index{stop@{stop}!CGearMotor@{CGearMotor}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily void C\+Gear\+Motor\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Here is the caller graph for this function\+:
+% FIG 3
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_c_gear_motor_8h}{C\+Gear\+Motor.\+h}}\item 
+\mbox{\hyperlink{_c_gear_motor_8cpp}{C\+Gear\+Motor.\+cpp}}\end{DoxyCompactItemize}

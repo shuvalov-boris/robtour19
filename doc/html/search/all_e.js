@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['s0_113',['S0',['../robtour19_8ino.html#a3714c18e6493a568961f125da447f738',1,'robtour19.ino']]],
+  ['s1_114',['S1',['../robtour19_8ino.html#a04aea3b8b1cf539a469966f30ff3a602',1,'robtour19.ino']]],
+  ['s2_115',['S2',['../robtour19_8ino.html#ad4a502f27e2270723a557ab17de16fe2',1,'robtour19.ino']]],
+  ['s3_116',['S3',['../robtour19_8ino.html#ac0bb270c5fc1811813212dbd97f6d1c8',1,'robtour19.ino']]],
+  ['search_5flines_117',['search_lines',['../class_c_drive_control.html#a40e71902ba9df0b2120a933f6eecdf6b',1,'CDriveControl']]],
+  ['second_5fturn_5fangle_5fdecrease_5ffactor_118',['SECOND_TURN_ANGLE_DECREASE_FACTOR',['../_c_drive_control_8h.html#aff218ed4ea632c9c0a1f4bc3fe63a9a1',1,'SECOND_TURN_ANGLE_DECREASE_FACTOR():&#160;CDriveControl.h'],['../_c_drive_control_8h.html#aff218ed4ea632c9c0a1f4bc3fe63a9a1',1,'SECOND_TURN_ANGLE_DECREASE_FACTOR():&#160;CDriveControl.h']]],
+  ['servo_5fgripper_119',['servo_gripper',['../robtour19_8ino.html#a9c6ba23b04d72b6833f78b313817dcc4',1,'robtour19.ino']]],
+  ['servo_5fgripper_5fpin_120',['servo_gripper_pin',['../robtour19_8ino.html#a699905de7ab081ac0982a13b75065cd9',1,'robtour19.ino']]],
+  ['servo_5frope_5ftension_5fpin_121',['servo_rope_tension_pin',['../robtour19_8ino.html#ae5aa0c43121069760e67a314e96075d6',1,'robtour19.ino']]],
+  ['servo_5frotate_5fright_5fwheel_122',['servo_rotate_right_wheel',['../robtour19_8ino.html#a68e74db24d99021e3c6e62101bec55bb',1,'robtour19.ino']]],
+  ['servo_5ftower_5ftilt_123',['servo_tower_tilt',['../robtour19_8ino.html#a862a9d8c779d33d7d25a98b43eac4925',1,'robtour19.ino']]],
+  ['servo_5ftower_5ftilt_5fpin_124',['servo_tower_tilt_pin',['../robtour19_8ino.html#a1882d68acccb4f35bf7575e750b38411',1,'robtour19.ino']]],
+  ['setspeed_125',['setSpeed',['../class_c_gear_motor.html#ada296059adce0cf7487db874d6b53dcc',1,'CGearMotor']]],
+  ['setup_126',['setup',['../robtour19_8ino.html#a4fc01d736fe50cf5b977f755b675f11d',1,'robtour19.ino']]],
+  ['simulation_5fdata_127',['SIMULATION_DATA',['../_c_hamming_code_8h.html#a37bec83496942422ba8b3093c0fb250f',1,'CHammingCode.h']]],
+  ['speed_128',['SPEED',['../_c_drive_control_8h.html#aac3553b3932cbfeeac4526ce7ca0336b',1,'CDriveControl.h']]],
+  ['start_129',['Start',['../class_c_tower_control.html#ab00004ad2894e42979bd7037b538dafc',1,'CTowerControl']]],
+  ['start_5fbutton_5fpin_130',['start_button_pin',['../robtour19_8ino.html#a8acc87e7a9f2585e725114c117557745',1,'robtour19.ino']]],
+  ['stby_131',['STBY',['../robtour19_8ino.html#a95a829530f5b51aaaa5b42a1942b4ec0',1,'robtour19.ino']]],
+  ['stop_132',['stop',['../class_c_gear_motor.html#a929d50779177280d65582802a1797641',1,'CGearMotor']]]
+];
