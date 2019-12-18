@@ -1,0 +1,6 @@
+<map id="CTowerControl::ProcessCommand" name="CTowerControl::ProcessCommand">
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,227,83"/>
+<area shape="rect" id="node2" href="$class_c_gear_motor.html#a0edbc5be9ff7637973f0915dd65525da" title=" " alt="" coords="275,5,429,32"/>
+<area shape="rect" id="node3" href="$class_c_gear_motor.html#a3380e7a0050f3ac54871e0308fdbdf03" title="Запустить вращение мотора вперед (или по/против часовой)" alt="" coords="281,56,423,83"/>
+<area shape="rect" id="node4" href="$class_c_gear_motor.html#ada296059adce0cf7487db874d6b53dcc" title=" " alt="" coords="275,107,429,133"/>
+</map>

@@ -1,0 +1,92 @@
+\hypertarget{class_c_hamming_code}{}\doxysection{C\+Hamming\+Code Class Reference}
+\label{class_c_hamming_code}\index{CHammingCode@{CHammingCode}}
+
+
+Принимает сообщение (координаты роботов и фишек на поле) от ИК передатчика  
+
+
+
+
+{\ttfamily \#include $<$C\+Hamming\+Code.\+h$>$}
+
+
+
+Collaboration diagram for C\+Hamming\+Code\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=182pt]{class_c_hamming_code__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_c_hamming_code_af2e9d1f8f8670ea95b08afdc4f609665}{C\+Hamming\+Code}} (byte recv\+\_\+pin)
+\item 
+bool \mbox{\hyperlink{class_c_hamming_code_a1ee3dd890fd4c28afb5573e10af2e883}{Receive\+Data}} (uint8\+\_\+t $\ast$data)
+\begin{DoxyCompactList}\small\item\em Принимает положение фишек и роботов от ИК передатчика \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_c_hamming_code_ae7199d800ecc3701010baaf707171954}{test}} ()
+\begin{DoxyCompactList}\small\item\em проверка алгоритма декодирования и корректировки сообщения на тестовых данных \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Принимает сообщение (координаты роботов и фишек на поле) от ИК передатчика 
+
+Также позволяет имитировать прием информации при отсутствии реального передатчика. Для этого определяется идентификатор I\+K\+\_\+\+R\+E\+C\+V\+\_\+\+S\+I\+M\+U\+L\+A\+T\+I\+ON. Для работы класса в режиме реального приема данных необходимо закомментировать строку с объявлением I\+K\+\_\+\+R\+E\+C\+V\+\_\+\+S\+I\+M\+U\+L\+A\+T\+I\+ON. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_c_hamming_code_af2e9d1f8f8670ea95b08afdc4f609665}\label{class_c_hamming_code_af2e9d1f8f8670ea95b08afdc4f609665}} 
+\index{CHammingCode@{CHammingCode}!CHammingCode@{CHammingCode}}
+\index{CHammingCode@{CHammingCode}!CHammingCode@{CHammingCode}}
+\doxysubsubsection{\texorpdfstring{CHammingCode()}{CHammingCode()}}
+{\footnotesize\ttfamily C\+Hamming\+Code\+::\+C\+Hamming\+Code (\begin{DoxyParamCaption}\item[{byte}]{recv\+\_\+pin }\end{DoxyParamCaption})}
+
+Конструктор, который устанавливает пин ИК приёмника 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em recv\+\_\+pin} & Пин ИК приёмника \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_c_hamming_code_a1ee3dd890fd4c28afb5573e10af2e883}\label{class_c_hamming_code_a1ee3dd890fd4c28afb5573e10af2e883}} 
+\index{CHammingCode@{CHammingCode}!ReceiveData@{ReceiveData}}
+\index{ReceiveData@{ReceiveData}!CHammingCode@{CHammingCode}}
+\doxysubsubsection{\texorpdfstring{ReceiveData()}{ReceiveData()}}
+{\footnotesize\ttfamily bool C\+Hamming\+Code\+::\+Receive\+Data (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Принимает положение фишек и роботов от ИК передатчика 
+
+Чтобы получить сообщение, необходимо вызывать Receive\+Data до тех пор, пока он не вернет значение true.
+
+Формат сообщения -\/ M\+E\+S\+S\+A\+G\+E\+\_\+\+S\+I\+ZE чисел от 1 до 8\+: -\/положение первого робота на первом поле; -\/положение фишки на первой полосе первого поля; -\/положение фишки на второй полосе первого поля; -\/положение фишки на третей полосе первого поля; -\/положение второго робота на втором поле; -\/положение фишки на первой полосе второго поля; -\/положение фишки на второй полосе второго поля; -\/положение фишки на третей полосе второго поля; 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ out}}  & {\em data} & сообщение (массив из 8 чисел) в случае успешного получения и декодирования сообщения \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, если сообщение получено и декодировано; в противном случае -\/ false. 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Полученные данные не проверяются на наличие помех (из-\/за слабого сигнала, например) 
+\end{DoxyWarning}
+\begin{DoxyRefDesc}{Todo}
+\item[\mbox{\hyperlink{todo__todo000003}{Todo}}]Необходимо реализовать условие достоверности сообщения проверкой последовательного получения одних и тех же данных \end{DoxyRefDesc}
+\mbox{\Hypertarget{class_c_hamming_code_ae7199d800ecc3701010baaf707171954}\label{class_c_hamming_code_ae7199d800ecc3701010baaf707171954}} 
+\index{CHammingCode@{CHammingCode}!test@{test}}
+\index{test@{test}!CHammingCode@{CHammingCode}}
+\doxysubsubsection{\texorpdfstring{test()}{test()}}
+{\footnotesize\ttfamily bool C\+Hamming\+Code\+::test (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+проверка алгоритма декодирования и корректировки сообщения на тестовых данных 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_c_hamming_code_8h}{C\+Hamming\+Code.\+h}}\item 
+\mbox{\hyperlink{_c_hamming_code_8cpp}{C\+Hamming\+Code.\+cpp}}\end{DoxyCompactItemize}

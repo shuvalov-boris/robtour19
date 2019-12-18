@@ -1,0 +1,6 @@
+<map id="CGearMotor::stop" name="CGearMotor::stop">
+<area shape="rect" id="node1" title=" " alt="" coords="240,56,365,83"/>
+<area shape="rect" id="node2" href="$class_c_drive_control.html#ae626d8fa280e3e8f478dd48e952dd04a" title=" " alt="" coords="5,5,192,32"/>
+<area shape="rect" id="node3" href="$class_c_gear_motor.html#a119e4a952b8e36aad9f401b832aa632f" title=" " alt="" coords="13,56,184,83"/>
+<area shape="rect" id="node4" href="$class_c_tower_control.html#ad64fef5836ef111afca8cadfaa240ea4" title=" " alt="" coords="27,107,170,133"/>
+</map>

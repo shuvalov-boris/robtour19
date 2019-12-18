@@ -77,7 +77,6 @@ const byte motor_drive_pinE = 6;
 const byte STBY = 12; // standby
 CGearMotor *DriveAxis;
 
-
 CDriveControl DriveControl;
 byte DCReturnedCode = 0;
 EMovementDirection last_move_cmd = EMD_NONE;
@@ -127,8 +126,6 @@ void setup()
 
   TowerMotor = new CGearMotor(motor_tower_pinA, motor_tower_pinE, motor_tower_pinB, STBY);
   TowerControl = CTowerControl(TowerMotor, servo_gripper_pin, servo_tower_tilt_pin, servo_rope_tension_pin);
-
-
  
 }
 
@@ -141,20 +138,19 @@ void loop()
 
   collect_coins();
   
-/// Режим управления командами
-//  if (Serial.available() > 0)
-//  {
-//    incomingByte = Serial.read();
-//
-//    Serial.print("I received: ");
-//    Serial.println(incomingByte, DEC);
-//
-//    Serial.read(); 
-//  }
-//
-//  TowerControl.ProcessCommand(incomingByte);   
-//  ColorTracker.ProcessCommand(incomingByte);
-
+  /// Режим управления командами
+  //  if (Serial.available() > 0)
+  //  {
+  //    incomingByte = Serial.read();
+  //
+  //    Serial.print("I received: ");
+  //    Serial.println(incomingByte, DEC);
+  //
+  //    Serial.read(); 
+  //  }
+  //
+  //  TowerControl.ProcessCommand(incomingByte);   
+  //  ColorTracker.ProcessCommand(incomingByte);
 }
 
 int _speed = 50;
